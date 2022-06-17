@@ -1,0 +1,19 @@
+{warning}
+
+import logging
+from pydantic import BaseModel
+
+logger = logging.getLogger('TgramBot')
+
+
+class TelegramObject(BaseModel):
+
+    """
+    Base TelegramObject Class for TgramBot
+    """
+
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __repr__(self):
+        return f"<{{type(self).__name__}} {{self}}>"
