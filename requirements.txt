@@ -1,2 +1,5 @@
 pydantic
 httpx[http2]
+requests
+beautifulsoup4==4.10
+html5lib==1.1

@@ -14,10 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .tg_types import (
-    {imports}
-)
 
-__all__ = [
-    {all}
-]
+from typing import Callable
+import tgrambot
+
+
+class Handler:
+    def __init__(self, callback: Callable, filters=None):
+        self.callback = callback,
+        self.filters = filters
+
+    def check(self, bot: 'tgrambot.Bot', update):
+        raise NotImplemented

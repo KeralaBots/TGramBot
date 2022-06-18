@@ -1,3 +1,19 @@
+# TGramBot - Partially Auto-generated Telegram Bot Api Library Python
+# Copyright (C) 2022  Anand <anandpskerala@gmail.com>
+
+# TGramBot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# TGramBot is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import asyncio
 import logging
 from collections import OrderedDict
@@ -23,9 +39,6 @@ class Dispatcher:
         self.bot = bot
         self.loop = asyncio.get_event_loop_policy().get_event_loop()
         self.workers = workers
-        self.worker_tasks = []
-        self.update_queue = asyncio.Queue()
-        self.lock_lists = []
         self.groups = OrderedDict()
         self.executor = ThreadPoolExecutor(workers, thread_name_prefix="Handler")
         self.is_idling = False
@@ -33,12 +46,15 @@ class Dispatcher:
 
     async def start(self):
         self.is_running = True
-        for i in range(self.workers):
-            self.lock_lists.append(asyncio.Lock())
+        asyncio.ensure_future(self.handle_workers())
 
     @staticmethod
     def _parse_update(update):
-        if (update.message or
+        if update.inline_query:
+            updated = update.inline_query
+        elif update.callback_query:
+            updated = update.callback_query
+        elif (update.message or
                 update.channel_post or
                 update.edited_message or update.edited_channel_post
         ):
@@ -48,21 +64,23 @@ class Dispatcher:
 
         return updated
 
-    async def handle_workers(self, lock):
-        while True:
-            update = await self.update_queue.get()
+    async def handle_workers(self):
+        while self.is_running:
+            updates = await self.bot.get_updates(offset=self.bot.offset + 1)
+            for update in updates:
+                if update is None:
+                    break
+                self.bot.offset = update.update_id
+                try:
+                    update = self._parse_update(update)
 
-            if update is None:
-                break
-            try:
-                update = self._parse_update(update)
-
-                async with lock:
                     for group in self.groups.values():
                         for handler in group:
-                            pass
-            except Exception as exe:
-                self.bot.logger.log(exe, exc_info=True)
+                            check = await handler.check(self.bot, update)
+                            if check:
+                                break
+                except Exception as exe:
+                    logging.error(exe, exc_info=True)
 
     async def idle(self):
 
@@ -81,6 +99,13 @@ class Dispatcher:
     async def stop(self):
         self.is_running = False
         self.groups.clear()
-        self.worker_tasks.clear()
-        for i in range(self.workers):
-            self.update_queue.put_nowait(None)
+
+    def add_handler(self, handler, group: int):
+        try:
+            if group not in self.groups:
+                self.groups[group] = []
+                self.groups = OrderedDict(sorted(self.groups.items()))
+
+            self.groups[group].append(handler)
+        finally:
+            pass

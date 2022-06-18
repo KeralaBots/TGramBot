@@ -3,7 +3,8 @@ from sys import argv
 
 from setuptools import setup, find_packages
 
-from constructor.build import build_types
+from constructor.build_api import build_api
+from constructor.build_types import build_types
 
 with open("requirements.txt", encoding="utf-8") as r:
     requires = [i.strip() for i in r]
@@ -12,6 +13,7 @@ with open('tgrambot/version.txt', encoding='utf-8') as f:
     version = re.findall(r'__version__ = \"(.+)\"', f.read())[0]
 
 if len(argv) > 1 and argv[1] in ["bdist_wheel", "install", "develop"]:
+    build_api()
     build_types()
 
 setup(
