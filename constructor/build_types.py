@@ -76,10 +76,12 @@ def build_types():
         content = ''
         # Pending queue to avoid ForwardRefs and ConfigErrors in pydantic
         pending_objects = []
+        not_pending = []
 
         # To Find subclasses of an object
         subclass_dict = {}
         chat_object = ''
+        callbackquery_object = ''
 
         # Classes to be imported in __init__ file
         init_types = []
@@ -122,10 +124,13 @@ def build_types():
                             def_types = f"List[{TG_CORE_TYPES.get(f'{def_types[9:]}')}]" if TG_CORE_TYPES.get(
                                 f'{def_types[9:]}') is not None else f'List["{def_types[9:]}"]'
                         else:
-                            def_types = def_types if def_types in BASE_TYPES else f'"{def_types}"'
                             import_type = def_types
-                        if import_type not in BASE_TYPES and import_type not in init_types:
+                            def_types = def_types if def_types in BASE_TYPES else f'"{def_types}"'
+                        if import_type not in BASE_TYPES and import_type not in not_pending and import_type not in init_types:
                             pending_objects_count += 1
+                        else:
+                            not_pending.append(name)
+
                         typed_list.append(def_types)
 
                     typed = str(typed_list).replace("'", "")
@@ -152,7 +157,10 @@ def build_types():
                         if required:
                             super_class_props.append(f'{field_name}: {cust_field}')
                         else:
-                            super_class_props.append(f'{field_name}: {cust_field} = None')
+                            if field_name == 'url':
+                                super_class_props.append(f'{field_name}: {cust_field} = ""')
+                            else:
+                                super_class_props.append(f'{field_name}: {cust_field} = None')
 
                         super_class_text += f'{field_name}={field_name}, '
 
@@ -162,6 +170,16 @@ def build_types():
                 # To avoid ForwardRef and ConfigErrors in pydantic
                 if name == "Chat":
                     chat_object += content_temp.format(
+                        class_name=name,
+                        class_object=class_object,
+                        comments=comments,
+                        fields=field_text,
+                        super_class=super_class
+                    )
+                    continue
+
+                if name == "CallbackQuery":
+                    callbackquery_object += content_temp.format(
                         class_name=name,
                         class_object=class_object,
                         comments=comments,
@@ -191,7 +209,10 @@ def build_types():
         for pending in reversed(pending_objects):
             if pending.startswith('class Message('):
                 content += chat_object
-            content += pending
+                content += pending
+                content += callbackquery_object
+            else:
+                content += pending
 
         # Constructing python module with all Telegram Objects
         with open(TYPES_DESTINATION_PATH / "tg_types.py", "w+") as type_file:

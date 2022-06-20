@@ -14,14 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import re
-import logging
-import tgrambot.types
-from .bot import Bot
+from .message_handler import MessageHandler
+from .callback_handler import CallbackQueryHandler
 
-logger = logging.getLogger(__name__)
-
-with open('tgrambot/version.txt', encoding='utf-8') as f:
-    __version__ = re.findall(r'__version__ = \"(.+)\"', f.read())[0]
-
-__all__ = ["Bot", "types"]
+__all__ = ["MessageHandler", "CallbackQueryHandler"]

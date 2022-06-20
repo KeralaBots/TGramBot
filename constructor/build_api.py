@@ -3,11 +3,14 @@ import json
 import re
 import string
 import shutil
+import logging
 
 import requests
 from pathlib import Path
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+
+logger = logging.getLogger(__name__)
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 ROOT_URL = "https://core.telegram.org"
@@ -346,10 +349,10 @@ def build_api():
     shutil.rmtree(API_PATH, ignore_errors=True)
     os.makedirs(API_PATH, exist_ok=True)
     for filename, url in TO_SCRAPE.items():
-        print("parsing", url)
+        logger.info("Parsing Schemas from ", url)
         items = retrieve_info(url)
         if verify_type_parameters(items) or verify_method_parameters(items):
-            print("Failed to validate schema. View logs above for more information.")
+            logger.error("Failed to validate schema. View logs above for more information.")
             exit(1)
 
         with open(API_PATH / f"{filename}.json", "w") as f:

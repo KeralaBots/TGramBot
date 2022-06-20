@@ -48,22 +48,6 @@ class Dispatcher:
         self.is_running = True
         asyncio.ensure_future(self.handle_workers())
 
-    @staticmethod
-    def _parse_update(update):
-        if update.inline_query:
-            updated = update.inline_query
-        elif update.callback_query:
-            updated = update.callback_query
-        elif (update.message or
-                update.channel_post or
-                update.edited_message or update.edited_channel_post
-        ):
-            updated = update.message
-        else:
-            updated = update
-
-        return updated
-
     async def handle_workers(self):
         while self.is_running:
             updates = await self.bot.get_updates(offset=self.bot.offset + 1)
@@ -72,7 +56,7 @@ class Dispatcher:
                     break
                 self.bot.offset = update.update_id
                 try:
-                    update = self._parse_update(update)
+                    update = update
 
                     for group in self.groups.values():
                         for handler in group:

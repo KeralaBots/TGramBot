@@ -20,11 +20,11 @@ import os
 import json
 import httpx
 import contextvars
-from typing import Optional, Union, List
+from typing import Optional, Union, List, Callable
 
 from .dispatcher import Dispatcher
 from .filters import Filters
-from .handlers.message_handler import MessageHandler
+from .handlers import MessageHandler, CallbackQueryHandler
 
 from .types import (
     User,
@@ -274,6 +274,18 @@ class Bot:
 
     def on_message(self, filters: Filters = None, group: int = 0):
         def decorator(func):
-            handler = MessageHandler(func, filters)
-            self.dispatcher.add_handler(handler, group)
+            self.add_message_handler(func, filters, group)
         return decorator
+
+    def on_callback(self, filters: Filters = None, group: int = 0):
+        def decorator(func):
+            self.add_callback_handler(func, filters, group)
+        return decorator
+
+    def add_message_handler(self, callback: Callable, filters: Filters = None, group: int = 0):
+        handler = MessageHandler(callback, filters)
+        self.dispatcher.add_handler(handler, group)
+
+    def add_callback_handler(self, callback: Callable, filters: Filters = None, group: int = 0):
+        handler = CallbackQueryHandler(callback, filters)
+        self.dispatcher.add_handler(handler, group)

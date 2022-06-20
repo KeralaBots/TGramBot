@@ -12,7 +12,7 @@ with open("requirements.txt", encoding="utf-8") as r:
 with open('tgrambot/version.txt', encoding='utf-8') as f:
     version = re.findall(r'__version__ = \"(.+)\"', f.read())[0]
 
-if len(argv) > 1 and argv[1] in ["bdist_wheel", "install", "develop"]:
+if len(argv) > 1 and argv[1] in ["sdist", "install", "develop"]:
     build_api()
     build_types()
 
