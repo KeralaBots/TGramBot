@@ -37,7 +37,6 @@ class CallbackQueryHandler(Handler):
                         data = self.filters.get('data')
                         m = re.search(data, update.callback_query.data, re.I)
                         if m:
-                            await self.callback[0](bot, update.callback_query)
                             return True
                         else:
                             return False
@@ -48,7 +47,6 @@ class CallbackQueryHandler(Handler):
                     if update.callback_query.data:
                         m = re.search(regex, update.callback_query.data, re.I)
                         if m:
-                            await self.callback[0](bot, update.callback_query)
                             return True
                         else:
                             return False
@@ -57,5 +55,4 @@ class CallbackQueryHandler(Handler):
                 else:
                     return False
         else:
-            await self.callback[0](bot, update.callback_query)
             return True

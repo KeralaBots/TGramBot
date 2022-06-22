@@ -47,6 +47,24 @@ WARNING = """
 # # # # # # # # # # # # # # # # # # # # # # # #
 """.strip()
 
+COPYRIGHT = """
+# TGramBot - Partially Auto-generated Telegram Bot Api Library Python
+# Copyright (C) 2022  Anand <anandpskerala@gmail.com>
+
+# TGramBot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# TGramBot is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+""".strip()
+
 
 def snake(s: str):
     # https://stackoverflow.com/q/1175208
@@ -66,7 +84,7 @@ def build_types():
     with open(TEMPLATES_DESTINATION / "base.tmpl", mode='r') as basefile:
         base_tmpl = basefile.read()
         with open(TYPES_DESTINATION_PATH / "base.py", "w+") as base:
-            base.write(base_tmpl.format(warning=WARNING))
+            base.write(base_tmpl.format(warning=WARNING, copyright=COPYRIGHT))
 
     # Read JSON file that contains api methods and types
     with open(API_PATH / 'api.json') as f:
@@ -167,7 +185,7 @@ def build_types():
                 if len(super_class_props) > 0 and super_class_text != "":
                     super_class += f"""\n    def __init__(self, {', '.join(super_class_props)}):\n        super({name}, self).__init__({super_class_text[:-2]})\n"""
 
-                # To avoid ForwardRef and ConfigErrors in pydantic
+                # To avoid ForwardRefs and ConfigErrors in pydantic
                 if name == "Chat":
                     chat_object += content_temp.format(
                         class_name=name,
@@ -219,6 +237,7 @@ def build_types():
             with open(TEMPLATES_DESTINATION / 'types.tmpl', 'r') as type_temp_file:
                 type_temp = type_temp_file.read()
                 type_file.write(type_temp.format(
+                    copyright=COPYRIGHT,
                     warning=WARNING,
                     content=content
                 ))
@@ -234,6 +253,8 @@ def build_types():
                 for lt in list_imports:
                     types_to_import += str(lt).replace("[", "").replace("]", "") + ",\n    "
                 type_init_file.write(type_init_temp.format(
+                    copyright=COPYRIGHT,
+                    warning=WARNING,
                     imports=init_imports,
                     all=types_to_import[:-6]
                 ))

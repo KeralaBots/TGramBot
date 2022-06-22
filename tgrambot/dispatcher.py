@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+import inspect
 import logging
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
@@ -61,7 +62,17 @@ class Dispatcher:
                     for group in self.groups.values():
                         for handler in group:
                             check = await handler.check(self.bot, update)
+                            updated = self._parse_updates(update)
                             if check:
+                                if inspect.iscoroutinefunction(handler.callback):
+                                    await handler.callback(self.bot, updated)
+                                else:
+                                    self.loop.run_in_executor(
+                                        self.executor,
+                                        handler.callback,
+                                        self.bot,
+                                        updated
+                                    )
                                 break
                 except Exception as exe:
                     logging.error(exe, exc_info=True)
@@ -76,6 +87,7 @@ class Dispatcher:
             signal_fn(s, signal_handler)
 
         self.is_idling = True
+        log.info('[Bot] Started Bot session. Idling....')
 
         while self.is_idling:
             await asyncio.sleep(1)
@@ -93,3 +105,17 @@ class Dispatcher:
             self.groups[group].append(handler)
         finally:
             pass
+
+    @staticmethod
+    def _parse_updates(update):
+        if update.inline_query:
+            updated = update.inline_query
+        elif update.callback_query:
+            updated = update.callback_query
+        elif (update.message or update.edited_message or update.channel_post
+        or update.edited_channel_post):
+            updated = update.message
+        else:
+            updated = update
+
+        return updated

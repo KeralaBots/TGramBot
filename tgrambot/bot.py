@@ -50,18 +50,30 @@ class Bot:
             self,
             token: str,
             parse_mode: str = None,
-            workers: int = 50
+            workers: int = 50,
+            proxy_url: str = None,
+            read_timeout: Optional[float] = 5.0,
+            write_timeout: Optional[float] = 5.0,
+            connect_timeout: Optional[float] = 5.0,
+            pool_timeout: Optional[float] = 1.0,
     ):
         self.bot_token = self._validate_bot_token(token)
         self._api_url = f"https://api.telegram.org/bot{self.bot_token}/"
         self._file_url = f"https://api.telegram.org/file/bot{self.bot_token}/"
         self._loop = asyncio.get_event_loop()
-        self.logger = logging.getLogger("TgramBot")
+        self.logger = logging.getLogger(__name__)
         self.offset = -1
         self._parse_mode = parse_mode
         self._parse_modes = ["MarkdownV2", "HTML", "Markdown", None]
         self.dispatcher = Dispatcher(self, workers)
         self.workers = workers
+        self.timeout = httpx.Timeout(
+            connect=connect_timeout,
+            read=read_timeout,
+            write=write_timeout,
+            pool=pool_timeout,
+        )
+        self.proxy = proxy_url
 
     @staticmethod
     def _validate_bot_token(token: str):
@@ -242,9 +254,8 @@ class Bot:
 
         return files
 
-    @staticmethod
-    async def _aio_post(url, payload, files=None):
-        async with httpx.AsyncClient(http2=True) as client:
+    async def _aio_post(self, url, payload, files=None):
+        async with httpx.AsyncClient(http2=True, timeout=self.timeout, proxies=self.proxy) as client:
             resp = await client.post(url, data=payload, files=files)
             try:
                 data = resp.json()

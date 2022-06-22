@@ -21,7 +21,7 @@ import tgrambot
 
 class Handler:
     def __init__(self, callback: Callable, filters=None):
-        self.callback = callback,
+        self.callback = callback
         self.filters = filters
 
     def check(self, bot: 'tgrambot.Bot', update):

@@ -37,7 +37,6 @@ class MessageHandler(Handler):
             if filter_type and update.message:
                 if filter_type not in self.special_types and filter_type not in self.exclude:
                     if update_json.get(filter_type):
-                        await self.callback[0](bot, update.message)
                         return True
                     else:
                         return False
@@ -62,7 +61,6 @@ class MessageHandler(Handler):
                             if type(commands) is str:
                                 m = re.search(commands, update.message.text, re.I)
                                 if m:
-                                    await self.callback[0](bot, update.message)
                                     return True
                                 else:
                                     return False
@@ -70,7 +68,6 @@ class MessageHandler(Handler):
                                 for command in commands:
                                     m = re.search(command, update.message.text, re.I)
                                     if m:
-                                        await self.callback[0](bot, update.message)
                                         return True
                                     else:
                                         return False
@@ -79,7 +76,6 @@ class MessageHandler(Handler):
                         if update.message.text:
                             m = re.search(regex, update.message.text, re.I)
                             if m:
-                                await self.callback[0](bot, update.message)
                                 return True
                             else:
                                 return False
@@ -89,22 +85,18 @@ class MessageHandler(Handler):
                             if text:
                                 m = re.search(text, update.message.text, re.I)
                                 if m:
-                                    await self.callback[0](bot, update.message)
                                     return True
                                 else:
                                     return False
                             else:
-                                await self.callback[0](bot, update.message)
                                 return True
                 else:
                     if update.message:
-                        await self.callback[0](bot, update.message)
                         return True
                     else:
                         return False
         else:
             if update.message:
-                await self.callback[0](bot, update.message)
                 return True
             else:
                 return False
