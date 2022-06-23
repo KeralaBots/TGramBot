@@ -3,15 +3,16 @@ from sys import argv
 
 from setuptools import setup, find_packages
 
-from constructor.build_api import build_api
-from constructor.build_types import build_types
-from constructor.build_methods import build_methods
+from compiler import build_types, build_methods, build_api
 
 with open("requirements.txt", encoding="utf-8") as r:
     requires = [i.strip() for i in r]
 
 with open('tgrambot/version.txt', encoding='utf-8') as f:
     version = re.findall(r'__version__ = \"(.+)\"', f.read())[0]
+
+with open("README.md", encoding="utf-8") as f:
+    readme = f.read()
 
 if len(argv) > 1 and argv[1] in ["sdist", "install", "develop"]:
     build_api()
@@ -22,7 +23,7 @@ setup(
     name="TGramBot",
     version=version,
     description="Partially Auto-generated and asynchronous Minimal Telegram BOT API framework in Python for bots",
-    long_description="",
+    long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/KeralaBots",
     download_url="https://github.com/KeralaBots/TgramBot/releases/latest",
@@ -57,8 +58,8 @@ setup(
         "Community": "https://t.me/Keralasbots",
         "Source": "https://github.com/Keralabots/Tgrambot",
     },
-    python_requires="~=3.8",
-    packages=find_packages(exclude=["constructor*", "tests*"]),
+    python_requires=">=3.8",
+    packages=find_packages(exclude=["tests*"]),
     zip_safe=False,
     install_requires=requires
 )

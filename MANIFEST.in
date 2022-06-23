@@ -1,0 +1,3 @@
+include README.md requirements.txt
+recursive-include compiler *.py *.tmpl
+recursive-include tgrambot *.py *.txt

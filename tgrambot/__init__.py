@@ -21,7 +21,5 @@ from .bot import Bot
 
 logger = logging.getLogger(__name__)
 
-with open('tgrambot/version.txt', encoding='utf-8') as f:
-    __version__ = re.findall(r'__version__ = \"(.+)\"', f.read())[0]
 
 __all__ = ["Bot", "types"]
