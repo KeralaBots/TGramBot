@@ -18,7 +18,6 @@ import os
 import re
 import shutil
 import json
-from functools import partial
 from pathlib import Path
 
 API_PATH = Path("constructor/api")
