@@ -1,4 +1,4 @@
-#TGramBot
+# TGramBot
 
 TGramBot is a partially auto-generated and asynchronous Minimal [Telegram Bot API](https://core.telegram.org/bots/api) framework in Python for bots
 
@@ -16,13 +16,13 @@ __**This Library is still in its Alpha phase**__
 So the chance of getting bugs and errors are high. So please let us know through the [issue section](https://github.com/KeralaBots/TGramBot/issues) about the bug you have encountered.
 
 
-###Installing..
+### Installing..
 
 ```
 pip3 install tgrambot
 ```
 
-###Example
+### Example
 
 ```python
 import asyncio
@@ -46,4 +46,4 @@ if __name__ == '__main__':
     loop.run_until_complete(main())
 ```
 
-###More Examples will be published soon
+### More Examples will be published soon
