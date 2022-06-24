@@ -59,7 +59,7 @@ setup(
         "Source": "https://github.com/Keralabots/Tgrambot",
     },
     python_requires=">=3.8",
-    packages=find_packages(exclude=["tests*"]),
+    packages=find_packages(exclude=["tests*", "examples*"]),
     zip_safe=False,
     install_requires=requires
 )
