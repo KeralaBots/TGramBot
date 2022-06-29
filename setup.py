@@ -3,7 +3,7 @@ from sys import argv
 
 from setuptools import setup, find_packages
 
-from compiler import build_types, build_methods, build_api
+from compiler import build_types, build_methods
 
 with open("requirements.txt", encoding="utf-8") as r:
     requires = [i.strip() for i in r]
@@ -15,7 +15,6 @@ with open("README.md", encoding="utf-8") as f:
     readme = f.read()
 
 if len(argv) > 1 and argv[1] in ["sdist", "install", "develop"]:
-    build_api()
     build_types()
     build_methods()
 

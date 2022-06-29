@@ -50,4 +50,4 @@ if __name__ == '__main__':
 
 ### Examples
 
-More examples are published in the [example directory](https://github.com/KeralaBots/TGramBot/tree/alpha/examples)
+More examples are published in the [example directory](https://github.com/KeralaBots/TGramBot/examples)

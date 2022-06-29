@@ -28,7 +28,7 @@ class MessageHandler(Handler):
     def __init__(self, callback: Callable, filters=None):
         super(MessageHandler, self).__init__(callback, filters)
         self.exclude = ['callback_data']
-        self.special_types = ['command', 'all', 'regex', 'text']
+        self.special_types = ['command', 'all', 'regex', 'text', 'chat']
 
     async def check(self, bot: 'tgrambot.Bot', update):
         if self.filters:
@@ -41,7 +41,6 @@ class MessageHandler(Handler):
                     else:
                         return False
                 elif filter_type in self.special_types:
-                    content = None
                     if filter_type == "command":
                         prefixes = self.filters.get('prefix')
                         commands = self.filters.get('command')
@@ -90,6 +89,12 @@ class MessageHandler(Handler):
                                     return False
                             else:
                                 return True
+                    elif filter_type == 'chat':
+                        chat_type = self.filters.get('chat_type')
+                        if update.message and update.message.chat.type == chat_type:
+                            return True
+                        else:
+                            return False
                 else:
                     if update.message:
                         return True
