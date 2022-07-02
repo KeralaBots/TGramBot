@@ -34,7 +34,7 @@ from tgrambot.filters import Filters
 from tgrambot.types import Message
 
 
-bot = Bot("token", **kwargs)
+bot = Bot("token")
 
 @bot.on_message(Filters.command('start'))
 async def start_bot(c: Bot, m: Message):
