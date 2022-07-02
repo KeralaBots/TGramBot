@@ -19,16 +19,12 @@ import logging
 import os
 import json
 import httpx
-import contextvars
-from typing import Optional, Union, List, Callable
+from typing import Optional, Callable
 
 from .dispatcher import Dispatcher
 from .filters import Filters
-from .handlers import MessageHandler, CallbackQueryHandler
+from .handlers import MessageHandler, CallbackQueryHandler, InlineQueryHandler
 
-from .types import (
-    User
-)
 
 from .methods import Methods
 
@@ -108,13 +104,6 @@ class Bot(Methods):
     def parse_mode(self):
         self.parse_mode = None
 
-    async def get_me(self):
-        payload = self.generate_payload(**locals())
-        method = 'getMe'
-        url = self.get_api_url(method)
-        result = await self.aio_post(url, payload)
-        return User(**result)
-
     @property
     async def me(self):
         if not hasattr(self, '_me'):
@@ -186,10 +175,19 @@ class Bot(Methods):
             self.add_callback_handler(func, filters, group)
         return decorator
 
+    def on_inlinequery(self, filters: Filters = None, group: int = 0):
+        def decorator(func):
+            self.add_inlinequery_handler(func, filters, group)
+        return decorator
+
     def add_message_handler(self, callback: Callable, filters: Filters = None, group: int = 0):
         handler = MessageHandler(callback, filters)
         self.dispatcher.add_handler(handler, group)
 
     def add_callback_handler(self, callback: Callable, filters: Filters = None, group: int = 0):
         handler = CallbackQueryHandler(callback, filters)
+        self.dispatcher.add_handler(handler, group)
+
+    def add_inlinequery_handler(self, callback: Callable, filters: Filters = None, group: int = 0):
+        handler = InlineQueryHandler(callback, filters)
         self.dispatcher.add_handler(handler, group)

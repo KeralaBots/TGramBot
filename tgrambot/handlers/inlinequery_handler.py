@@ -23,39 +23,29 @@ from typing import Callable
 from .handler import Handler
 
 
-class CallbackQueryHandler(Handler):
+class InlineQueryHandler(Handler):
     def __init__(self, callback: Callable, filters=None):
-        super(CallbackQueryHandler, self).__init__(callback, filters)
-        self.required_filters = ['callback_data', 'regex']
-
+        super(InlineQueryHandler, self).__init__(callback, filters)
+        self.required_filters = ['regex']
+    
     async def check(self, bot: 'tgrambot.Bot', update):
         if self.filters:
             filter_type = self.filters.get('type')
-            if filter_type and filter_type in self.required_filters and update.callback_query:
-                if filter_type == "callback_data":
-                    if update.callback_query.data:
-                        data = self.filters.get('data')
-                        m = re.search(data, update.callback_query.data, re.I)
-                        if m:
-                            return True
-                        else:
-                            return False
-                    else:
-                        return False
-                elif filter_type == "regex":
+            if filter_type and filter_type in self.required_filters and update.inline_query:
+                if update.inline_query.query:
                     regex = self.filters.get('regex')
-                    if update.callback_query.data:
-                        m = re.search(regex, update.callback_query.data, re.I)
-                        if m:
-                            return True
-                        else:
-                            return False
+                    m = re.search(regex, update.inline_query.query, re.I)
+                    if m:
+                        return True
                     else:
                         return False
                 else:
                     return False
+            else:
+                return False
+
         else:
-            if update.callback_query:
+            if update.inline_query:
                 return True
             else:
                 return False

@@ -69,7 +69,29 @@ def build_methods():
             comments = '\n        '.join(item.get('description')) + f"\n\n        Source : {item.get('href')}"
             fields = item.get('fields')
             method = snake(name)
-            if fields:
+            if not fields:
+                raw_return = TG_CORE_TYPES.get(returns_list[0]) if TG_CORE_TYPES.get(returns_list[0]) is not None else returns_list[0]
+                if raw_return.startswith("Array of"):
+                    raw_return = TG_CORE_TYPES.get(raw_return[9:]) if TG_CORE_TYPES.get(
+                        raw_return[9:]) is not None else raw_return[9:]
+                    returns = f'[{raw_return}(**r) for r in result]'
+                else:
+                    if raw_return in BASE_TYPES:
+                        returns = f'result'
+                    else:
+                        returns = f'{raw_return}(**result)'
+
+                if raw_return not in to_import and raw_return not in BASE_TYPES:
+                    to_import.append(raw_return)
+                content += content_temp.format(
+                    name=name,
+                    method_name=method,
+                    fields=field_text[:-2],
+                    attachment="",
+                    comments=comments,
+                    returns=returns
+                )
+            else:
                 returns = ''
                 for field in fields:
                     typed_list = []

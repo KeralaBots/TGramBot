@@ -1,3 +1,10 @@
+# # # # # # # # # # # # # # # # # # # # # # # #
+#               !!! WARNING !!!               #
+#       This is an auto-generated file!       #
+# All changes made in this file will be lost! #
+# # # # # # # # # # # # # # # # # # # # # # # #
+
+
 # TGramBot - Partially Auto-generated Telegram Bot Api Library Python
 # Copyright (C) 2022  Anand <anandpskerala@gmail.com>
 
@@ -14,8 +21,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .message_handler import MessageHandler
-from .callback_handler import CallbackQueryHandler
-from .inlinequery_handler import InlineQueryHandler
+import logging
+from pydantic import BaseModel
 
-__all__ = ["MessageHandler", "CallbackQueryHandler", "InlineQueryHandler"]
+logger = logging.getLogger(__name__)
+
+
+class TelegramObject(BaseModel):
+
+    """
+    Base TelegramObject Class for TGramBot
+    """
+
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __repr__(self):
+        return f"<{type(self).__name__} {self}>"

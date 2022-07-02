@@ -55,6 +55,8 @@ class Filters:
 
     invoice = dict(type="invoice")
 
+    has_protected_content = dict(type="has_protected_content")
+
     video_chat_scheduled = dict(type="video_chat_scheduled")
 
     video_chat_started = dict(type="video_chat_started")
