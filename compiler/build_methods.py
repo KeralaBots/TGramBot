@@ -61,7 +61,7 @@ def build_methods():
         # Main Template
         content_temp = open(TEMPLATES_DESTINATION / 'methods.tmpl', mode='r').read()
         for name, item in schema.items():
-            field_text = "self, "
+            field_text = "\n            self, "
             required = ''
             non_required = ''
             returns_list = item.get('returns')
@@ -86,7 +86,7 @@ def build_methods():
                 content += content_temp.format(
                     name=name,
                     method_name=method,
-                    fields=field_text[:-2],
+                    fields=field_text[:-2] + '\n    ',
                     attachment="",
                     comments=comments,
                     returns=returns
@@ -121,9 +121,9 @@ def build_methods():
                     cust_typed = f'Union{typed}' if len(typed_list) > 1 else typed[1:-1]
                     if field_name:
                         if field.get('required'):
-                            required += f"{field_name}: {cust_typed}, "
+                            required += f"\n            {field_name}: {cust_typed}, "
                         else:
-                            non_required += f"{field_name}: {cust_typed} = None, "
+                            non_required += f"\n            {field_name}: {cust_typed} = None, "
 
                 raw_return = TG_CORE_TYPES.get(returns_list[0]) if TG_CORE_TYPES.get(returns_list[0]) is not None else returns_list[0]
                 if raw_return.startswith("Array of"):
@@ -146,7 +146,7 @@ def build_methods():
                 content += content_temp.format(
                     name=name,
                     method_name=method,
-                    fields=field_text[:-2],
+                    fields=field_text[:-2] + '\n    ',
                     attachment=attach_content,
                     comments=comments,
                     returns=returns

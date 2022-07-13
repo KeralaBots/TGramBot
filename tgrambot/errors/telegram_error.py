@@ -42,3 +42,18 @@ class InvalidToken(TelegramError):
     def __reduce__(self) -> Tuple[type, Tuple]:
         return self.__class__, ()
 
+
+class InstanceNotFound(TelegramError):
+    def __init__(self):
+        super(InstanceNotFound, self).__init__('bot instance not found', "There is no bot instance present")
+
+    def __reduce__(self) -> Tuple[type, Tuple]:
+        return self.__class__, ()
+
+
+class MethodNotFound(TelegramError):
+    def __init__(self, method, class_name):
+        super(MethodNotFound, self).__init__('method not supported', f'{class_name} doesn\'t support {method} method')
+
+    def __reduce__(self) -> Tuple[type, Tuple]:
+        return self.__class__, ()

@@ -21,6 +21,7 @@ import tgrambot
 from typing import Callable
 
 from .handler import Handler
+from ..types import InlineQuery
 
 
 class InlineQueryHandler(Handler):
@@ -29,23 +30,22 @@ class InlineQueryHandler(Handler):
         self.required_filters = ['regex']
     
     async def check(self, bot: 'tgrambot.Bot', update):
-        if self.filters:
-            filter_type = self.filters.get('type')
-            if filter_type and filter_type in self.required_filters and update.inline_query:
-                if update.inline_query.query:
-                    regex = self.filters.get('regex')
-                    m = re.search(regex, update.inline_query.query, re.I)
-                    if m:
-                        return True
+        if isinstance(update, InlineQuery):
+            if self.filters:
+                filter_type = self.filters.get('type')
+                if filter_type and filter_type in self.required_filters:
+                    if update.query:
+                        regex = self.filters.get('regex')
+                        m = re.search(regex, update.query, re.I)
+                        if m:
+                            return True
+                        else:
+                            return False
                     else:
                         return False
                 else:
                     return False
             else:
-                return False
-
-        else:
-            if update.inline_query:
                 return True
-            else:
-                return False
+        else:
+            return False

@@ -35,7 +35,15 @@ BASE_TYPES = ['str', 'bool', 'int', 'None']
 
 INPUT_TYPES = ["ForceReply", "ReplyKeyboardMarkup", "KeyboardButton",
                "KeyboardButtonPollType", "ReplyKeyboardRemove", "InlineKeyboardMarkup",
-               "InlineKeyboardButton", "LoginUrl"]
+               "InlineKeyboardButton", "LoginUrl", "InlineQueryResultArticle", "InputMedia",
+               "InputMediaAnimation", "InputMediaDocument", "InputMediaAudio", "InputMediaPhoto",
+               "InputMediaVideo", "InlineQueryResultCachedAudio", "InlineQueryResultCachedDocument", "InlineQueryResultCachedGif",
+               "InlineQueryResultCachedMpeg4Gif", "InlineQueryResultCachedPhoto", "InlineQueryResultCachedSticker",
+               "InlineQueryResultCachedVideo", "InlineQueryResultCachedVoice", "InlineQueryResultArticle", "InlineQueryResultAudio"
+               "InlineQueryResultContact", "InlineQueryResultGame", "InlineQueryResultDocument", "InlineQueryResultGif",
+               "InlineQueryResultLocation", "InlineQueryResultMpeg4Gif", "InlineQueryResultPhoto", "InlineQueryResultVenue",
+               "InlineQueryResultVideo", "InlineQueryResultVoice", "InputTextMessageContent", "InputLocationMessageContent",
+               "InputVenueMessageContent", "InputContactMessageContent", "InputInvoiceMessageContent"]
 
 
 WARNING = """
@@ -123,7 +131,9 @@ def build_types():
                 )
             else:
                 field_text = ''
-                super_class_props = []
+                super_class_required = ""
+                super_class_not_required = ""
+                super_class_props = ""
                 super_class_text = ''
                 field_count = 0
                 pending_objects_count = 0
@@ -172,19 +182,21 @@ def build_types():
 
                     if name in INPUT_TYPES:
                         if required:
-                            super_class_props.append(f'{field_name}: {cust_field}')
+                            super_class_required += f'{field_name}: {cust_field}, '
                         else:
                             if field_name == 'url':
-                                super_class_props.append(f'{field_name}: {cust_field} = ""')
+                                super_class_not_required += f'{field_name}: {cust_field} = "", '
                             else:
-                                super_class_props.append(f'{field_name}: {cust_field} = None')
+                                super_class_not_required += f'{field_name}: {cust_field} = None, '
 
                         super_class_text += f'{field_name}={field_name}, '
+                super_class_props += super_class_required + super_class_not_required
 
                 if len(super_class_props) > 0 and super_class_text != "":
-                    super_class += f"""\n    def __init__(self, {', '.join(super_class_props)}):\n        super({name}, self).__init__({super_class_text[:-2]})\n"""
+                    super_class += f"\n    def __init__(self, {super_class_props[:-2]}):\n        super({name}, self).__init__({super_class_text[:-2]})\n"
 
                 # To avoid ForwardRefs and ConfigErrors in pydantic
+                print(f'{name} - {pending_objects_count}')
                 if name == "Chat":
                     chat_object += content_temp.format(
                         class_name=name,

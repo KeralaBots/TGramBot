@@ -44,7 +44,7 @@ class Bot(Methods):
             read_timeout: Optional[float] = 5.0,
             write_timeout: Optional[float] = 5.0,
             connect_timeout: Optional[float] = 5.0,
-            pool_timeout: Optional[float] = 1.0,
+            pool_timeout: Optional[float] = 1.0
     ):
         super(Bot, self).__init__(bot=self)
         self.bot_token = self._validate_bot_token(token)
@@ -119,9 +119,14 @@ class Bot(Methods):
     def generate_payload(**kwargs):
         return_value = {}
         for key, value in kwargs.items():
+            if not kwargs.get('parse_mode') and key == 'parse_mode':
+                self = kwargs.get('self')
+                value = self._parse_mode
+                return_value.update({key: value})
             if key not in ['self', 'cls'] and value is not None and not key.startswith('_'):
                 if key == 'reply_markup':
                     value = value.json() if value is not None else value
+
                 return_value.update({key: value})
         return return_value
 

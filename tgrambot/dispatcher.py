@@ -24,6 +24,7 @@ import tgrambot
 
 import signal
 from signal import signal as signal_fn, SIGINT, SIGTERM, SIGABRT
+from .storage import create_instance, delete_instance
 
 
 log = logging.getLogger(__name__)
@@ -47,6 +48,7 @@ class Dispatcher:
 
     async def start(self):
         self.is_running = True
+        create_instance(self.bot)
         asyncio.ensure_future(self.handle_workers())
 
     async def handle_workers(self):
@@ -57,12 +59,12 @@ class Dispatcher:
                     break
                 self.bot.offset = update.update_id
                 try:
-                    update = update
+                    updated = self._parse_updates(update)
 
                     for group in self.groups.values():
                         for handler in group:
-                            check = await handler.check(self.bot, update)
-                            updated = self._parse_updates(update)
+                            check = await handler.check(self.bot, updated)
+                            
                             if check:
                                 if inspect.iscoroutinefunction(handler.callback):
                                     await handler.callback(self.bot, updated)
@@ -76,6 +78,7 @@ class Dispatcher:
                                 break
                 except Exception as exe:
                     logging.error(exe, exc_info=True)
+                    continue
 
     async def idle(self):
 
@@ -93,6 +96,7 @@ class Dispatcher:
             await asyncio.sleep(1)
 
     async def stop(self):
+        delete_instance()
         self.is_running = False
         self.groups.clear()
 

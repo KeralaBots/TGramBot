@@ -16,8 +16,10 @@
 
 from tgrambot.errors.telegram_error import (
     TelegramError,
-    InvalidToken
+    InvalidToken,
+    InstanceNotFound,
+    MethodNotFound
 )
 
 
-__all__ = ["TelegramError", "InvalidToken"]
+__all__ = ["TelegramError", "InvalidToken", "InstanceNotFound", "MethodNotFound"]
