@@ -32,13 +32,14 @@ import asyncio
 from tgrambot import Bot
 from tgrambot.filters import Filters
 from tgrambot.types import Message
+from tgrambot.text import Italic
 
 
 bot = Bot("token", workers=50, parse_mode='MarkdownV2')
 
 @bot.on_message(Filters.command('start'))
 async def start_bot(c: Bot, m: Message):
-    await c.send_message(m.chat.id, "Hola Amigo!")
+    await c.send_message(m.chat.id, Italic("Hola Amigo!"))
 
 async def main():
     await bot.run()
