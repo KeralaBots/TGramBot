@@ -73,10 +73,10 @@ class Methods:
         self._bot = bot
 
     async def get_updates(
-            self, 
-            offset: int = None, 
-            limit: int = None, 
-            timeout: int = None, 
+            self,
+            offset: int = None,
+            limit: int = None,
+            timeout: int = None,
             allowed_updates: List[str] = None
     ):
         """
@@ -86,20 +86,20 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getUpdates'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return [Update(**r) for r in result]
 
     async def set_webhook(
-            self, 
-            url: str, 
-            certificate: InputFile = None, 
-            ip_address: str = None, 
-            max_connections: int = None, 
-            allowed_updates: List[str] = None, 
-            drop_pending_updates: bool = None, 
+            self,
+            url: str,
+            certificate: InputFile = None,
+            ip_address: str = None,
+            max_connections: int = None,
+            allowed_updates: List[str] = None,
+            drop_pending_updates: bool = None,
             secret_token: str = None
     ):
         """
@@ -110,16 +110,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'certificate', certificate) is not None:
-            files.update(self._bot.attach_file(payload, 'certificate', certificate))
+            files.update(self._bot.attach_file(
+                payload, 'certificate', certificate))
         method = 'setWebhook'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def delete_webhook(
-            self, 
+            self,
             drop_pending_updates: bool = None
     ):
         """
@@ -129,7 +130,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteWebhook'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -145,7 +146,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getWebhookInfo'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -161,7 +162,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getMe'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -177,7 +178,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'logOut'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -193,7 +194,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'close'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -221,17 +222,18 @@ class Methods:
         raise ValueError(f"Unknown parse mode: {parse_mode}")
 
     async def send_message(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             text: Union[str, Element],
-            parse_mode: str = None, 
-            entities: List[MessageEntity] = None, 
-            disable_web_page_preview: bool = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            parse_mode: str = None,
+            entities: List[MessageEntity] = None,
+            disable_web_page_preview: bool = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send text messages. On success, the sent Message is returned.
@@ -245,18 +247,18 @@ class Methods:
 
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def forward_message(
-            self, 
-            chat_id: Union[int, str], 
-            from_chat_id: Union[int, str], 
-            message_id: int, 
-            disable_notification: bool = None, 
+            self,
+            chat_id: Union[int, str],
+            from_chat_id: Union[int, str],
+            message_id: int,
+            disable_notification: bool = None,
             protect_content: bool = None
     ):
         """
@@ -266,25 +268,26 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'forwardMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def copy_message(
-            self, 
-            chat_id: Union[int, str], 
-            from_chat_id: Union[int, str], 
-            message_id: int, 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            from_chat_id: Union[int, str],
+            message_id: int,
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
@@ -293,24 +296,25 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'copyMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return MessageId(**result)
 
     async def send_photo(
-            self, 
-            chat_id: Union[int, str], 
-            photo: Union[InputFile, str], 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            photo: Union[InputFile, str],
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send photos. On success, the sent Message is returned.
@@ -319,7 +323,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'photo', photo) is not None:
             files.update(self._bot.attach_file(payload, 'photo', photo))
         method = 'sendPhoto'
@@ -328,21 +332,22 @@ class Methods:
         return Message(**result)
 
     async def send_audio(
-            self, 
-            chat_id: Union[int, str], 
-            audio: Union[InputFile, str], 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            duration: int = None, 
-            performer: str = None, 
-            title: str = None, 
-            thumb: Union[InputFile, str] = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            audio: Union[InputFile, str],
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            duration: int = None,
+            performer: str = None,
+            title: str = None,
+            thumb: Union[InputFile, str] = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
@@ -352,7 +357,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'audio', audio) is not None:
             files.update(self._bot.attach_file(payload, 'audio', audio))
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
@@ -363,19 +368,20 @@ class Methods:
         return Message(**result)
 
     async def send_document(
-            self, 
-            chat_id: Union[int, str], 
-            document: Union[InputFile, str], 
-            thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            disable_content_type_detection: bool = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            document: Union[InputFile, str],
+            thumb: Union[InputFile, str] = None,
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            disable_content_type_detection: bool = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
@@ -384,7 +390,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'document', document) is not None:
             files.update(self._bot.attach_file(payload, 'document', document))
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
@@ -395,22 +401,23 @@ class Methods:
         return Message(**result)
 
     async def send_video(
-            self, 
-            chat_id: Union[int, str], 
-            video: Union[InputFile, str], 
-            duration: int = None, 
-            width: int = None, 
-            height: int = None, 
-            thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            supports_streaming: bool = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            video: Union[InputFile, str],
+            duration: int = None,
+            width: int = None,
+            height: int = None,
+            thumb: Union[InputFile, str] = None,
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            supports_streaming: bool = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
@@ -419,7 +426,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'video', video) is not None:
             files.update(self._bot.attach_file(payload, 'video', video))
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
@@ -430,21 +437,22 @@ class Methods:
         return Message(**result)
 
     async def send_animation(
-            self, 
-            chat_id: Union[int, str], 
-            animation: Union[InputFile, str], 
-            duration: int = None, 
-            width: int = None, 
-            height: int = None, 
-            thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            animation: Union[InputFile, str],
+            duration: int = None,
+            width: int = None,
+            height: int = None,
+            thumb: Union[InputFile, str] = None,
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
@@ -453,9 +461,10 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'animation', animation) is not None:
-            files.update(self._bot.attach_file(payload, 'animation', animation))
+            files.update(self._bot.attach_file(
+                payload, 'animation', animation))
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
             files.update(self._bot.attach_file(payload, 'thumb', thumb))
         method = 'sendAnimation'
@@ -464,18 +473,19 @@ class Methods:
         return Message(**result)
 
     async def send_voice(
-            self, 
-            chat_id: Union[int, str], 
-            voice: Union[InputFile, str], 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
-            duration: int = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            voice: Union[InputFile, str],
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
+            duration: int = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
@@ -484,7 +494,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'voice', voice) is not None:
             files.update(self._bot.attach_file(payload, 'voice', voice))
         method = 'sendVoice'
@@ -493,17 +503,18 @@ class Methods:
         return Message(**result)
 
     async def send_video_note(
-            self, 
-            chat_id: Union[int, str], 
-            video_note: Union[InputFile, str], 
-            duration: int = None, 
-            length: int = None, 
-            thumb: Union[InputFile, str] = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            video_note: Union[InputFile, str],
+            duration: int = None,
+            length: int = None,
+            thumb: Union[InputFile, str] = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
@@ -512,9 +523,10 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'video_note', video_note) is not None:
-            files.update(self._bot.attach_file(payload, 'video_note', video_note))
+            files.update(self._bot.attach_file(
+                payload, 'video_note', video_note))
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
             files.update(self._bot.attach_file(payload, 'thumb', thumb))
         method = 'sendVideoNote'
@@ -523,12 +535,12 @@ class Methods:
         return Message(**result)
 
     async def send_media_group(
-            self, 
-            chat_id: Union[int, str], 
-            media: Union[List[InputMediaAudio], List[InputMediaDocument], List[InputMediaPhoto], List[InputMediaVideo]], 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
+            self,
+            chat_id: Union[int, str],
+            media: Union[List[InputMediaAudio], List[InputMediaDocument], List[InputMediaPhoto], List[InputMediaVideo]],
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
             allow_sending_without_reply: bool = None
     ):
         """
@@ -538,26 +550,27 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendMediaGroup'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return [Message(**r) for r in result]
 
     async def send_location(
-            self, 
-            chat_id: Union[int, str], 
-            latitude: int, 
-            longitude: int, 
-            horizontal_accuracy: int = None, 
-            live_period: int = None, 
-            heading: int = None, 
-            proximity_alert_radius: int = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            latitude: int,
+            longitude: int,
+            horizontal_accuracy: int = None,
+            live_period: int = None,
+            heading: int = None,
+            proximity_alert_radius: int = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send point on the map. On success, the sent Message is returned.
@@ -566,22 +579,22 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendLocation'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def edit_message_live_location(
-            self, 
-            latitude: int, 
-            longitude: int, 
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
-            horizontal_accuracy: int = None, 
-            heading: int = None, 
-            proximity_alert_radius: int = None, 
+            self,
+            latitude: int,
+            longitude: int,
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
+            horizontal_accuracy: int = None,
+            heading: int = None,
+            proximity_alert_radius: int = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -591,17 +604,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editMessageLiveLocation'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def stop_message_live_location(
-            self, 
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
+            self,
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -611,28 +624,29 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'stopMessageLiveLocation'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def send_venue(
-            self, 
-            chat_id: Union[int, str], 
-            latitude: int, 
-            longitude: int, 
-            title: str, 
-            address: str, 
-            foursquare_id: str = None, 
-            foursquare_type: str = None, 
-            google_place_id: str = None, 
-            google_place_type: str = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            latitude: int,
+            longitude: int,
+            title: str,
+            address: str,
+            foursquare_id: str = None,
+            foursquare_type: str = None,
+            google_place_id: str = None,
+            google_place_type: str = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send information about a venue. On success, the sent Message is returned.
@@ -641,24 +655,25 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendVenue'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def send_contact(
-            self, 
-            chat_id: Union[int, str], 
-            phone_number: str, 
-            first_name: str, 
-            last_name: str = None, 
-            vcard: str = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            phone_number: str,
+            first_name: str,
+            last_name: str = None,
+            vcard: str = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send phone contacts. On success, the sent Message is returned.
@@ -667,32 +682,33 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendContact'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def send_poll(
-            self, 
-            chat_id: Union[int, str], 
-            question: str, 
-            options: List[str], 
-            is_anonymous: bool = None, 
-            type: str = None, 
-            allows_multiple_answers: bool = None, 
-            correct_option_id: int = None, 
-            explanation: str = None, 
-            explanation_parse_mode: str = None, 
-            explanation_entities: List[MessageEntity] = None, 
-            open_period: int = None, 
-            close_date: int = None, 
-            is_closed: bool = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            question: str,
+            options: List[str],
+            is_anonymous: bool = None,
+            type: str = None,
+            allows_multiple_answers: bool = None,
+            correct_option_id: int = None,
+            explanation: str = None,
+            explanation_parse_mode: str = None,
+            explanation_entities: List[MessageEntity] = None,
+            open_period: int = None,
+            close_date: int = None,
+            is_closed: bool = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send a native poll. On success, the sent Message is returned.
@@ -701,21 +717,22 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendPoll'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def send_dice(
-            self, 
-            chat_id: Union[int, str], 
-            emoji: str = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            emoji: str = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
@@ -724,15 +741,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendDice'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def send_chat_action(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             action: str
     ):
         """
@@ -743,16 +760,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendChatAction'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_user_profile_photos(
-            self, 
-            user_id: int, 
-            offset: int = None, 
+            self,
+            user_id: int,
+            offset: int = None,
             limit: int = None
     ):
         """
@@ -762,14 +779,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getUserProfilePhotos'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return UserProfilePhotos(**result)
 
     async def get_file(
-            self, 
+            self,
             file_id: str
     ):
         """
@@ -780,17 +797,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getFile'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return File(**result)
 
     async def ban_chat_member(
-            self, 
-            chat_id: Union[int, str], 
-            user_id: int, 
-            until_date: int = None, 
+            self,
+            chat_id: Union[int, str],
+            user_id: int,
+            until_date: int = None,
             revoke_messages: bool = None
     ):
         """
@@ -800,16 +817,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'banChatMember'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def unban_chat_member(
-            self, 
-            chat_id: Union[int, str], 
-            user_id: int, 
+            self,
+            chat_id: Union[int, str],
+            user_id: int,
             only_if_banned: bool = None
     ):
         """
@@ -819,17 +836,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'unbanChatMember'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def restrict_chat_member(
-            self, 
-            chat_id: Union[int, str], 
-            user_id: int, 
-            permissions: ChatPermissions, 
+            self,
+            chat_id: Union[int, str],
+            user_id: int,
+            permissions: ChatPermissions,
             until_date: int = None
     ):
         """
@@ -839,26 +856,26 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'restrictChatMember'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def promote_chat_member(
-            self, 
-            chat_id: Union[int, str], 
-            user_id: int, 
-            is_anonymous: bool = None, 
-            can_manage_chat: bool = None, 
-            can_post_messages: bool = None, 
-            can_edit_messages: bool = None, 
-            can_delete_messages: bool = None, 
-            can_manage_video_chats: bool = None, 
-            can_restrict_members: bool = None, 
-            can_promote_members: bool = None, 
-            can_change_info: bool = None, 
-            can_invite_users: bool = None, 
+            self,
+            chat_id: Union[int, str],
+            user_id: int,
+            is_anonymous: bool = None,
+            can_manage_chat: bool = None,
+            can_post_messages: bool = None,
+            can_edit_messages: bool = None,
+            can_delete_messages: bool = None,
+            can_manage_video_chats: bool = None,
+            can_restrict_members: bool = None,
+            can_promote_members: bool = None,
+            can_change_info: bool = None,
+            can_invite_users: bool = None,
             can_pin_messages: bool = None
     ):
         """
@@ -868,16 +885,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'promoteChatMember'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_chat_administrator_custom_title(
-            self, 
-            chat_id: Union[int, str], 
-            user_id: int, 
+            self,
+            chat_id: Union[int, str],
+            user_id: int,
             custom_title: str
     ):
         """
@@ -887,15 +904,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatAdministratorCustomTitle'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def ban_chat_sender_chat(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             sender_chat_id: int
     ):
         """
@@ -905,15 +922,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'banChatSenderChat'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def unban_chat_sender_chat(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             sender_chat_id: int
     ):
         """
@@ -923,15 +940,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'unbanChatSenderChat'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_chat_permissions(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             permissions: ChatPermissions
     ):
         """
@@ -941,14 +958,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatPermissions'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def export_chat_invite_link(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -958,18 +975,18 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'exportChatInviteLink'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def create_chat_invite_link(
-            self, 
-            chat_id: Union[int, str], 
-            name: str = None, 
-            expire_date: int = None, 
-            member_limit: int = None, 
+            self,
+            chat_id: Union[int, str],
+            name: str = None,
+            expire_date: int = None,
+            member_limit: int = None,
             creates_join_request: bool = None
     ):
         """
@@ -979,19 +996,19 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'createChatInviteLink'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return ChatInviteLink(**result)
 
     async def edit_chat_invite_link(
-            self, 
-            chat_id: Union[int, str], 
-            invite_link: str, 
-            name: str = None, 
-            expire_date: int = None, 
-            member_limit: int = None, 
+            self,
+            chat_id: Union[int, str],
+            invite_link: str,
+            name: str = None,
+            expire_date: int = None,
+            member_limit: int = None,
             creates_join_request: bool = None
     ):
         """
@@ -1001,15 +1018,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editChatInviteLink'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return ChatInviteLink(**result)
 
     async def revoke_chat_invite_link(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             invite_link: str
     ):
         """
@@ -1019,15 +1036,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'revokeChatInviteLink'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return ChatInviteLink(**result)
 
     async def approve_chat_join_request(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             user_id: int
     ):
         """
@@ -1037,15 +1054,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'approveChatJoinRequest'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def decline_chat_join_request(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             user_id: int
     ):
         """
@@ -1055,15 +1072,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'declineChatJoinRequest'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_chat_photo(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             photo: InputFile
     ):
         """
@@ -1073,7 +1090,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'photo', photo) is not None:
             files.update(self._bot.attach_file(payload, 'photo', photo))
         method = 'setChatPhoto'
@@ -1082,7 +1099,7 @@ class Methods:
         return result
 
     async def delete_chat_photo(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1092,15 +1109,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteChatPhoto'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_chat_title(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             title: str
     ):
         """
@@ -1110,15 +1127,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatTitle'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_chat_description(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             description: str = None
     ):
         """
@@ -1128,16 +1145,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatDescription'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def pin_chat_message(
-            self, 
-            chat_id: Union[int, str], 
-            message_id: int, 
+            self,
+            chat_id: Union[int, str],
+            message_id: int,
             disable_notification: bool = None
     ):
         """
@@ -1147,15 +1164,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'pinChatMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def unpin_chat_message(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             message_id: int = None
     ):
         """
@@ -1165,14 +1182,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'unpinChatMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def unpin_all_chat_messages(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1182,14 +1199,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'unpinAllChatMessages'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def leave_chat(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1199,14 +1216,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'leaveChat'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_chat(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1216,14 +1233,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getChat'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Chat(**result)
 
     async def get_chat_administrators(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1233,14 +1250,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getChatAdministrators'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return [ChatMember(**r) for r in result]
 
     async def get_chat_member_count(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1250,15 +1267,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getChatMemberCount'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_chat_member(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             user_id: int
     ):
         """
@@ -1268,15 +1285,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getChatMember'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return ChatMember(**result)
 
     async def set_chat_sticker_set(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             sticker_set_name: str
     ):
         """
@@ -1286,14 +1303,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatStickerSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def delete_chat_sticker_set(
-            self, 
+            self,
             chat_id: Union[int, str]
     ):
         """
@@ -1303,18 +1320,18 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteChatStickerSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def answer_callback_query(
-            self, 
-            callback_query_id: str, 
-            text: str = None, 
-            show_alert: bool = None, 
-            url: str = None, 
+            self,
+            callback_query_id: str,
+            text: str = None,
+            show_alert: bool = None,
+            url: str = None,
             cache_time: int = None
     ):
         """
@@ -1324,16 +1341,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'answerCallbackQuery'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_my_commands(
-            self, 
-            commands: List[BotCommand], 
-            scope: BotCommandScope = None, 
+            self,
+            commands: List[BotCommand],
+            scope: BotCommandScope = None,
             language_code: str = None
     ):
         """
@@ -1343,15 +1360,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setMyCommands'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def delete_my_commands(
-            self, 
-            scope: BotCommandScope = None, 
+            self,
+            scope: BotCommandScope = None,
             language_code: str = None
     ):
         """
@@ -1361,15 +1378,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteMyCommands'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_my_commands(
-            self, 
-            scope: BotCommandScope = None, 
+            self,
+            scope: BotCommandScope = None,
             language_code: str = None
     ):
         """
@@ -1379,15 +1396,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getMyCommands'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return [BotCommand(**r) for r in result]
 
     async def set_chat_menu_button(
-            self, 
-            chat_id: int = None, 
+            self,
+            chat_id: int = None,
             menu_button: MenuButton = None
     ):
         """
@@ -1397,14 +1414,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setChatMenuButton'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_chat_menu_button(
-            self, 
+            self,
             chat_id: int = None
     ):
         """
@@ -1414,15 +1431,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getChatMenuButton'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return MenuButton(**result)
 
     async def set_my_default_administrator_rights(
-            self, 
-            rights: ChatAdministratorRights = None, 
+            self,
+            rights: ChatAdministratorRights = None,
             for_channels: bool = None
     ):
         """
@@ -1432,14 +1449,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setMyDefaultAdministratorRights'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def get_my_default_administrator_rights(
-            self, 
+            self,
             for_channels: bool = None
     ):
         """
@@ -1449,21 +1466,21 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getMyDefaultAdministratorRights'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return ChatAdministratorRights(**result)
 
     async def edit_message_text(
-            self, 
+            self,
             text: Union[str, Element],
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
-            parse_mode: str = None, 
-            entities: List[MessageEntity] = None, 
-            disable_web_page_preview: bool = None, 
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
+            parse_mode: str = None,
+            entities: List[MessageEntity] = None,
+            disable_web_page_preview: bool = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1477,20 +1494,20 @@ class Methods:
 
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editMessageText'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def edit_message_caption(
-            self, 
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
-            caption: str = None, 
-            parse_mode: str = None, 
-            caption_entities: List[MessageEntity] = None, 
+            self,
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
+            caption: str = None,
+            parse_mode: str = None,
+            caption_entities: List[MessageEntity] = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1500,18 +1517,18 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editMessageCaption'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def edit_message_media(
-            self, 
-            media: InputMedia, 
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
+            self,
+            media: InputMedia,
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1521,17 +1538,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editMessageMedia'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def edit_message_reply_markup(
-            self, 
-            chat_id: Union[int, str] = None, 
-            message_id: int = None, 
-            inline_message_id: str = None, 
+            self,
+            chat_id: Union[int, str] = None,
+            message_id: int = None,
+            inline_message_id: str = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1541,16 +1558,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'editMessageReplyMarkup'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def stop_poll(
-            self, 
-            chat_id: Union[int, str], 
-            message_id: int, 
+            self,
+            chat_id: Union[int, str],
+            message_id: int,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1560,15 +1577,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'stopPoll'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Poll(**result)
 
     async def delete_message(
-            self, 
-            chat_id: Union[int, str], 
+            self,
+            chat_id: Union[int, str],
             message_id: int
     ):
         """
@@ -1586,21 +1603,22 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteMessage'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def send_sticker(
-            self, 
-            chat_id: Union[int, str], 
-            sticker: Union[InputFile, str], 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
-            reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
+            self,
+            chat_id: Union[int, str],
+            sticker: Union[InputFile, str],
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
+            reply_markup: Union[InlineKeyboardMarkup,
+                                ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply] = None
     ):
         """
         Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
@@ -1609,7 +1627,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'sticker', sticker) is not None:
             files.update(self._bot.attach_file(payload, 'sticker', sticker))
         method = 'sendSticker'
@@ -1618,7 +1636,7 @@ class Methods:
         return Message(**result)
 
     async def get_sticker_set(
-            self, 
+            self,
             name: str
     ):
         """
@@ -1628,15 +1646,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getStickerSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return StickerSet(**result)
 
     async def upload_sticker_file(
-            self, 
-            user_id: int, 
+            self,
+            user_id: int,
             png_sticker: InputFile
     ):
         """
@@ -1646,24 +1664,25 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'png_sticker', png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'png_sticker', png_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'png_sticker', png_sticker))
         method = 'uploadStickerFile'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return File(**result)
 
     async def create_new_sticker_set(
-            self, 
-            user_id: int, 
-            name: str, 
-            title: str, 
-            emojis: str, 
-            png_sticker: Union[InputFile, str] = None, 
-            tgs_sticker: InputFile = None, 
-            webm_sticker: InputFile = None, 
-            contains_masks: bool = None, 
+            self,
+            user_id: int,
+            name: str,
+            title: str,
+            emojis: str,
+            png_sticker: Union[InputFile, str] = None,
+            tgs_sticker: InputFile = None,
+            webm_sticker: InputFile = None,
+            contains_masks: bool = None,
             mask_position: MaskPosition = None
     ):
         """
@@ -1673,26 +1692,29 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'png_sticker', png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'png_sticker', png_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'png_sticker', png_sticker))
         if self._bot.attach_file(payload, 'tgs_sticker', tgs_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'tgs_sticker', tgs_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'tgs_sticker', tgs_sticker))
         if self._bot.attach_file(payload, 'webm_sticker', webm_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'webm_sticker', webm_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'webm_sticker', webm_sticker))
         method = 'createNewStickerSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def add_sticker_to_set(
-            self, 
-            user_id: int, 
-            name: str, 
-            emojis: str, 
-            png_sticker: Union[InputFile, str] = None, 
-            tgs_sticker: InputFile = None, 
-            webm_sticker: InputFile = None, 
+            self,
+            user_id: int,
+            name: str,
+            emojis: str,
+            png_sticker: Union[InputFile, str] = None,
+            tgs_sticker: InputFile = None,
+            webm_sticker: InputFile = None,
             mask_position: MaskPosition = None
     ):
         """
@@ -1702,21 +1724,24 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'png_sticker', png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'png_sticker', png_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'png_sticker', png_sticker))
         if self._bot.attach_file(payload, 'tgs_sticker', tgs_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'tgs_sticker', tgs_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'tgs_sticker', tgs_sticker))
         if self._bot.attach_file(payload, 'webm_sticker', webm_sticker) is not None:
-            files.update(self._bot.attach_file(payload, 'webm_sticker', webm_sticker))
+            files.update(self._bot.attach_file(
+                payload, 'webm_sticker', webm_sticker))
         method = 'addStickerToSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_sticker_position_in_set(
-            self, 
-            sticker: str, 
+            self,
+            sticker: str,
             position: int
     ):
         """
@@ -1726,14 +1751,14 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setStickerPositionInSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def delete_sticker_from_set(
-            self, 
+            self,
             sticker: str
     ):
         """
@@ -1743,16 +1768,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'deleteStickerFromSet'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_sticker_set_thumb(
-            self, 
-            name: str, 
-            user_id: int, 
+            self,
+            name: str,
+            user_id: int,
             thumb: Union[InputFile, str] = None
     ):
         """
@@ -1762,7 +1787,7 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         if self._bot.attach_file(payload, 'thumb', thumb) is not None:
             files.update(self._bot.attach_file(payload, 'thumb', thumb))
         method = 'setStickerSetThumb'
@@ -1771,13 +1796,13 @@ class Methods:
         return result
 
     async def answer_inline_query(
-            self, 
-            inline_query_id: str, 
-            results: List[InlineQueryResult], 
-            cache_time: int = None, 
-            is_personal: bool = None, 
-            next_offset: str = None, 
-            switch_pm_text: str = None, 
+            self,
+            inline_query_id: str,
+            results: List[InlineQueryResult],
+            cache_time: int = None,
+            is_personal: bool = None,
+            next_offset: str = None,
+            switch_pm_text: str = None,
             switch_pm_parameter: str = None
     ):
         """
@@ -1788,15 +1813,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'answerInlineQuery'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def answer_web_app_query(
-            self, 
-            web_app_query_id: str, 
+            self,
+            web_app_query_id: str,
             result: InlineQueryResult
     ):
         """
@@ -1806,40 +1831,40 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'answerWebAppQuery'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return SentWebAppMessage(**result)
 
     async def send_invoice(
-            self, 
-            chat_id: Union[int, str], 
-            title: str, 
-            description: str, 
-            payload: str, 
-            provider_token: str, 
-            currency: str, 
-            prices: List[LabeledPrice], 
-            max_tip_amount: int = None, 
-            suggested_tip_amounts: List[int] = None, 
-            start_parameter: str = None, 
-            provider_data: str = None, 
-            photo_url: str = None, 
-            photo_size: int = None, 
-            photo_width: int = None, 
-            photo_height: int = None, 
-            need_name: bool = None, 
-            need_phone_number: bool = None, 
-            need_email: bool = None, 
-            need_shipping_address: bool = None, 
-            send_phone_number_to_provider: bool = None, 
-            send_email_to_provider: bool = None, 
-            is_flexible: bool = None, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
+            self,
+            chat_id: Union[int, str],
+            title: str,
+            description: str,
+            payload: str,
+            provider_token: str,
+            currency: str,
+            prices: List[LabeledPrice],
+            max_tip_amount: int = None,
+            suggested_tip_amounts: List[int] = None,
+            start_parameter: str = None,
+            provider_data: str = None,
+            photo_url: str = None,
+            photo_size: int = None,
+            photo_width: int = None,
+            photo_height: int = None,
+            need_name: bool = None,
+            need_phone_number: bool = None,
+            need_email: bool = None,
+            need_shipping_address: bool = None,
+            send_phone_number_to_provider: bool = None,
+            send_email_to_provider: bool = None,
+            is_flexible: bool = None,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1849,33 +1874,33 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendInvoice'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def create_invoice_link(
-            self, 
-            title: str, 
-            description: str, 
-            payload: str, 
-            provider_token: str, 
-            currency: str, 
-            prices: List[LabeledPrice], 
-            max_tip_amount: int = None, 
-            suggested_tip_amounts: List[int] = None, 
-            provider_data: str = None, 
-            photo_url: str = None, 
-            photo_size: int = None, 
-            photo_width: int = None, 
-            photo_height: int = None, 
-            need_name: bool = None, 
-            need_phone_number: bool = None, 
-            need_email: bool = None, 
-            need_shipping_address: bool = None, 
-            send_phone_number_to_provider: bool = None, 
-            send_email_to_provider: bool = None, 
+            self,
+            title: str,
+            description: str,
+            payload: str,
+            provider_token: str,
+            currency: str,
+            prices: List[LabeledPrice],
+            max_tip_amount: int = None,
+            suggested_tip_amounts: List[int] = None,
+            provider_data: str = None,
+            photo_url: str = None,
+            photo_size: int = None,
+            photo_width: int = None,
+            photo_height: int = None,
+            need_name: bool = None,
+            need_phone_number: bool = None,
+            need_email: bool = None,
+            need_shipping_address: bool = None,
+            send_phone_number_to_provider: bool = None,
+            send_email_to_provider: bool = None,
             is_flexible: bool = None
     ):
         """
@@ -1885,17 +1910,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'createInvoiceLink'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def answer_shipping_query(
-            self, 
-            shipping_query_id: str, 
-            ok: bool, 
-            shipping_options: List[ShippingOption] = None, 
+            self,
+            shipping_query_id: str,
+            ok: bool,
+            shipping_options: List[ShippingOption] = None,
             error_message: str = None
     ):
         """
@@ -1905,16 +1930,16 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'answerShippingQuery'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def answer_pre_checkout_query(
-            self, 
-            pre_checkout_query_id: str, 
-            ok: bool, 
+            self,
+            pre_checkout_query_id: str,
+            ok: bool,
             error_message: str = None
     ):
         """
@@ -1924,15 +1949,15 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'answerPreCheckoutQuery'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def set_passport_data_errors(
-            self, 
-            user_id: int, 
+            self,
+            user_id: int,
             errors: List[PassportElementError]
     ):
         """
@@ -1943,20 +1968,20 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setPassportDataErrors'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return result
 
     async def send_game(
-            self, 
-            chat_id: int, 
-            game_short_name: str, 
-            disable_notification: bool = None, 
-            protect_content: bool = None, 
-            reply_to_message_id: int = None, 
-            allow_sending_without_reply: bool = None, 
+            self,
+            chat_id: int,
+            game_short_name: str,
+            disable_notification: bool = None,
+            protect_content: bool = None,
+            reply_to_message_id: int = None,
+            allow_sending_without_reply: bool = None,
             reply_markup: InlineKeyboardMarkup = None
     ):
         """
@@ -1966,20 +1991,20 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'sendGame'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def set_game_score(
-            self, 
-            user_id: int, 
-            score: int, 
-            force: bool = None, 
-            disable_edit_message: bool = None, 
-            chat_id: int = None, 
-            message_id: int = None, 
+            self,
+            user_id: int,
+            score: int,
+            force: bool = None,
+            disable_edit_message: bool = None,
+            chat_id: int = None,
+            message_id: int = None,
             inline_message_id: str = None
     ):
         """
@@ -1989,17 +2014,17 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'setGameScore'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return Message(**result)
 
     async def get_game_high_scores(
-            self, 
-            user_id: int, 
-            chat_id: int = None, 
-            message_id: int = None, 
+            self,
+            user_id: int,
+            chat_id: int = None,
+            message_id: int = None,
             inline_message_id: str = None
     ):
         """
@@ -2009,9 +2034,8 @@ class Methods:
         """
         payload = self._bot.generate_payload(**locals())
         files = {}
-        
+
         method = 'getGameHighScores'
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
         return [GameHighScore(**r) for r in result]
-
