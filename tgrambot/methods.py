@@ -62,6 +62,7 @@ logger = logging.getLogger(__name__)
 
 
 class Methods:
+
     def __init__(self, bot: "tgrambot.Bot"):
         self._bot = bot
 
@@ -104,8 +105,10 @@ class Methods:
         payload = self._bot.generate_payload(**locals())
         files = {}
 
-        if self._bot.attach_file(payload, "certificate", certificate) is not None:
-            files.update(self._bot.attach_file(payload, "certificate", certificate))
+        if self._bot.attach_file(payload, "certificate",
+                                 certificate) is not None:
+            files.update(
+                self._bot.attach_file(payload, "certificate", certificate))
         method = "setWebhook"
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -196,8 +199,7 @@ class Methods:
             logger.warning(
                 "Parse mode 'Markdown' is a legacy format. "
                 "Message will be rendered without markup as plaint text. "
-                "Try to use 'MarkdownV2'"
-            )
+                "Try to use 'MarkdownV2'")
             return element.to_plain_text()
 
         raise ValueError(f"Unknown parse mode: {parse_mode}")
@@ -213,9 +215,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send text messages. On success, the sent Message is returned.
@@ -268,9 +269,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
@@ -296,9 +296,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send photos. On success, the sent Message is returned.
@@ -330,9 +329,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
@@ -365,9 +363,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
@@ -402,9 +399,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
@@ -438,9 +434,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
@@ -451,7 +446,8 @@ class Methods:
         files = {}
 
         if self._bot.attach_file(payload, "animation", animation) is not None:
-            files.update(self._bot.attach_file(payload, "animation", animation))
+            files.update(self._bot.attach_file(payload, "animation",
+                                               animation))
         if self._bot.attach_file(payload, "thumb", thumb) is not None:
             files.update(self._bot.attach_file(payload, "thumb", thumb))
         method = "sendAnimation"
@@ -471,9 +467,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
@@ -501,9 +496,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
@@ -513,8 +507,10 @@ class Methods:
         payload = self._bot.generate_payload(**locals())
         files = {}
 
-        if self._bot.attach_file(payload, "video_note", video_note) is not None:
-            files.update(self._bot.attach_file(payload, "video_note", video_note))
+        if self._bot.attach_file(payload, "video_note",
+                                 video_note) is not None:
+            files.update(
+                self._bot.attach_file(payload, "video_note", video_note))
         if self._bot.attach_file(payload, "thumb", thumb) is not None:
             files.update(self._bot.attach_file(payload, "thumb", thumb))
         method = "sendVideoNote"
@@ -525,12 +521,8 @@ class Methods:
     async def send_media_group(
         self,
         chat_id: Union[int, str],
-        media: Union[
-            List[InputMediaAudio],
-            List[InputMediaDocument],
-            List[InputMediaPhoto],
-            List[InputMediaVideo],
-        ],
+        media: Union[List[InputMediaAudio], List[InputMediaDocument],
+                     List[InputMediaPhoto], List[InputMediaVideo], ],
         disable_notification: bool = None,
         protect_content: bool = None,
         reply_to_message_id: int = None,
@@ -562,9 +554,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send point on the map. On success, the sent Message is returned.
@@ -639,9 +630,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send information about a venue. On success, the sent Message is returned.
@@ -667,9 +657,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send phone contacts. On success, the sent Message is returned.
@@ -703,9 +692,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send a native poll. On success, the sent Message is returned.
@@ -728,9 +716,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.
@@ -760,9 +747,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def get_user_profile_photos(
-        self, user_id: int, offset: int = None, limit: int = None
-    ):
+    async def get_user_profile_photos(self,
+                                      user_id: int,
+                                      offset: int = None,
+                                      limit: int = None):
         """
         Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
 
@@ -811,9 +799,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def unban_chat_member(
-        self, chat_id: Union[int, str], user_id: int, only_if_banned: bool = None
-    ):
+    async def unban_chat_member(self,
+                                chat_id: Union[int, str],
+                                user_id: int,
+                                only_if_banned: bool = None):
         """
         Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.
 
@@ -876,9 +865,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def set_chat_administrator_custom_title(
-        self, chat_id: Union[int, str], user_id: int, custom_title: str
-    ):
+    async def set_chat_administrator_custom_title(self, chat_id: Union[int,
+                                                                       str],
+                                                  user_id: int,
+                                                  custom_title: str):
         """
         Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
 
@@ -892,7 +882,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def ban_chat_sender_chat(self, chat_id: Union[int, str], sender_chat_id: int):
+    async def ban_chat_sender_chat(self, chat_id: Union[int, str],
+                                   sender_chat_id: int):
         """
         Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.
 
@@ -906,9 +897,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def unban_chat_sender_chat(
-        self, chat_id: Union[int, str], sender_chat_id: int
-    ):
+    async def unban_chat_sender_chat(self, chat_id: Union[int, str],
+                                     sender_chat_id: int):
         """
         Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights. Returns True on success.
 
@@ -922,9 +912,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def set_chat_permissions(
-        self, chat_id: Union[int, str], permissions: ChatPermissions
-    ):
+    async def set_chat_permissions(self, chat_id: Union[int, str],
+                                   permissions: ChatPermissions):
         """
         Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights. Returns True on success.
 
@@ -995,7 +984,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return ChatInviteLink(**result)
 
-    async def revoke_chat_invite_link(self, chat_id: Union[int, str], invite_link: str):
+    async def revoke_chat_invite_link(self, chat_id: Union[int, str],
+                                      invite_link: str):
         """
         Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
 
@@ -1009,7 +999,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return ChatInviteLink(**result)
 
-    async def approve_chat_join_request(self, chat_id: Union[int, str], user_id: int):
+    async def approve_chat_join_request(self, chat_id: Union[int, str],
+                                        user_id: int):
         """
         Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
 
@@ -1023,7 +1014,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def decline_chat_join_request(self, chat_id: Union[int, str], user_id: int):
+    async def decline_chat_join_request(self, chat_id: Union[int, str],
+                                        user_id: int):
         """
         Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
 
@@ -1081,9 +1073,9 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def set_chat_description(
-        self, chat_id: Union[int, str], description: str = None
-    ):
+    async def set_chat_description(self,
+                                   chat_id: Union[int, str],
+                                   description: str = None):
         """
         Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
 
@@ -1116,9 +1108,9 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def unpin_chat_message(
-        self, chat_id: Union[int, str], message_id: int = None
-    ):
+    async def unpin_chat_message(self,
+                                 chat_id: Union[int, str],
+                                 message_id: int = None):
         """
         Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
 
@@ -1216,9 +1208,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return ChatMember(**result)
 
-    async def set_chat_sticker_set(
-        self, chat_id: Union[int, str], sticker_set_name: str
-    ):
+    async def set_chat_sticker_set(self, chat_id: Union[int, str],
+                                   sticker_set_name: str):
         """
         Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
 
@@ -1286,9 +1277,9 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def delete_my_commands(
-        self, scope: BotCommandScope = None, language_code: str = None
-    ):
+    async def delete_my_commands(self,
+                                 scope: BotCommandScope = None,
+                                 language_code: str = None):
         """
         Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.
 
@@ -1302,9 +1293,9 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def get_my_commands(
-        self, scope: BotCommandScope = None, language_code: str = None
-    ):
+    async def get_my_commands(self,
+                              scope: BotCommandScope = None,
+                              language_code: str = None):
         """
         Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.
 
@@ -1318,9 +1309,9 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return [BotCommand(**r) for r in result]
 
-    async def set_chat_menu_button(
-        self, chat_id: int = None, menu_button: MenuButton = None
-    ):
+    async def set_chat_menu_button(self,
+                                   chat_id: int = None,
+                                   menu_button: MenuButton = None):
         """
         Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on success.
 
@@ -1349,8 +1340,9 @@ class Methods:
         return MenuButton(**result)
 
     async def set_my_default_administrator_rights(
-        self, rights: ChatAdministratorRights = None, for_channels: bool = None
-    ):
+            self,
+            rights: ChatAdministratorRights = None,
+            for_channels: bool = None):
         """
         Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success.
 
@@ -1364,7 +1356,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def get_my_default_administrator_rights(self, for_channels: bool = None):
+    async def get_my_default_administrator_rights(self,
+                                                  for_channels: bool = None):
         """
         Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
 
@@ -1519,9 +1512,8 @@ class Methods:
         protect_content: bool = None,
         reply_to_message_id: int = None,
         allow_sending_without_reply: bool = None,
-        reply_markup: Union[
-            InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply
-        ] = None,
+        reply_markup: Union[InlineKeyboardMarkup, ReplyKeyboardMarkup,
+                            ReplyKeyboardRemove, ForceReply] = None,
     ):
         """
         Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.
@@ -1561,8 +1553,10 @@ class Methods:
         payload = self._bot.generate_payload(**locals())
         files = {}
 
-        if self._bot.attach_file(payload, "png_sticker", png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "png_sticker", png_sticker))
+        if self._bot.attach_file(payload, "png_sticker",
+                                 png_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "png_sticker", png_sticker))
         method = "uploadStickerFile"
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -1588,12 +1582,18 @@ class Methods:
         payload = self._bot.generate_payload(**locals())
         files = {}
 
-        if self._bot.attach_file(payload, "png_sticker", png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "png_sticker", png_sticker))
-        if self._bot.attach_file(payload, "tgs_sticker", tgs_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "tgs_sticker", tgs_sticker))
-        if self._bot.attach_file(payload, "webm_sticker", webm_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "webm_sticker", webm_sticker))
+        if self._bot.attach_file(payload, "png_sticker",
+                                 png_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "png_sticker", png_sticker))
+        if self._bot.attach_file(payload, "tgs_sticker",
+                                 tgs_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "tgs_sticker", tgs_sticker))
+        if self._bot.attach_file(payload, "webm_sticker",
+                                 webm_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "webm_sticker", webm_sticker))
         method = "createNewStickerSet"
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -1617,12 +1617,18 @@ class Methods:
         payload = self._bot.generate_payload(**locals())
         files = {}
 
-        if self._bot.attach_file(payload, "png_sticker", png_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "png_sticker", png_sticker))
-        if self._bot.attach_file(payload, "tgs_sticker", tgs_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "tgs_sticker", tgs_sticker))
-        if self._bot.attach_file(payload, "webm_sticker", webm_sticker) is not None:
-            files.update(self._bot.attach_file(payload, "webm_sticker", webm_sticker))
+        if self._bot.attach_file(payload, "png_sticker",
+                                 png_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "png_sticker", png_sticker))
+        if self._bot.attach_file(payload, "tgs_sticker",
+                                 tgs_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "tgs_sticker", tgs_sticker))
+        if self._bot.attach_file(payload, "webm_sticker",
+                                 webm_sticker) is not None:
+            files.update(
+                self._bot.attach_file(payload, "webm_sticker", webm_sticker))
         method = "addStickerToSet"
         url = self._bot.get_api_url(method)
         result = await self._bot.aio_post(url, payload, files)
@@ -1656,9 +1662,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def set_sticker_set_thumb(
-        self, name: str, user_id: int, thumb: Union[InputFile, str] = None
-    ):
+    async def set_sticker_set_thumb(self,
+                                    name: str,
+                                    user_id: int,
+                                    thumb: Union[InputFile, str] = None):
         """
         Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success.
 
@@ -1698,9 +1705,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def answer_web_app_query(
-        self, web_app_query_id: str, result: InlineQueryResult
-    ):
+    async def answer_web_app_query(self, web_app_query_id: str,
+                                   result: InlineQueryResult):
         """
         Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.
 
@@ -1813,9 +1819,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def answer_pre_checkout_query(
-        self, pre_checkout_query_id: str, ok: bool, error_message: str = None
-    ):
+    async def answer_pre_checkout_query(self,
+                                        pre_checkout_query_id: str,
+                                        ok: bool,
+                                        error_message: str = None):
         """
         Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
 
@@ -1829,9 +1836,8 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    async def set_passport_data_errors(
-        self, user_id: int, errors: List[PassportElementError]
-    ):
+    async def set_passport_data_errors(self, user_id: int,
+                                       errors: List[PassportElementError]):
         """
         Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success.
         Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues.
