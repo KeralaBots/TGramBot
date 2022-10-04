@@ -21,8 +21,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import tgrambot
+import logging
 from typing import List, Union
+
+from telegram_text.bases import Element
+
+import tgrambot
 from tgrambot.types import (
     Update,
     InputFile,
@@ -60,6 +64,8 @@ from tgrambot.types import (
     PassportElementError,
     GameHighScore
 )
+
+logger = logging.getLogger(__name__)
 
 
 class Methods:
@@ -193,10 +199,31 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
+    @staticmethod
+    def _render_markup_element(element: Element, parse_mode: Union[None, str]):
+        if parse_mode is None:
+            return element.to_plain_text()
+
+        if parse_mode == 'HTML':
+            return element.to_html()
+
+        if parse_mode == 'MarkdownV2':
+            return element.to_markdown()
+
+        if parse_mode == 'Markdown':
+            logger.warning(
+                "Parse mode 'Markdown' is a legacy format. "
+                "Message will be rendered without markup as plaint text. "
+                "Try to use 'MarkdownV2'"
+            )
+            return element.to_plain_text()
+
+        raise ValueError(f"Unknown parse mode: {parse_mode}")
+
     async def send_message(
             self, 
             chat_id: Union[int, str], 
-            text: str, 
+            text: Union[str, Element],
             parse_mode: str = None, 
             entities: List[MessageEntity] = None, 
             disable_web_page_preview: bool = None, 
@@ -211,6 +238,11 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendmessage
         """
+
+        if isinstance(text, Element):
+            _parse_mode = parse_mode or self._parse_mode
+            text = self._render_markup_element(text, _parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1425,7 +1457,7 @@ class Methods:
 
     async def edit_message_text(
             self, 
-            text: str, 
+            text: Union[str, Element],
             chat_id: Union[int, str] = None, 
             message_id: int = None, 
             inline_message_id: str = None, 
@@ -1439,6 +1471,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagetext
         """
+        if isinstance(text, Element):
+            _parse_mode = parse_mode or self._parse_mode
+            text = self._render_markup_element(text, _parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         

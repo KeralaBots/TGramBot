@@ -3,3 +3,4 @@ httpx[http2]
 requests
 beautifulsoup4==4.10
 html5lib==1.1
+telegram-text==0.1.0
