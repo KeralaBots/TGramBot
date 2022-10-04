@@ -405,7 +405,8 @@ class ReplyKeyboardRemove(TelegramObject):
 
     def __init__(self, remove_keyboard: bool, selective: bool = None):
         super(ReplyKeyboardRemove, self).__init__(
-            remove_keyboard=remove_keyboard, selective=selective)
+            remove_keyboard=remove_keyboard, selective=selective
+        )
 
 
 class LoginUrl(TelegramObject):
@@ -420,9 +421,19 @@ class LoginUrl(TelegramObject):
     bot_username: str = Field(default=None)
     request_write_access: bool = Field(default=None)
 
-    def __init__(self, url: str, forward_text: str = None, bot_username: str = None, request_write_access: bool = None):
-        super(LoginUrl, self).__init__(url=url, forward_text=forward_text,
-                                       bot_username=bot_username, request_write_access=request_write_access)
+    def __init__(
+        self,
+        url: str,
+        forward_text: str = None,
+        bot_username: str = None,
+        request_write_access: bool = None,
+    ):
+        super(LoginUrl, self).__init__(
+            url=url,
+            forward_text=forward_text,
+            bot_username=bot_username,
+            request_write_access=request_write_access,
+        )
 
 
 class ForceReply(TelegramObject):
@@ -435,9 +446,17 @@ class ForceReply(TelegramObject):
     input_field_placeholder: str = Field(default=None)
     selective: bool = Field(default=None)
 
-    def __init__(self, force_reply: bool, input_field_placeholder: str = None, selective: bool = None):
-        super(ForceReply, self).__init__(force_reply=force_reply,
-                                         input_field_placeholder=input_field_placeholder, selective=selective)
+    def __init__(
+        self,
+        force_reply: bool,
+        input_field_placeholder: str = None,
+        selective: bool = None,
+    ):
+        super(ForceReply, self).__init__(
+            force_reply=force_reply,
+            input_field_placeholder=input_field_placeholder,
+            selective=selective,
+        )
 
 
 class ChatPhoto(TelegramObject):
@@ -813,9 +832,21 @@ class InputMediaPhoto(InputMedia):
     parse_mode: str = Field(default=None)
     caption_entities: List["MessageEntity"] = Field(default=None)
 
-    def __init__(self, type: str, media: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None):
-        super(InputMediaPhoto, self).__init__(type=type, media=media,
-                                              caption=caption, parse_mode=parse_mode, caption_entities=caption_entities)
+    def __init__(
+        self,
+        type: str,
+        media: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+    ):
+        super(InputMediaPhoto, self).__init__(
+            type=type,
+            media=media,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+        )
 
 
 class InputFile(TelegramObject):
@@ -910,9 +941,16 @@ class InlineQueryResultGame(InlineQueryResult):
     game_short_name: str = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
 
-    def __init__(self, type: str, id: str, game_short_name: str, reply_markup: "InlineKeyboardMarkup" = None):
-        super(InlineQueryResultGame, self).__init__(type=type, id=id,
-                                                    game_short_name=game_short_name, reply_markup=reply_markup)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        game_short_name: str,
+        reply_markup: "InlineKeyboardMarkup" = None,
+    ):
+        super(InlineQueryResultGame, self).__init__(
+            type=type, id=id, game_short_name=game_short_name, reply_markup=reply_markup
+        )
 
 
 class InputMessageContent(TelegramObject):
@@ -940,9 +978,19 @@ class InputTextMessageContent(InputMessageContent):
     entities: List["MessageEntity"] = Field(default=None)
     disable_web_page_preview: bool = Field(default=None)
 
-    def __init__(self, message_text: str, parse_mode: str = None, entities: List["MessageEntity"] = None, disable_web_page_preview: bool = None):
-        super(InputTextMessageContent, self).__init__(message_text=message_text,
-                                                      parse_mode=parse_mode, entities=entities, disable_web_page_preview=disable_web_page_preview)
+    def __init__(
+        self,
+        message_text: str,
+        parse_mode: str = None,
+        entities: List["MessageEntity"] = None,
+        disable_web_page_preview: bool = None,
+    ):
+        super(InputTextMessageContent, self).__init__(
+            message_text=message_text,
+            parse_mode=parse_mode,
+            entities=entities,
+            disable_web_page_preview=disable_web_page_preview,
+        )
 
 
 class InputLocationMessageContent(InputMessageContent):
@@ -958,9 +1006,23 @@ class InputLocationMessageContent(InputMessageContent):
     heading: int = Field(default=None)
     proximity_alert_radius: int = Field(default=None)
 
-    def __init__(self, latitude: int, longitude: int, horizontal_accuracy: int = None, live_period: int = None, heading: int = None, proximity_alert_radius: int = None):
-        super(InputLocationMessageContent, self).__init__(latitude=latitude, longitude=longitude, horizontal_accuracy=horizontal_accuracy,
-                                                          live_period=live_period, heading=heading, proximity_alert_radius=proximity_alert_radius)
+    def __init__(
+        self,
+        latitude: int,
+        longitude: int,
+        horizontal_accuracy: int = None,
+        live_period: int = None,
+        heading: int = None,
+        proximity_alert_radius: int = None,
+    ):
+        super(InputLocationMessageContent, self).__init__(
+            latitude=latitude,
+            longitude=longitude,
+            horizontal_accuracy=horizontal_accuracy,
+            live_period=live_period,
+            heading=heading,
+            proximity_alert_radius=proximity_alert_radius,
+        )
 
 
 class InputVenueMessageContent(InputMessageContent):
@@ -978,9 +1040,27 @@ class InputVenueMessageContent(InputMessageContent):
     google_place_id: str = Field(default=None)
     google_place_type: str = Field(default=None)
 
-    def __init__(self, latitude: int, longitude: int, title: str, address: str, foursquare_id: str = None, foursquare_type: str = None, google_place_id: str = None, google_place_type: str = None):
-        super(InputVenueMessageContent, self).__init__(latitude=latitude, longitude=longitude, title=title, address=address,
-                                                       foursquare_id=foursquare_id, foursquare_type=foursquare_type, google_place_id=google_place_id, google_place_type=google_place_type)
+    def __init__(
+        self,
+        latitude: int,
+        longitude: int,
+        title: str,
+        address: str,
+        foursquare_id: str = None,
+        foursquare_type: str = None,
+        google_place_id: str = None,
+        google_place_type: str = None,
+    ):
+        super(InputVenueMessageContent, self).__init__(
+            latitude=latitude,
+            longitude=longitude,
+            title=title,
+            address=address,
+            foursquare_id=foursquare_id,
+            foursquare_type=foursquare_type,
+            google_place_id=google_place_id,
+            google_place_type=google_place_type,
+        )
 
 
 class InputContactMessageContent(InputMessageContent):
@@ -994,9 +1074,19 @@ class InputContactMessageContent(InputMessageContent):
     last_name: str = Field(default=None)
     vcard: str = Field(default=None)
 
-    def __init__(self, phone_number: str, first_name: str, last_name: str = None, vcard: str = None):
+    def __init__(
+        self,
+        phone_number: str,
+        first_name: str,
+        last_name: str = None,
+        vcard: str = None,
+    ):
         super(InputContactMessageContent, self).__init__(
-            phone_number=phone_number, first_name=first_name, last_name=last_name, vcard=vcard)
+            phone_number=phone_number,
+            first_name=first_name,
+            last_name=last_name,
+            vcard=vcard,
+        )
 
 
 class ChosenInlineResult(TelegramObject):
@@ -1363,9 +1453,51 @@ class InputInvoiceMessageContent(InputMessageContent):
     send_email_to_provider: bool = Field(default=None)
     is_flexible: bool = Field(default=None)
 
-    def __init__(self, title: str, description: str, payload: str, provider_token: str, currency: str, prices: List["LabeledPrice"], max_tip_amount: int = None, suggested_tip_amounts: List[int] = None, provider_data: str = None, photo_url: str = None, photo_size: int = None, photo_width: int = None, photo_height: int = None, need_name: bool = None, need_phone_number: bool = None, need_email: bool = None, need_shipping_address: bool = None, send_phone_number_to_provider: bool = None, send_email_to_provider: bool = None, is_flexible: bool = None):
-        super(InputInvoiceMessageContent, self).__init__(title=title, description=description, payload=payload, provider_token=provider_token, currency=currency, prices=prices, max_tip_amount=max_tip_amount, suggested_tip_amounts=suggested_tip_amounts, provider_data=provider_data, photo_url=photo_url, photo_size=photo_size,
-                                                         photo_width=photo_width, photo_height=photo_height, need_name=need_name, need_phone_number=need_phone_number, need_email=need_email, need_shipping_address=need_shipping_address, send_phone_number_to_provider=send_phone_number_to_provider, send_email_to_provider=send_email_to_provider, is_flexible=is_flexible)
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        payload: str,
+        provider_token: str,
+        currency: str,
+        prices: List["LabeledPrice"],
+        max_tip_amount: int = None,
+        suggested_tip_amounts: List[int] = None,
+        provider_data: str = None,
+        photo_url: str = None,
+        photo_size: int = None,
+        photo_width: int = None,
+        photo_height: int = None,
+        need_name: bool = None,
+        need_phone_number: bool = None,
+        need_email: bool = None,
+        need_shipping_address: bool = None,
+        send_phone_number_to_provider: bool = None,
+        send_email_to_provider: bool = None,
+        is_flexible: bool = None,
+    ):
+        super(InputInvoiceMessageContent, self).__init__(
+            title=title,
+            description=description,
+            payload=payload,
+            provider_token=provider_token,
+            currency=currency,
+            prices=prices,
+            max_tip_amount=max_tip_amount,
+            suggested_tip_amounts=suggested_tip_amounts,
+            provider_data=provider_data,
+            photo_url=photo_url,
+            photo_size=photo_size,
+            photo_width=photo_width,
+            photo_height=photo_height,
+            need_name=need_name,
+            need_phone_number=need_phone_number,
+            need_email=need_email,
+            need_shipping_address=need_shipping_address,
+            send_phone_number_to_provider=send_phone_number_to_provider,
+            send_email_to_provider=send_email_to_provider,
+            is_flexible=is_flexible,
+        )
 
 
 class InlineKeyboardButton(TelegramObject):
@@ -1384,9 +1516,29 @@ class InlineKeyboardButton(TelegramObject):
     callback_game: "CallbackGame" = Field(default=None)
     pay: bool = Field(default=None)
 
-    def __init__(self, text: str, url: str = "", callback_data: str = None, web_app: "WebAppInfo" = None, login_url: "LoginUrl" = None, switch_inline_query: str = None, switch_inline_query_current_chat: str = None, callback_game: "CallbackGame" = None, pay: bool = None):
-        super(InlineKeyboardButton, self).__init__(text=text, url=url, callback_data=callback_data, web_app=web_app, login_url=login_url,
-                                                   switch_inline_query=switch_inline_query, switch_inline_query_current_chat=switch_inline_query_current_chat, callback_game=callback_game, pay=pay)
+    def __init__(
+        self,
+        text: str,
+        url: str = "",
+        callback_data: str = None,
+        web_app: "WebAppInfo" = None,
+        login_url: "LoginUrl" = None,
+        switch_inline_query: str = None,
+        switch_inline_query_current_chat: str = None,
+        callback_game: "CallbackGame" = None,
+        pay: bool = None,
+    ):
+        super(InlineKeyboardButton, self).__init__(
+            text=text,
+            url=url,
+            callback_data=callback_data,
+            web_app=web_app,
+            login_url=login_url,
+            switch_inline_query=switch_inline_query,
+            switch_inline_query_current_chat=switch_inline_query_current_chat,
+            callback_game=callback_game,
+            pay=pay,
+        )
 
 
 class InlineKeyboardMarkup(TelegramObject):
@@ -1399,8 +1551,7 @@ class InlineKeyboardMarkup(TelegramObject):
     inline_keyboard: List[List["InlineKeyboardButton"]] = Field(default=None)
 
     def __init__(self, inline_keyboard: List[List["InlineKeyboardButton"]]):
-        super(InlineKeyboardMarkup, self).__init__(
-            inline_keyboard=inline_keyboard)
+        super(InlineKeyboardMarkup, self).__init__(inline_keyboard=inline_keyboard)
 
 
 class InlineQueryResultCachedAudio(InlineQueryResult):
@@ -1419,9 +1570,27 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, audio_file_id: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedAudio, self).__init__(type=type, id=id, audio_file_id=audio_file_id, caption=caption,
-                                                           parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        audio_file_id: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedAudio, self).__init__(
+            type=type,
+            id=id,
+            audio_file_id=audio_file_id,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedVoice(InlineQueryResult):
@@ -1441,9 +1610,29 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, voice_file_id: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedVoice, self).__init__(type=type, id=id, voice_file_id=voice_file_id, title=title, caption=caption,
-                                                           parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        voice_file_id: str,
+        title: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedVoice, self).__init__(
+            type=type,
+            id=id,
+            voice_file_id=voice_file_id,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedVideo(InlineQueryResult):
@@ -1463,9 +1652,31 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, video_file_id: str, title: str, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedVideo, self).__init__(type=type, id=id, video_file_id=video_file_id, title=title, description=description,
-                                                           caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        video_file_id: str,
+        title: str,
+        description: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedVideo, self).__init__(
+            type=type,
+            id=id,
+            video_file_id=video_file_id,
+            title=title,
+            description=description,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedDocument(InlineQueryResult):
@@ -1486,9 +1697,31 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, title: str, document_file_id: str, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedDocument, self).__init__(type=type, id=id, title=title, document_file_id=document_file_id, description=description,
-                                                              caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        title: str,
+        document_file_id: str,
+        description: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedDocument, self).__init__(
+            type=type,
+            id=id,
+            title=title,
+            document_file_id=document_file_id,
+            description=description,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedSticker(InlineQueryResult):
@@ -1504,9 +1737,21 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, sticker_file_id: str, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedSticker, self).__init__(type=type, id=id, sticker_file_id=sticker_file_id,
-                                                             reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        sticker_file_id: str,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedSticker, self).__init__(
+            type=type,
+            id=id,
+            sticker_file_id=sticker_file_id,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
@@ -1525,9 +1770,29 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, mpeg4_file_id: str, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedMpeg4Gif, self).__init__(type=type, id=id, mpeg4_file_id=mpeg4_file_id, title=title, caption=caption,
-                                                              parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        mpeg4_file_id: str,
+        title: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedMpeg4Gif, self).__init__(
+            type=type,
+            id=id,
+            mpeg4_file_id=mpeg4_file_id,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedGif(InlineQueryResult):
@@ -1546,9 +1811,29 @@ class InlineQueryResultCachedGif(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, gif_file_id: str, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedGif, self).__init__(type=type, id=id, gif_file_id=gif_file_id, title=title, caption=caption,
-                                                         parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        gif_file_id: str,
+        title: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedGif, self).__init__(
+            type=type,
+            id=id,
+            gif_file_id=gif_file_id,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultCachedPhoto(InlineQueryResult):
@@ -1568,9 +1853,31 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, photo_file_id: str, title: str = None, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedPhoto, self).__init__(type=type, id=id, photo_file_id=photo_file_id, title=title, description=description,
-                                                           caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        photo_file_id: str,
+        title: str = None,
+        description: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultCachedPhoto, self).__init__(
+            type=type,
+            id=id,
+            photo_file_id=photo_file_id,
+            title=title,
+            description=description,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultContact(InlineQueryResult):
@@ -1616,9 +1923,41 @@ class InlineQueryResultVenue(InlineQueryResult):
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
 
-    def __init__(self, type: str, id: str, latitude: int, longitude: int, title: str, address: str, foursquare_id: str = None, foursquare_type: str = None, google_place_id: str = None, google_place_type: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultVenue, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, address=address, foursquare_id=foursquare_id, foursquare_type=foursquare_type,
-                                                     google_place_id=google_place_id, google_place_type=google_place_type, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        latitude: int,
+        longitude: int,
+        title: str,
+        address: str,
+        foursquare_id: str = None,
+        foursquare_type: str = None,
+        google_place_id: str = None,
+        google_place_type: str = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+        thumb_url: str = None,
+        thumb_width: int = None,
+        thumb_height: int = None,
+    ):
+        super(InlineQueryResultVenue, self).__init__(
+            type=type,
+            id=id,
+            latitude=latitude,
+            longitude=longitude,
+            title=title,
+            address=address,
+            foursquare_id=foursquare_id,
+            foursquare_type=foursquare_type,
+            google_place_id=google_place_id,
+            google_place_type=google_place_type,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+            thumb_url=thumb_url,
+            thumb_width=thumb_width,
+            thumb_height=thumb_height,
+        )
 
 
 class InlineQueryResultLocation(InlineQueryResult):
@@ -1643,9 +1982,39 @@ class InlineQueryResultLocation(InlineQueryResult):
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
 
-    def __init__(self, type: str, id: str, latitude: int, longitude: int, title: str, horizontal_accuracy: int = None, live_period: int = None, heading: int = None, proximity_alert_radius: int = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultLocation, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, horizontal_accuracy=horizontal_accuracy, live_period=live_period, heading=heading,
-                                                        proximity_alert_radius=proximity_alert_radius, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        latitude: int,
+        longitude: int,
+        title: str,
+        horizontal_accuracy: int = None,
+        live_period: int = None,
+        heading: int = None,
+        proximity_alert_radius: int = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+        thumb_url: str = None,
+        thumb_width: int = None,
+        thumb_height: int = None,
+    ):
+        super(InlineQueryResultLocation, self).__init__(
+            type=type,
+            id=id,
+            latitude=latitude,
+            longitude=longitude,
+            title=title,
+            horizontal_accuracy=horizontal_accuracy,
+            live_period=live_period,
+            heading=heading,
+            proximity_alert_radius=proximity_alert_radius,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+            thumb_url=thumb_url,
+            thumb_width=thumb_width,
+            thumb_height=thumb_height,
+        )
 
 
 class InlineQueryResultDocument(InlineQueryResult):
@@ -1670,9 +2039,39 @@ class InlineQueryResultDocument(InlineQueryResult):
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
 
-    def __init__(self, type: str, id: str, title: str, document_url: str, mime_type: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, description: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultDocument, self).__init__(type=type, id=id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, document_url=document_url,
-                                                        mime_type=mime_type, description=description, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        title: str,
+        document_url: str,
+        mime_type: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        description: str = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+        thumb_url: str = None,
+        thumb_width: int = None,
+        thumb_height: int = None,
+    ):
+        super(InlineQueryResultDocument, self).__init__(
+            type=type,
+            id=id,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            document_url=document_url,
+            mime_type=mime_type,
+            description=description,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+            thumb_url=thumb_url,
+            thumb_width=thumb_width,
+            thumb_height=thumb_height,
+        )
 
 
 class InlineQueryResultVoice(InlineQueryResult):
@@ -1693,9 +2092,31 @@ class InlineQueryResultVoice(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, voice_url: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, voice_duration: int = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultVoice, self).__init__(type=type, id=id, voice_url=voice_url, title=title, caption=caption, parse_mode=parse_mode,
-                                                     caption_entities=caption_entities, voice_duration=voice_duration, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        voice_url: str,
+        title: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        voice_duration: int = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultVoice, self).__init__(
+            type=type,
+            id=id,
+            voice_url=voice_url,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            voice_duration=voice_duration,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultAudio(InlineQueryResult):
@@ -1740,9 +2161,41 @@ class InlineQueryResultVideo(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, video_url: str, mime_type: str, thumb_url: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, video_width: int = None, video_height: int = None, video_duration: int = None, description: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultVideo, self).__init__(type=type, id=id, video_url=video_url, mime_type=mime_type, thumb_url=thumb_url, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities,
-                                                     video_width=video_width, video_height=video_height, video_duration=video_duration, description=description, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        video_url: str,
+        mime_type: str,
+        thumb_url: str,
+        title: str,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        video_width: int = None,
+        video_height: int = None,
+        video_duration: int = None,
+        description: str = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultVideo, self).__init__(
+            type=type,
+            id=id,
+            video_url=video_url,
+            mime_type=mime_type,
+            thumb_url=thumb_url,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            video_width=video_width,
+            video_height=video_height,
+            video_duration=video_duration,
+            description=description,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultMpeg4Gif(InlineQueryResult):
@@ -1766,9 +2219,39 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, mpeg4_url: str, thumb_url: str, mpeg4_width: int = None, mpeg4_height: int = None, mpeg4_duration: int = None, thumb_mime_type: str = None, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultMpeg4Gif, self).__init__(type=type, id=id, mpeg4_url=mpeg4_url, mpeg4_width=mpeg4_width, mpeg4_height=mpeg4_height, mpeg4_duration=mpeg4_duration, thumb_url=thumb_url,
-                                                        thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        mpeg4_url: str,
+        thumb_url: str,
+        mpeg4_width: int = None,
+        mpeg4_height: int = None,
+        mpeg4_duration: int = None,
+        thumb_mime_type: str = None,
+        title: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultMpeg4Gif, self).__init__(
+            type=type,
+            id=id,
+            mpeg4_url=mpeg4_url,
+            mpeg4_width=mpeg4_width,
+            mpeg4_height=mpeg4_height,
+            mpeg4_duration=mpeg4_duration,
+            thumb_url=thumb_url,
+            thumb_mime_type=thumb_mime_type,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultGif(InlineQueryResult):
@@ -1792,9 +2275,39 @@ class InlineQueryResultGif(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, gif_url: str, thumb_url: str, gif_width: int = None, gif_height: int = None, gif_duration: int = None, thumb_mime_type: str = None, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultGif, self).__init__(type=type, id=id, gif_url=gif_url, gif_width=gif_width, gif_height=gif_height, gif_duration=gif_duration, thumb_url=thumb_url,
-                                                   thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        gif_url: str,
+        thumb_url: str,
+        gif_width: int = None,
+        gif_height: int = None,
+        gif_duration: int = None,
+        thumb_mime_type: str = None,
+        title: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultGif, self).__init__(
+            type=type,
+            id=id,
+            gif_url=gif_url,
+            gif_width=gif_width,
+            gif_height=gif_height,
+            gif_duration=gif_duration,
+            thumb_url=thumb_url,
+            thumb_mime_type=thumb_mime_type,
+            title=title,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultPhoto(InlineQueryResult):
@@ -1817,9 +2330,37 @@ class InlineQueryResultPhoto(InlineQueryResult):
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
 
-    def __init__(self, type: str, id: str, photo_url: str, thumb_url: str, photo_width: int = None, photo_height: int = None, title: str = None, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultPhoto, self).__init__(type=type, id=id, photo_url=photo_url, thumb_url=thumb_url, photo_width=photo_width, photo_height=photo_height, title=title,
-                                                     description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        photo_url: str,
+        thumb_url: str,
+        photo_width: int = None,
+        photo_height: int = None,
+        title: str = None,
+        description: str = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        reply_markup: "InlineKeyboardMarkup" = None,
+        input_message_content: "InputMessageContent" = None,
+    ):
+        super(InlineQueryResultPhoto, self).__init__(
+            type=type,
+            id=id,
+            photo_url=photo_url,
+            thumb_url=thumb_url,
+            photo_width=photo_width,
+            photo_height=photo_height,
+            title=title,
+            description=description,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            reply_markup=reply_markup,
+            input_message_content=input_message_content,
+        )
 
 
 class InlineQueryResultArticle(InlineQueryResult):
@@ -1840,9 +2381,33 @@ class InlineQueryResultArticle(InlineQueryResult):
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
 
-    def __init__(self, type: str, id: str, title: str, input_message_content: "InputMessageContent", reply_markup: "InlineKeyboardMarkup" = None, url: str = "", hide_url: bool = None, description: str = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultArticle, self).__init__(type=type, id=id, title=title, input_message_content=input_message_content, reply_markup=reply_markup,
-                                                       url=url, hide_url=hide_url, description=description, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+    def __init__(
+        self,
+        type: str,
+        id: str,
+        title: str,
+        input_message_content: "InputMessageContent",
+        reply_markup: "InlineKeyboardMarkup" = None,
+        url: str = "",
+        hide_url: bool = None,
+        description: str = None,
+        thumb_url: str = None,
+        thumb_width: int = None,
+        thumb_height: int = None,
+    ):
+        super(InlineQueryResultArticle, self).__init__(
+            type=type,
+            id=id,
+            title=title,
+            input_message_content=input_message_content,
+            reply_markup=reply_markup,
+            url=url,
+            hide_url=hide_url,
+            description=description,
+            thumb_url=thumb_url,
+            thumb_width=thumb_width,
+            thumb_height=thumb_height,
+        )
 
 
 class Sticker(TelegramObject):
@@ -1879,9 +2444,25 @@ class InputMediaDocument(InputMedia):
     caption_entities: List["MessageEntity"] = Field(default=None)
     disable_content_type_detection: bool = Field(default=None)
 
-    def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, disable_content_type_detection: bool = None):
-        super(InputMediaDocument, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode,
-                                                 caption_entities=caption_entities, disable_content_type_detection=disable_content_type_detection)
+    def __init__(
+        self,
+        type: str,
+        media: str,
+        thumb: Union["InputFile", str] = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        disable_content_type_detection: bool = None,
+    ):
+        super(InputMediaDocument, self).__init__(
+            type=type,
+            media=media,
+            thumb=thumb,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            disable_content_type_detection=disable_content_type_detection,
+        )
 
 
 class InputMediaAudio(InputMedia):
@@ -1900,9 +2481,29 @@ class InputMediaAudio(InputMedia):
     performer: str = Field(default=None)
     title: str = Field(default=None)
 
-    def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, duration: int = None, performer: str = None, title: str = None):
-        super(InputMediaAudio, self).__init__(type=type, media=media, thumb=thumb, caption=caption,
-                                              parse_mode=parse_mode, caption_entities=caption_entities, duration=duration, performer=performer, title=title)
+    def __init__(
+        self,
+        type: str,
+        media: str,
+        thumb: Union["InputFile", str] = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        duration: int = None,
+        performer: str = None,
+        title: str = None,
+    ):
+        super(InputMediaAudio, self).__init__(
+            type=type,
+            media=media,
+            thumb=thumb,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            duration=duration,
+            performer=performer,
+            title=title,
+        )
 
 
 class InputMediaAnimation(InputMedia):
@@ -1921,9 +2522,29 @@ class InputMediaAnimation(InputMedia):
     height: int = Field(default=None)
     duration: int = Field(default=None)
 
-    def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, width: int = None, height: int = None, duration: int = None):
-        super(InputMediaAnimation, self).__init__(type=type, media=media, thumb=thumb, caption=caption,
-                                                  parse_mode=parse_mode, caption_entities=caption_entities, width=width, height=height, duration=duration)
+    def __init__(
+        self,
+        type: str,
+        media: str,
+        thumb: Union["InputFile", str] = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        width: int = None,
+        height: int = None,
+        duration: int = None,
+    ):
+        super(InputMediaAnimation, self).__init__(
+            type=type,
+            media=media,
+            thumb=thumb,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            width=width,
+            height=height,
+            duration=duration,
+        )
 
 
 class InputMediaVideo(InputMedia):
@@ -1943,9 +2564,31 @@ class InputMediaVideo(InputMedia):
     duration: int = Field(default=None)
     supports_streaming: bool = Field(default=None)
 
-    def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, width: int = None, height: int = None, duration: int = None, supports_streaming: bool = None):
-        super(InputMediaVideo, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode,
-                                              caption_entities=caption_entities, width=width, height=height, duration=duration, supports_streaming=supports_streaming)
+    def __init__(
+        self,
+        type: str,
+        media: str,
+        thumb: Union["InputFile", str] = None,
+        caption: str = None,
+        parse_mode: str = None,
+        caption_entities: List["MessageEntity"] = None,
+        width: int = None,
+        height: int = None,
+        duration: int = None,
+        supports_streaming: bool = None,
+    ):
+        super(InputMediaVideo, self).__init__(
+            type=type,
+            media=media,
+            thumb=thumb,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
+            width=width,
+            height=height,
+            duration=duration,
+            supports_streaming=supports_streaming,
+        )
 
 
 class KeyboardButton(TelegramObject):
@@ -1963,9 +2606,21 @@ class KeyboardButton(TelegramObject):
     request_poll: "KeyboardButtonPollType" = Field(default=None)
     web_app: "WebAppInfo" = Field(default=None)
 
-    def __init__(self, text: str, request_contact: bool = None, request_location: bool = None, request_poll: "KeyboardButtonPollType" = None, web_app: "WebAppInfo" = None):
-        super(KeyboardButton, self).__init__(text=text, request_contact=request_contact,
-                                             request_location=request_location, request_poll=request_poll, web_app=web_app)
+    def __init__(
+        self,
+        text: str,
+        request_contact: bool = None,
+        request_location: bool = None,
+        request_poll: "KeyboardButtonPollType" = None,
+        web_app: "WebAppInfo" = None,
+    ):
+        super(KeyboardButton, self).__init__(
+            text=text,
+            request_contact=request_contact,
+            request_location=request_location,
+            request_poll=request_poll,
+            web_app=web_app,
+        )
 
 
 class ReplyKeyboardMarkup(TelegramObject):
@@ -1980,9 +2635,21 @@ class ReplyKeyboardMarkup(TelegramObject):
     input_field_placeholder: str = Field(default=None)
     selective: bool = Field(default=None)
 
-    def __init__(self, keyboard: List[List["KeyboardButton"]], resize_keyboard: bool = None, one_time_keyboard: bool = None, input_field_placeholder: str = None, selective: bool = None):
-        super(ReplyKeyboardMarkup, self).__init__(keyboard=keyboard, resize_keyboard=resize_keyboard,
-                                                  one_time_keyboard=one_time_keyboard, input_field_placeholder=input_field_placeholder, selective=selective)
+    def __init__(
+        self,
+        keyboard: List[List["KeyboardButton"]],
+        resize_keyboard: bool = None,
+        one_time_keyboard: bool = None,
+        input_field_placeholder: str = None,
+        selective: bool = None,
+    ):
+        super(ReplyKeyboardMarkup, self).__init__(
+            keyboard=keyboard,
+            resize_keyboard=resize_keyboard,
+            one_time_keyboard=one_time_keyboard,
+            input_field_placeholder=input_field_placeholder,
+            selective=selective,
+        )
 
 
 class Chat(TelegramObject):
@@ -2066,7 +2733,8 @@ class Message(TelegramObject):
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
     message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
-        default=None)
+        default=None
+    )
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2079,7 +2747,8 @@ class Message(TelegramObject):
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
     video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
-        default=None)
+        default=None
+    )
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
 
@@ -2150,7 +2819,8 @@ class Message(TelegramObject):
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
     message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
-        default=None)
+        default=None
+    )
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2163,7 +2833,8 @@ class Message(TelegramObject):
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
     video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
-        default=None)
+        default=None
+    )
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
 

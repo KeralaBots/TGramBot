@@ -4,16 +4,11 @@ from pathlib import Path
 
 API_PATH = Path("compiler/api")
 METHODS_DESTINATION_PATH = Path("tgrambot")
-TEMPLATES_DESTINATION = Path('compiler/templates')
+TEMPLATES_DESTINATION = Path("compiler/templates")
 
-TG_CORE_TYPES = {
-    "String": 'str',
-    "Boolean": 'bool',
-    "Integer": 'int',
-    "Float": 'int'
-}
+TG_CORE_TYPES = {"String": "str", "Boolean": "bool", "Integer": "int", "Float": "int"}
 
-BASE_TYPES = ['str', 'bool', 'int', 'None']
+BASE_TYPES = ["str", "bool", "int", "None"]
 
 WARNING = """
 # # # # # # # # # # # # # # # # # # # # # # # #
@@ -59,74 +54,101 @@ def camel(s: str):
 
 def build_methods():
 
-    with open(API_PATH / 'api.json') as f:
-        schema = json.loads(f.read()).get('methods')
-        content = ''
+    with open(API_PATH / "api.json") as f:
+        schema = json.loads(f.read()).get("methods")
+        content = ""
         to_import = []
         # Main Template
-        content_temp = open(TEMPLATES_DESTINATION /
-                            'methods.tmpl', mode='r').read()
+        content_temp = open(TEMPLATES_DESTINATION / "methods.tmpl", mode="r").read()
         for name, item in schema.items():
             field_text = "\n            self, "
-            required = ''
-            non_required = ''
-            returns_list = item.get('returns')
+            required = ""
+            non_required = ""
+            returns_list = item.get("returns")
             attach_file = []
-            comments = '\n        '.join(
-                item.get('description')) + f"\n\n        Source : {item.get('href')}"
-            fields = item.get('fields')
+            comments = (
+                "\n        ".join(item.get("description"))
+                + f"\n\n        Source : {item.get('href')}"
+            )
+            fields = item.get("fields")
             method = snake(name)
             if not fields:
-                raw_return = TG_CORE_TYPES.get(returns_list[0]) if TG_CORE_TYPES.get(
-                    returns_list[0]) is not None else returns_list[0]
+                raw_return = (
+                    TG_CORE_TYPES.get(returns_list[0])
+                    if TG_CORE_TYPES.get(returns_list[0]) is not None
+                    else returns_list[0]
+                )
                 if raw_return.startswith("Array of"):
-                    raw_return = TG_CORE_TYPES.get(raw_return[9:]) if TG_CORE_TYPES.get(
-                        raw_return[9:]) is not None else raw_return[9:]
-                    returns = f'[{raw_return}(**r) for r in result]'
+                    raw_return = (
+                        TG_CORE_TYPES.get(raw_return[9:])
+                        if TG_CORE_TYPES.get(raw_return[9:]) is not None
+                        else raw_return[9:]
+                    )
+                    returns = f"[{raw_return}(**r) for r in result]"
                 else:
                     if raw_return in BASE_TYPES:
-                        returns = f'result'
+                        returns = f"result"
                     else:
-                        returns = f'{raw_return}(**result)'
+                        returns = f"{raw_return}(**result)"
 
                 if raw_return not in to_import and raw_return not in BASE_TYPES:
                     to_import.append(raw_return)
                 content += content_temp.format(
                     name=name,
                     method_name=method,
-                    fields=field_text[:-2] + '\n    ',
+                    fields=field_text[:-2] + "\n    ",
                     attachment="",
                     comments=comments,
                     markup="",
-                    returns=returns
+                    returns=returns,
                 )
             else:
-                returns = ''
+                returns = ""
                 markup = ""
                 check_markup = []
                 markup_name = ""
                 is_markup = ["text", "caption"]
                 for field in fields:
                     typed_list = []
-                    field_name = field.get('name')
-                    for types in field.get('types'):
-                        def_types = TG_CORE_TYPES.get(types) if TG_CORE_TYPES.get(
-                            types) is not None else types
+                    field_name = field.get("name")
+                    for types in field.get("types"):
+                        def_types = (
+                            TG_CORE_TYPES.get(types)
+                            if TG_CORE_TYPES.get(types) is not None
+                            else types
+                        )
                         if def_types.startswith("Array of Array"):
-                            import_type = TG_CORE_TYPES.get(def_types[18:]) if TG_CORE_TYPES.get(
-                                def_types[18:]) is not None else def_types[18:]
-                            def_types = f"List[List[{TG_CORE_TYPES.get(f'{def_types[18:]}')}]]" if TG_CORE_TYPES.get(
-                                f'{def_types[18:]}') is not None else f'List[List[{def_types[18:]}]]'
+                            import_type = (
+                                TG_CORE_TYPES.get(def_types[18:])
+                                if TG_CORE_TYPES.get(def_types[18:]) is not None
+                                else def_types[18:]
+                            )
+                            def_types = (
+                                f"List[List[{TG_CORE_TYPES.get(f'{def_types[18:]}')}]]"
+                                if TG_CORE_TYPES.get(f"{def_types[18:]}") is not None
+                                else f"List[List[{def_types[18:]}]]"
+                            )
                         elif def_types.startswith("Array of"):
-                            import_type = TG_CORE_TYPES.get(def_types[9:]) if TG_CORE_TYPES.get(
-                                def_types[9:]) is not None else def_types[9:]
-                            def_types = f"List[{TG_CORE_TYPES.get(f'{def_types[9:]}')}]" if TG_CORE_TYPES.get(
-                                f'{def_types[9:]}') is not None else f'List[{def_types[9:]}]'
+                            import_type = (
+                                TG_CORE_TYPES.get(def_types[9:])
+                                if TG_CORE_TYPES.get(def_types[9:]) is not None
+                                else def_types[9:]
+                            )
+                            def_types = (
+                                f"List[{TG_CORE_TYPES.get(f'{def_types[9:]}')}]"
+                                if TG_CORE_TYPES.get(f"{def_types[9:]}") is not None
+                                else f"List[{def_types[9:]}]"
+                            )
                         else:
                             import_type = def_types
-                            def_types = def_types if def_types in BASE_TYPES else f'{def_types}'
+                            def_types = (
+                                def_types if def_types in BASE_TYPES else f"{def_types}"
+                            )
 
-                        if import_type not in to_import and import_type not in BASE_TYPES:
+                        if (
+                            import_type not in to_import
+                            and import_type not in BASE_TYPES
+                        ):
                             to_import.append(import_type)
 
                         if import_type == "InputFile":
@@ -141,32 +163,39 @@ def build_methods():
 
                     typed = ", ".join(typed_list)
 
-                    cust_typed = f'Union[{typed}]' if len(
-                        typed_list) > 1 else typed
+                    cust_typed = f"Union[{typed}]" if len(typed_list) > 1 else typed
                     if field_name:
-                        if field.get('required'):
+                        if field.get("required"):
                             required += f"\n            {field_name}: {cust_typed}, "
                         else:
-                            non_required += f"\n            {field_name}: {cust_typed} = None, "
+                            non_required += (
+                                f"\n            {field_name}: {cust_typed} = None, "
+                            )
 
                 if True in check_markup:
                     markup += markup_temp.format(mark=markup_name)
-                raw_return = TG_CORE_TYPES.get(returns_list[0]) if TG_CORE_TYPES.get(
-                    returns_list[0]) is not None else returns_list[0]
+                raw_return = (
+                    TG_CORE_TYPES.get(returns_list[0])
+                    if TG_CORE_TYPES.get(returns_list[0]) is not None
+                    else returns_list[0]
+                )
                 if raw_return.startswith("Array of"):
-                    raw_return = TG_CORE_TYPES.get(raw_return[9:]) if TG_CORE_TYPES.get(
-                        raw_return[9:]) is not None else raw_return[9:]
-                    returns = f'[{raw_return}(**r) for r in result]'
+                    raw_return = (
+                        TG_CORE_TYPES.get(raw_return[9:])
+                        if TG_CORE_TYPES.get(raw_return[9:]) is not None
+                        else raw_return[9:]
+                    )
+                    returns = f"[{raw_return}(**r) for r in result]"
                 else:
                     if raw_return in BASE_TYPES:
-                        returns = f'result'
+                        returns = f"result"
                     else:
-                        returns = f'{raw_return}(**result)'
+                        returns = f"{raw_return}(**result)"
 
                 if raw_return not in to_import and raw_return not in BASE_TYPES:
                     to_import.append(raw_return)
 
-                attach_content = ''
+                attach_content = ""
                 if len(attach_file) > 0:
                     for attachs in attach_file:
                         attach_content += f"\n        if self._bot.attach_file(payload, '{attachs}', {attachs}) is not None:\n            files.update(self._bot.attach_file(payload, '{attachs}', {attachs}))"
@@ -174,19 +203,22 @@ def build_methods():
                 content += content_temp.format(
                     name=name,
                     method_name=method,
-                    fields=field_text[:-2] + '\n    ',
+                    fields=field_text[:-2] + "\n    ",
                     attachment=attach_content,
                     comments=comments,
                     markup=markup,
-                    returns=returns
+                    returns=returns,
                 )
 
-        with open(METHODS_DESTINATION_PATH / 'methods.py', mode="w+") as file:
-            main_temp = open(TEMPLATES_DESTINATION /
-                             'method_class.tmpl', mode='r').read()
-            file.write(main_temp.format(
-                content=content,
-                imports=",\n    ".join(to_import),
-                copyright=COPYRIGHT,
-                warning=WARNING
-            ))
+        with open(METHODS_DESTINATION_PATH / "methods.py", mode="w+") as file:
+            main_temp = open(
+                TEMPLATES_DESTINATION / "method_class.tmpl", mode="r"
+            ).read()
+            file.write(
+                main_temp.format(
+                    content=content,
+                    imports=",\n    ".join(to_import),
+                    copyright=COPYRIGHT,
+                    warning=WARNING,
+                )
+            )
