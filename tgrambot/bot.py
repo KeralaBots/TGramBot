@@ -172,7 +172,8 @@ class Bot(Methods):
                 raise TelegramError('Error', resp.text)
 
             if not data['ok']:
-                raise TelegramError(str(data['error_code']), str(data['description']))
+                raise TelegramError(
+                    str(data['error_code']), str(data['description']))
 
             return data['result']
 

@@ -32,7 +32,7 @@ class WebhookInfo(TelegramObject):
     """
     Describes the current status of a webhook.
     """
-    
+
     url: str = Field(default=None)
     has_custom_certificate: bool = Field(default=None)
     pending_update_count: int = Field(default=None)
@@ -42,14 +42,14 @@ class WebhookInfo(TelegramObject):
     last_synchronization_error_date: int = Field(default=None)
     max_connections: int = Field(default=None)
     allowed_updates: List[str] = Field(default=None)
-    
+
 
 class User(TelegramObject):
 
     """
     This object represents a Telegram user or bot.
     """
-    
+
     id: int = Field(default=None)
     is_bot: bool = Field(default=None)
     first_name: str = Field(default=None)
@@ -61,50 +61,50 @@ class User(TelegramObject):
     can_join_groups: bool = Field(default=None)
     can_read_all_group_messages: bool = Field(default=None)
     supports_inline_queries: bool = Field(default=None)
-    
+
 
 class MessageId(TelegramObject):
 
     """
     This object represents a unique message identifier.
     """
-    
+
     message_id: int = Field(default=None)
-    
+
 
 class MessageEntity(TelegramObject):
 
     """
     This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
     """
-    
+
     type: str = Field(default=None)
     offset: int = Field(default=None)
     length: int = Field(default=None)
     url: str = Field(default=None)
     user: "User" = Field(default=None)
     language: str = Field(default=None)
-    
+
 
 class PhotoSize(TelegramObject):
 
     """
     This object represents one size of a photo or a file / sticker thumbnail.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     width: int = Field(default=None)
     height: int = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class Animation(TelegramObject):
 
     """
     This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     width: int = Field(default=None)
@@ -114,14 +114,14 @@ class Animation(TelegramObject):
     file_name: str = Field(default=None)
     mime_type: str = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class Audio(TelegramObject):
 
     """
     This object represents an audio file to be treated as music by the Telegram clients.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     duration: int = Field(default=None)
@@ -131,28 +131,28 @@ class Audio(TelegramObject):
     mime_type: str = Field(default=None)
     file_size: int = Field(default=None)
     thumb: "PhotoSize" = Field(default=None)
-    
+
 
 class Document(TelegramObject):
 
     """
     This object represents a general file (as opposed to photos, voice messages and audio files).
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     thumb: "PhotoSize" = Field(default=None)
     file_name: str = Field(default=None)
     mime_type: str = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class Video(TelegramObject):
 
     """
     This object represents a video file.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     width: int = Field(default=None)
@@ -162,85 +162,85 @@ class Video(TelegramObject):
     file_name: str = Field(default=None)
     mime_type: str = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class VideoNote(TelegramObject):
 
     """
     This object represents a video message (available in Telegram apps as of v.4.0).
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     length: int = Field(default=None)
     duration: int = Field(default=None)
     thumb: "PhotoSize" = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class Voice(TelegramObject):
 
     """
     This object represents a voice note.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     duration: int = Field(default=None)
     mime_type: str = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class Contact(TelegramObject):
 
     """
     This object represents a phone contact.
     """
-    
+
     phone_number: str = Field(default=None)
     first_name: str = Field(default=None)
     last_name: str = Field(default=None)
     user_id: int = Field(default=None)
     vcard: str = Field(default=None)
-    
+
 
 class Dice(TelegramObject):
 
     """
     This object represents an animated emoji that displays a random value.
     """
-    
+
     emoji: str = Field(default=None)
     value: int = Field(default=None)
-    
+
 
 class PollOption(TelegramObject):
 
     """
     This object contains information about one answer option in a poll.
     """
-    
+
     text: str = Field(default=None)
     voter_count: int = Field(default=None)
-    
+
 
 class PollAnswer(TelegramObject):
 
     """
     This object represents an answer of a user in a non-anonymous poll.
     """
-    
+
     poll_id: str = Field(default=None)
     user: "User" = Field(default=None)
     option_ids: List[int] = Field(default=None)
-    
+
 
 class Poll(TelegramObject):
 
     """
     This object contains information about a poll.
     """
-    
+
     id: str = Field(default=None)
     question: str = Field(default=None)
     options: List["PollOption"] = Field(default=None)
@@ -254,28 +254,28 @@ class Poll(TelegramObject):
     explanation_entities: List["MessageEntity"] = Field(default=None)
     open_period: int = Field(default=None)
     close_date: int = Field(default=None)
-    
+
 
 class Location(TelegramObject):
 
     """
     This object represents a point on the map.
     """
-    
+
     longitude: int = Field(default=None)
     latitude: int = Field(default=None)
     horizontal_accuracy: int = Field(default=None)
     live_period: int = Field(default=None)
     heading: int = Field(default=None)
     proximity_alert_radius: int = Field(default=None)
-    
+
 
 class Venue(TelegramObject):
 
     """
     This object represents a venue.
     """
-    
+
     location: "Location" = Field(default=None)
     title: str = Field(default=None)
     address: str = Field(default=None)
@@ -283,113 +283,113 @@ class Venue(TelegramObject):
     foursquare_type: str = Field(default=None)
     google_place_id: str = Field(default=None)
     google_place_type: str = Field(default=None)
-    
+
 
 class WebAppData(TelegramObject):
 
     """
     Describes data sent from a Web App to the bot.
     """
-    
+
     data: str = Field(default=None)
     button_text: str = Field(default=None)
-    
+
 
 class ProximityAlertTriggered(TelegramObject):
 
     """
     This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.
     """
-    
+
     traveler: "User" = Field(default=None)
     watcher: "User" = Field(default=None)
     distance: int = Field(default=None)
-    
+
 
 class MessageAutoDeleteTimerChanged(TelegramObject):
 
     """
     This object represents a service message about a change in auto-delete timer settings.
     """
-    
+
     message_auto_delete_time: int = Field(default=None)
-    
+
 
 class VideoChatScheduled(TelegramObject):
 
     """
     This object represents a service message about a video chat scheduled in the chat.
     """
-    
+
     start_date: int = Field(default=None)
-    
+
 
 class VideoChatStarted(TelegramObject):
 
     """
     This object represents a service message about a video chat started in the chat. Currently holds no information.
     """
-    
+
     pass
-    
+
 
 class VideoChatEnded(TelegramObject):
 
     """
     This object represents a service message about a video chat ended in the chat.
     """
-    
+
     duration: int = Field(default=None)
-    
+
 
 class VideoChatParticipantsInvited(TelegramObject):
 
     """
     This object represents a service message about new members invited to a video chat.
     """
-    
+
     users: List["User"] = Field(default=None)
-    
+
 
 class UserProfilePhotos(TelegramObject):
 
     """
     This object represent a user's profile pictures.
     """
-    
+
     total_count: int = Field(default=None)
     photos: List[List["PhotoSize"]] = Field(default=None)
-    
+
 
 class File(TelegramObject):
 
     """
     This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     file_size: int = Field(default=None)
     file_path: str = Field(default=None)
-    
+
 
 class WebAppInfo(TelegramObject):
 
     """
     Describes a Web App.
     """
-    
+
     url: str = Field(default=None)
-    
+
 
 class KeyboardButtonPollType(TelegramObject):
 
     """
     This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
     """
-    
+
     type: str = Field(default=None)
-    
+
     def __init__(self, type: str = None):
         super(KeyboardButtonPollType, self).__init__(type=type)
 
@@ -399,12 +399,13 @@ class ReplyKeyboardRemove(TelegramObject):
     """
     Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).
     """
-    
+
     remove_keyboard: bool = Field(default=None)
     selective: bool = Field(default=None)
-    
+
     def __init__(self, remove_keyboard: bool, selective: bool = None):
-        super(ReplyKeyboardRemove, self).__init__(remove_keyboard=remove_keyboard, selective=selective)
+        super(ReplyKeyboardRemove, self).__init__(
+            remove_keyboard=remove_keyboard, selective=selective)
 
 
 class LoginUrl(TelegramObject):
@@ -413,14 +414,15 @@ class LoginUrl(TelegramObject):
     This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
     Telegram apps support these buttons as of version 5.7.
     """
-    
+
     url: str = Field(default=None)
     forward_text: str = Field(default=None)
     bot_username: str = Field(default=None)
     request_write_access: bool = Field(default=None)
-    
+
     def __init__(self, url: str, forward_text: str = None, bot_username: str = None, request_write_access: bool = None):
-        super(LoginUrl, self).__init__(url=url, forward_text=forward_text, bot_username=bot_username, request_write_access=request_write_access)
+        super(LoginUrl, self).__init__(url=url, forward_text=forward_text,
+                                       bot_username=bot_username, request_write_access=request_write_access)
 
 
 class ForceReply(TelegramObject):
@@ -428,13 +430,14 @@ class ForceReply(TelegramObject):
     """
     Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.
     """
-    
+
     force_reply: bool = Field(default=None)
     input_field_placeholder: str = Field(default=None)
     selective: bool = Field(default=None)
-    
+
     def __init__(self, force_reply: bool, input_field_placeholder: str = None, selective: bool = None):
-        super(ForceReply, self).__init__(force_reply=force_reply, input_field_placeholder=input_field_placeholder, selective=selective)
+        super(ForceReply, self).__init__(force_reply=force_reply,
+                                         input_field_placeholder=input_field_placeholder, selective=selective)
 
 
 class ChatPhoto(TelegramObject):
@@ -442,19 +445,19 @@ class ChatPhoto(TelegramObject):
     """
     This object represents a chat photo.
     """
-    
+
     small_file_id: str = Field(default=None)
     small_file_unique_id: str = Field(default=None)
     big_file_id: str = Field(default=None)
     big_file_unique_id: str = Field(default=None)
-    
+
 
 class ChatInviteLink(TelegramObject):
 
     """
     Represents an invite link for a chat.
     """
-    
+
     invite_link: str = Field(default=None)
     creator: "User" = Field(default=None)
     creates_join_request: bool = Field(default=None)
@@ -464,14 +467,14 @@ class ChatInviteLink(TelegramObject):
     expire_date: int = Field(default=None)
     member_limit: int = Field(default=None)
     pending_join_request_count: int = Field(default=None)
-    
+
 
 class ChatAdministratorRights(TelegramObject):
 
     """
     Represents the rights of an administrator in a chat.
     """
-    
+
     is_anonymous: bool = Field(default=None)
     can_manage_chat: bool = Field(default=None)
     can_delete_messages: bool = Field(default=None)
@@ -483,7 +486,7 @@ class ChatAdministratorRights(TelegramObject):
     can_post_messages: bool = Field(default=None)
     can_edit_messages: bool = Field(default=None)
     can_pin_messages: bool = Field(default=None)
-    
+
 
 class ChatMember(TelegramObject):
 
@@ -496,28 +499,28 @@ class ChatMember(TelegramObject):
     - ChatMemberLeft
     - ChatMemberBanned
     """
-    
+
     pass
-    
+
 
 class ChatMemberOwner(ChatMember):
 
     """
     Represents a chat member that owns the chat and has all administrator privileges.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
     is_anonymous: bool = Field(default=None)
     custom_title: str = Field(default=None)
-    
+
 
 class ChatMemberAdministrator(ChatMember):
 
     """
     Represents a chat member that has some additional privileges.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
     can_be_edited: bool = Field(default=None)
@@ -533,24 +536,24 @@ class ChatMemberAdministrator(ChatMember):
     can_edit_messages: bool = Field(default=None)
     can_pin_messages: bool = Field(default=None)
     custom_title: str = Field(default=None)
-    
+
 
 class ChatMemberMember(ChatMember):
 
     """
     Represents a chat member that has no additional privileges or restrictions.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
-    
+
 
 class ChatMemberRestricted(ChatMember):
 
     """
     Represents a chat member that is under certain restrictions in the chat. Supergroups only.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
     is_member: bool = Field(default=None)
@@ -563,62 +566,62 @@ class ChatMemberRestricted(ChatMember):
     can_send_other_messages: bool = Field(default=None)
     can_add_web_page_previews: bool = Field(default=None)
     until_date: int = Field(default=None)
-    
+
 
 class ChatMemberLeft(ChatMember):
 
     """
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
-    
+
 
 class ChatMemberBanned(ChatMember):
 
     """
     Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
     """
-    
+
     status: str = Field(default=None)
     user: "User" = Field(default=None)
     until_date: int = Field(default=None)
-    
+
 
 class ChatMemberUpdated(TelegramObject):
 
     """
     This object represents changes in the status of a chat member.
     """
-    
+
     chat: "Chat" = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     date: int = Field(default=None)
     old_chat_member: "ChatMember" = Field(default=None)
     new_chat_member: "ChatMember" = Field(default=None)
     invite_link: "ChatInviteLink" = Field(default=None)
-    
+
 
 class ChatJoinRequest(TelegramObject):
 
     """
     Represents a join request sent to a chat.
     """
-    
+
     chat: "Chat" = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     date: int = Field(default=None)
     bio: str = Field(default=None)
     invite_link: "ChatInviteLink" = Field(default=None)
-    
+
 
 class ChatPermissions(TelegramObject):
 
     """
     Describes actions that a non-administrator user is allowed to take in a chat.
     """
-    
+
     can_send_messages: bool = Field(default=None)
     can_send_media_messages: bool = Field(default=None)
     can_send_polls: bool = Field(default=None)
@@ -627,27 +630,27 @@ class ChatPermissions(TelegramObject):
     can_change_info: bool = Field(default=None)
     can_invite_users: bool = Field(default=None)
     can_pin_messages: bool = Field(default=None)
-    
+
 
 class ChatLocation(TelegramObject):
 
     """
     Represents a location to which a chat is connected.
     """
-    
+
     location: "Location" = Field(default=None)
     address: str = Field(default=None)
-    
+
 
 class BotCommand(TelegramObject):
 
     """
     This object represents a bot command.
     """
-    
+
     command: str = Field(default=None)
     description: str = Field(default=None)
-    
+
 
 class BotCommandScope(TelegramObject):
 
@@ -661,76 +664,76 @@ class BotCommandScope(TelegramObject):
     - BotCommandScopeChatAdministrators
     - BotCommandScopeChatMember
     """
-    
+
     pass
-    
+
 
 class BotCommandScopeDefault(BotCommandScope):
 
     """
     Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering all private chats.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering all group and supergroup chats.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering all group and supergroup chat administrators.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class BotCommandScopeChat(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering a specific chat.
     """
-    
+
     type: str = Field(default=None)
     chat_id: Union[int, str] = Field(default=None)
-    
+
 
 class BotCommandScopeChatAdministrators(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
     """
-    
+
     type: str = Field(default=None)
     chat_id: Union[int, str] = Field(default=None)
-    
+
 
 class BotCommandScopeChatMember(BotCommandScope):
 
     """
     Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
     """
-    
+
     type: str = Field(default=None)
     chat_id: Union[int, str] = Field(default=None)
     user_id: int = Field(default=None)
-    
+
 
 class MenuButton(TelegramObject):
 
@@ -741,48 +744,48 @@ class MenuButton(TelegramObject):
     - MenuButtonDefault
     If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat. Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
     """
-    
+
     pass
-    
+
 
 class MenuButtonCommands(MenuButton):
 
     """
     Represents a menu button, which opens the bot's list of commands.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class MenuButtonWebApp(MenuButton):
 
     """
     Represents a menu button, which launches a Web App.
     """
-    
+
     type: str = Field(default=None)
     text: str = Field(default=None)
     web_app: "WebAppInfo" = Field(default=None)
-    
+
 
 class MenuButtonDefault(MenuButton):
 
     """
     Describes that no specific value for the menu button was set.
     """
-    
+
     type: str = Field(default=None)
-    
+
 
 class ResponseParameters(TelegramObject):
 
     """
     Describes why a request was unsuccessful.
     """
-    
+
     migrate_to_chat_id: int = Field(default=None)
     retry_after: int = Field(default=None)
-    
+
 
 class InputMedia(TelegramObject):
 
@@ -794,24 +797,25 @@ class InputMedia(TelegramObject):
     - InputMediaPhoto
     - InputMediaVideo
     """
-    
+
     pass
-    
+
 
 class InputMediaPhoto(InputMedia):
 
     """
     Represents a photo to be sent.
     """
-    
+
     type: str = Field(default=None)
     media: str = Field(default=None)
     caption: str = Field(default=None)
     parse_mode: str = Field(default=None)
     caption_entities: List["MessageEntity"] = Field(default=None)
-    
+
     def __init__(self, type: str, media: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None):
-        super(InputMediaPhoto, self).__init__(type=type, media=media, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities)
+        super(InputMediaPhoto, self).__init__(type=type, media=media,
+                                              caption=caption, parse_mode=parse_mode, caption_entities=caption_entities)
 
 
 class InputFile(TelegramObject):
@@ -819,16 +823,16 @@ class InputFile(TelegramObject):
     """
     This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.
     """
-    
+
     pass
-    
+
 
 class StickerSet(TelegramObject):
 
     """
     This object represents a sticker set.
     """
-    
+
     name: str = Field(default=None)
     title: str = Field(default=None)
     is_animated: bool = Field(default=None)
@@ -836,33 +840,33 @@ class StickerSet(TelegramObject):
     contains_masks: bool = Field(default=None)
     stickers: List["Sticker"] = Field(default=None)
     thumb: "PhotoSize" = Field(default=None)
-    
+
 
 class MaskPosition(TelegramObject):
 
     """
     This object describes the position on faces where a mask should be placed by default.
     """
-    
+
     point: str = Field(default=None)
     x_shift: int = Field(default=None)
     y_shift: int = Field(default=None)
     scale: int = Field(default=None)
-    
+
 
 class InlineQuery(TelegramObject):
 
     """
     This object represents an incoming inline query. When the user sends an empty query, your bot could return some default or trending results.
     """
-    
+
     id: str = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     query: str = Field(default=None)
     offset: str = Field(default=None)
     chat_type: str = Field(default=None)
     location: "Location" = Field(default=None)
-    
+
 
 class InlineQueryResult(TelegramObject):
 
@@ -890,9 +894,9 @@ class InlineQueryResult(TelegramObject):
     - InlineQueryResultVoice
     Note: All URLs passed in inline query results will be available to end users and therefore must be assumed to be public.
     """
-    
+
     pass
-    
+
 
 class InlineQueryResultGame(InlineQueryResult):
 
@@ -900,14 +904,15 @@ class InlineQueryResultGame(InlineQueryResult):
     Represents a Game.
     Note: This will only work in Telegram versions released after October 1, 2016. Older clients will not display any inline results if a game result is among them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     game_short_name: str = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, game_short_name: str, reply_markup: "InlineKeyboardMarkup" = None):
-        super(InlineQueryResultGame, self).__init__(type=type, id=id, game_short_name=game_short_name, reply_markup=reply_markup)
+        super(InlineQueryResultGame, self).__init__(type=type, id=id,
+                                                    game_short_name=game_short_name, reply_markup=reply_markup)
 
 
 class InputMessageContent(TelegramObject):
@@ -920,23 +925,24 @@ class InputMessageContent(TelegramObject):
     - InputContactMessageContent
     - InputInvoiceMessageContent
     """
-    
+
     pass
-    
+
 
 class InputTextMessageContent(InputMessageContent):
 
     """
     Represents the content of a text message to be sent as the result of an inline query.
     """
-    
+
     message_text: str = Field(default=None)
     parse_mode: str = Field(default=None)
     entities: List["MessageEntity"] = Field(default=None)
     disable_web_page_preview: bool = Field(default=None)
-    
+
     def __init__(self, message_text: str, parse_mode: str = None, entities: List["MessageEntity"] = None, disable_web_page_preview: bool = None):
-        super(InputTextMessageContent, self).__init__(message_text=message_text, parse_mode=parse_mode, entities=entities, disable_web_page_preview=disable_web_page_preview)
+        super(InputTextMessageContent, self).__init__(message_text=message_text,
+                                                      parse_mode=parse_mode, entities=entities, disable_web_page_preview=disable_web_page_preview)
 
 
 class InputLocationMessageContent(InputMessageContent):
@@ -944,16 +950,17 @@ class InputLocationMessageContent(InputMessageContent):
     """
     Represents the content of a location message to be sent as the result of an inline query.
     """
-    
+
     latitude: int = Field(default=None)
     longitude: int = Field(default=None)
     horizontal_accuracy: int = Field(default=None)
     live_period: int = Field(default=None)
     heading: int = Field(default=None)
     proximity_alert_radius: int = Field(default=None)
-    
+
     def __init__(self, latitude: int, longitude: int, horizontal_accuracy: int = None, live_period: int = None, heading: int = None, proximity_alert_radius: int = None):
-        super(InputLocationMessageContent, self).__init__(latitude=latitude, longitude=longitude, horizontal_accuracy=horizontal_accuracy, live_period=live_period, heading=heading, proximity_alert_radius=proximity_alert_radius)
+        super(InputLocationMessageContent, self).__init__(latitude=latitude, longitude=longitude, horizontal_accuracy=horizontal_accuracy,
+                                                          live_period=live_period, heading=heading, proximity_alert_radius=proximity_alert_radius)
 
 
 class InputVenueMessageContent(InputMessageContent):
@@ -961,7 +968,7 @@ class InputVenueMessageContent(InputMessageContent):
     """
     Represents the content of a venue message to be sent as the result of an inline query.
     """
-    
+
     latitude: int = Field(default=None)
     longitude: int = Field(default=None)
     title: str = Field(default=None)
@@ -970,9 +977,10 @@ class InputVenueMessageContent(InputMessageContent):
     foursquare_type: str = Field(default=None)
     google_place_id: str = Field(default=None)
     google_place_type: str = Field(default=None)
-    
+
     def __init__(self, latitude: int, longitude: int, title: str, address: str, foursquare_id: str = None, foursquare_type: str = None, google_place_id: str = None, google_place_type: str = None):
-        super(InputVenueMessageContent, self).__init__(latitude=latitude, longitude=longitude, title=title, address=address, foursquare_id=foursquare_id, foursquare_type=foursquare_type, google_place_id=google_place_id, google_place_type=google_place_type)
+        super(InputVenueMessageContent, self).__init__(latitude=latitude, longitude=longitude, title=title, address=address,
+                                                       foursquare_id=foursquare_id, foursquare_type=foursquare_type, google_place_id=google_place_id, google_place_type=google_place_type)
 
 
 class InputContactMessageContent(InputMessageContent):
@@ -980,14 +988,15 @@ class InputContactMessageContent(InputMessageContent):
     """
     Represents the content of a contact message to be sent as the result of an inline query.
     """
-    
+
     phone_number: str = Field(default=None)
     first_name: str = Field(default=None)
     last_name: str = Field(default=None)
     vcard: str = Field(default=None)
-    
+
     def __init__(self, phone_number: str, first_name: str, last_name: str = None, vcard: str = None):
-        super(InputContactMessageContent, self).__init__(phone_number=phone_number, first_name=first_name, last_name=last_name, vcard=vcard)
+        super(InputContactMessageContent, self).__init__(
+            phone_number=phone_number, first_name=first_name, last_name=last_name, vcard=vcard)
 
 
 class ChosenInlineResult(TelegramObject):
@@ -996,89 +1005,89 @@ class ChosenInlineResult(TelegramObject):
     Represents a result of an inline query that was chosen by the user and sent to their chat partner.
     Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates.
     """
-    
+
     result_id: str = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     location: "Location" = Field(default=None)
     inline_message_id: str = Field(default=None)
     query: str = Field(default=None)
-    
+
 
 class SentWebAppMessage(TelegramObject):
 
     """
     Describes an inline message sent by a Web App on behalf of a user.
     """
-    
+
     inline_message_id: str = Field(default=None)
-    
+
 
 class LabeledPrice(TelegramObject):
 
     """
     This object represents a portion of the price for goods or services.
     """
-    
+
     label: str = Field(default=None)
     amount: int = Field(default=None)
-    
+
 
 class Invoice(TelegramObject):
 
     """
     This object contains basic information about an invoice.
     """
-    
+
     title: str = Field(default=None)
     description: str = Field(default=None)
     start_parameter: str = Field(default=None)
     currency: str = Field(default=None)
     total_amount: int = Field(default=None)
-    
+
 
 class ShippingAddress(TelegramObject):
 
     """
     This object represents a shipping address.
     """
-    
+
     country_code: str = Field(default=None)
     state: str = Field(default=None)
     city: str = Field(default=None)
     street_line1: str = Field(default=None)
     street_line2: str = Field(default=None)
     post_code: str = Field(default=None)
-    
+
 
 class OrderInfo(TelegramObject):
 
     """
     This object represents information about an order.
     """
-    
+
     name: str = Field(default=None)
     phone_number: str = Field(default=None)
     email: str = Field(default=None)
     shipping_address: "ShippingAddress" = Field(default=None)
-    
+
 
 class ShippingOption(TelegramObject):
 
     """
     This object represents one shipping option.
     """
-    
+
     id: str = Field(default=None)
     title: str = Field(default=None)
     prices: List["LabeledPrice"] = Field(default=None)
-    
+
 
 class SuccessfulPayment(TelegramObject):
 
     """
     This object contains basic information about a successful payment.
     """
-    
+
     currency: str = Field(default=None)
     total_amount: int = Field(default=None)
     invoice_payload: str = Field(default=None)
@@ -1086,26 +1095,26 @@ class SuccessfulPayment(TelegramObject):
     order_info: "OrderInfo" = Field(default=None)
     telegram_payment_charge_id: str = Field(default=None)
     provider_payment_charge_id: str = Field(default=None)
-    
+
 
 class ShippingQuery(TelegramObject):
 
     """
     This object contains information about an incoming shipping query.
     """
-    
+
     id: str = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     invoice_payload: str = Field(default=None)
     shipping_address: "ShippingAddress" = Field(default=None)
-    
+
 
 class PreCheckoutQuery(TelegramObject):
 
     """
     This object contains information about an incoming pre-checkout query.
     """
-    
+
     id: str = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     currency: str = Field(default=None)
@@ -1113,26 +1122,26 @@ class PreCheckoutQuery(TelegramObject):
     invoice_payload: str = Field(default=None)
     shipping_option_id: str = Field(default=None)
     order_info: "OrderInfo" = Field(default=None)
-    
+
 
 class PassportFile(TelegramObject):
 
     """
     This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     file_size: int = Field(default=None)
     file_date: int = Field(default=None)
-    
+
 
 class EncryptedPassportElement(TelegramObject):
 
     """
     Describes documents or other Telegram Passport elements shared with the bot by the user.
     """
-    
+
     type: str = Field(default=None)
     data: str = Field(default=None)
     phone_number: str = Field(default=None)
@@ -1143,18 +1152,18 @@ class EncryptedPassportElement(TelegramObject):
     selfie: "PassportFile" = Field(default=None)
     translation: List["PassportFile"] = Field(default=None)
     hash: str = Field(default=None)
-    
+
 
 class EncryptedCredentials(TelegramObject):
 
     """
     Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
     """
-    
+
     data: str = Field(default=None)
     hash: str = Field(default=None)
     secret: str = Field(default=None)
-    
+
 
 class PassportElementError(TelegramObject):
 
@@ -1170,169 +1179,169 @@ class PassportElementError(TelegramObject):
     - PassportElementErrorTranslationFiles
     - PassportElementErrorUnspecified
     """
-    
+
     pass
-    
+
 
 class PassportElementErrorDataField(PassportElementError):
 
     """
     Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     field_name: str = Field(default=None)
     data_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorFrontSide(PassportElementError):
 
     """
     Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorReverseSide(PassportElementError):
 
     """
     Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorSelfie(PassportElementError):
 
     """
     Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorFile(PassportElementError):
 
     """
     Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorFiles(PassportElementError):
 
     """
     Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hashes: List[str] = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorTranslationFile(PassportElementError):
 
     """
     Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorTranslationFiles(PassportElementError):
 
     """
     Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     file_hashes: List[str] = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class PassportElementErrorUnspecified(PassportElementError):
 
     """
     Represents an issue in an unspecified place. The error is considered resolved when new data is added.
     """
-    
+
     source: str = Field(default=None)
     type: str = Field(default=None)
     element_hash: str = Field(default=None)
     message: str = Field(default=None)
-    
+
 
 class Game(TelegramObject):
 
     """
     This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
     """
-    
+
     title: str = Field(default=None)
     description: str = Field(default=None)
     photo: List["PhotoSize"] = Field(default=None)
     text: str = Field(default=None)
     text_entities: List["MessageEntity"] = Field(default=None)
     animation: "Animation" = Field(default=None)
-    
+
 
 class CallbackGame(TelegramObject):
 
     """
     A placeholder, currently holds no information. Use BotFather to set up your game.
     """
-    
+
     pass
-    
+
 
 class GameHighScore(TelegramObject):
 
     """
     This object represents one row of the high scores table for a game.
     """
-    
+
     position: int = Field(default=None)
     user: "User" = Field(default=None)
     score: int = Field(default=None)
-    
+
 
 class PassportData(TelegramObject):
 
     """
     Describes Telegram Passport data shared with the bot by the user.
     """
-    
+
     data: List["EncryptedPassportElement"] = Field(default=None)
     credentials: "EncryptedCredentials" = Field(default=None)
-    
+
 
 class InputInvoiceMessageContent(InputMessageContent):
 
     """
     Represents the content of an invoice message to be sent as the result of an inline query.
     """
-    
+
     title: str = Field(default=None)
     description: str = Field(default=None)
     payload: str = Field(default=None)
@@ -1353,9 +1362,10 @@ class InputInvoiceMessageContent(InputMessageContent):
     send_phone_number_to_provider: bool = Field(default=None)
     send_email_to_provider: bool = Field(default=None)
     is_flexible: bool = Field(default=None)
-    
+
     def __init__(self, title: str, description: str, payload: str, provider_token: str, currency: str, prices: List["LabeledPrice"], max_tip_amount: int = None, suggested_tip_amounts: List[int] = None, provider_data: str = None, photo_url: str = None, photo_size: int = None, photo_width: int = None, photo_height: int = None, need_name: bool = None, need_phone_number: bool = None, need_email: bool = None, need_shipping_address: bool = None, send_phone_number_to_provider: bool = None, send_email_to_provider: bool = None, is_flexible: bool = None):
-        super(InputInvoiceMessageContent, self).__init__(title=title, description=description, payload=payload, provider_token=provider_token, currency=currency, prices=prices, max_tip_amount=max_tip_amount, suggested_tip_amounts=suggested_tip_amounts, provider_data=provider_data, photo_url=photo_url, photo_size=photo_size, photo_width=photo_width, photo_height=photo_height, need_name=need_name, need_phone_number=need_phone_number, need_email=need_email, need_shipping_address=need_shipping_address, send_phone_number_to_provider=send_phone_number_to_provider, send_email_to_provider=send_email_to_provider, is_flexible=is_flexible)
+        super(InputInvoiceMessageContent, self).__init__(title=title, description=description, payload=payload, provider_token=provider_token, currency=currency, prices=prices, max_tip_amount=max_tip_amount, suggested_tip_amounts=suggested_tip_amounts, provider_data=provider_data, photo_url=photo_url, photo_size=photo_size,
+                                                         photo_width=photo_width, photo_height=photo_height, need_name=need_name, need_phone_number=need_phone_number, need_email=need_email, need_shipping_address=need_shipping_address, send_phone_number_to_provider=send_phone_number_to_provider, send_email_to_provider=send_email_to_provider, is_flexible=is_flexible)
 
 
 class InlineKeyboardButton(TelegramObject):
@@ -1363,7 +1373,7 @@ class InlineKeyboardButton(TelegramObject):
     """
     This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
     """
-    
+
     text: str = Field(default=None)
     url: str = Field(default=None)
     callback_data: str = Field(default=None)
@@ -1373,9 +1383,10 @@ class InlineKeyboardButton(TelegramObject):
     switch_inline_query_current_chat: str = Field(default=None)
     callback_game: "CallbackGame" = Field(default=None)
     pay: bool = Field(default=None)
-    
+
     def __init__(self, text: str, url: str = "", callback_data: str = None, web_app: "WebAppInfo" = None, login_url: "LoginUrl" = None, switch_inline_query: str = None, switch_inline_query_current_chat: str = None, callback_game: "CallbackGame" = None, pay: bool = None):
-        super(InlineKeyboardButton, self).__init__(text=text, url=url, callback_data=callback_data, web_app=web_app, login_url=login_url, switch_inline_query=switch_inline_query, switch_inline_query_current_chat=switch_inline_query_current_chat, callback_game=callback_game, pay=pay)
+        super(InlineKeyboardButton, self).__init__(text=text, url=url, callback_data=callback_data, web_app=web_app, login_url=login_url,
+                                                   switch_inline_query=switch_inline_query, switch_inline_query_current_chat=switch_inline_query_current_chat, callback_game=callback_game, pay=pay)
 
 
 class InlineKeyboardMarkup(TelegramObject):
@@ -1384,11 +1395,12 @@ class InlineKeyboardMarkup(TelegramObject):
     This object represents an inline keyboard that appears right next to the message it belongs to.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.
     """
-    
+
     inline_keyboard: List[List["InlineKeyboardButton"]] = Field(default=None)
-    
+
     def __init__(self, inline_keyboard: List[List["InlineKeyboardButton"]]):
-        super(InlineKeyboardMarkup, self).__init__(inline_keyboard=inline_keyboard)
+        super(InlineKeyboardMarkup, self).__init__(
+            inline_keyboard=inline_keyboard)
 
 
 class InlineQueryResultCachedAudio(InlineQueryResult):
@@ -1397,7 +1409,7 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
     Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     audio_file_id: str = Field(default=None)
@@ -1406,9 +1418,10 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, audio_file_id: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedAudio, self).__init__(type=type, id=id, audio_file_id=audio_file_id, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedAudio, self).__init__(type=type, id=id, audio_file_id=audio_file_id, caption=caption,
+                                                           parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedVoice(InlineQueryResult):
@@ -1417,7 +1430,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
     Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     voice_file_id: str = Field(default=None)
@@ -1427,9 +1440,10 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, voice_file_id: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedVoice, self).__init__(type=type, id=id, voice_file_id=voice_file_id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedVoice, self).__init__(type=type, id=id, voice_file_id=voice_file_id, title=title, caption=caption,
+                                                           parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedVideo(InlineQueryResult):
@@ -1437,7 +1451,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
     """
     Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     video_file_id: str = Field(default=None)
@@ -1448,9 +1462,10 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, video_file_id: str, title: str, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedVideo, self).__init__(type=type, id=id, video_file_id=video_file_id, title=title, description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedVideo, self).__init__(type=type, id=id, video_file_id=video_file_id, title=title, description=description,
+                                                           caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedDocument(InlineQueryResult):
@@ -1459,7 +1474,7 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
     Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     title: str = Field(default=None)
@@ -1470,9 +1485,10 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, title: str, document_file_id: str, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedDocument, self).__init__(type=type, id=id, title=title, document_file_id=document_file_id, description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedDocument, self).__init__(type=type, id=id, title=title, document_file_id=document_file_id, description=description,
+                                                              caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedSticker(InlineQueryResult):
@@ -1481,15 +1497,16 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
     Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
     Note: This will only work in Telegram versions released after 9 April, 2016 for static stickers and after 06 July, 2019 for animated stickers. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     sticker_file_id: str = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, sticker_file_id: str, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedSticker, self).__init__(type=type, id=id, sticker_file_id=sticker_file_id, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedSticker, self).__init__(type=type, id=id, sticker_file_id=sticker_file_id,
+                                                             reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
@@ -1497,7 +1514,7 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
     """
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     mpeg4_file_id: str = Field(default=None)
@@ -1507,9 +1524,10 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, mpeg4_file_id: str, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedMpeg4Gif, self).__init__(type=type, id=id, mpeg4_file_id=mpeg4_file_id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedMpeg4Gif, self).__init__(type=type, id=id, mpeg4_file_id=mpeg4_file_id, title=title, caption=caption,
+                                                              parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedGif(InlineQueryResult):
@@ -1517,7 +1535,7 @@ class InlineQueryResultCachedGif(InlineQueryResult):
     """
     Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     gif_file_id: str = Field(default=None)
@@ -1527,9 +1545,10 @@ class InlineQueryResultCachedGif(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, gif_file_id: str, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedGif, self).__init__(type=type, id=id, gif_file_id=gif_file_id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedGif, self).__init__(type=type, id=id, gif_file_id=gif_file_id, title=title, caption=caption,
+                                                         parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultCachedPhoto(InlineQueryResult):
@@ -1537,7 +1556,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
     """
     Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     photo_file_id: str = Field(default=None)
@@ -1548,9 +1567,10 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, photo_file_id: str, title: str = None, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultCachedPhoto, self).__init__(type=type, id=id, photo_file_id=photo_file_id, title=title, description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultCachedPhoto, self).__init__(type=type, id=id, photo_file_id=photo_file_id, title=title, description=description,
+                                                           caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultContact(InlineQueryResult):
@@ -1559,7 +1579,7 @@ class InlineQueryResultContact(InlineQueryResult):
     Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     phone_number: str = Field(default=None)
@@ -1571,7 +1591,7 @@ class InlineQueryResultContact(InlineQueryResult):
     thumb_url: str = Field(default=None)
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
-    
+
 
 class InlineQueryResultVenue(InlineQueryResult):
 
@@ -1579,7 +1599,7 @@ class InlineQueryResultVenue(InlineQueryResult):
     Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     latitude: int = Field(default=None)
@@ -1595,9 +1615,10 @@ class InlineQueryResultVenue(InlineQueryResult):
     thumb_url: str = Field(default=None)
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, latitude: int, longitude: int, title: str, address: str, foursquare_id: str = None, foursquare_type: str = None, google_place_id: str = None, google_place_type: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultVenue, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, address=address, foursquare_id=foursquare_id, foursquare_type=foursquare_type, google_place_id=google_place_id, google_place_type=google_place_type, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+        super(InlineQueryResultVenue, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, address=address, foursquare_id=foursquare_id, foursquare_type=foursquare_type,
+                                                     google_place_id=google_place_id, google_place_type=google_place_type, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
 
 
 class InlineQueryResultLocation(InlineQueryResult):
@@ -1606,7 +1627,7 @@ class InlineQueryResultLocation(InlineQueryResult):
     Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     latitude: int = Field(default=None)
@@ -1621,9 +1642,10 @@ class InlineQueryResultLocation(InlineQueryResult):
     thumb_url: str = Field(default=None)
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, latitude: int, longitude: int, title: str, horizontal_accuracy: int = None, live_period: int = None, heading: int = None, proximity_alert_radius: int = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultLocation, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, horizontal_accuracy=horizontal_accuracy, live_period=live_period, heading=heading, proximity_alert_radius=proximity_alert_radius, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+        super(InlineQueryResultLocation, self).__init__(type=type, id=id, latitude=latitude, longitude=longitude, title=title, horizontal_accuracy=horizontal_accuracy, live_period=live_period, heading=heading,
+                                                        proximity_alert_radius=proximity_alert_radius, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
 
 
 class InlineQueryResultDocument(InlineQueryResult):
@@ -1632,7 +1654,7 @@ class InlineQueryResultDocument(InlineQueryResult):
     Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     title: str = Field(default=None)
@@ -1647,9 +1669,10 @@ class InlineQueryResultDocument(InlineQueryResult):
     thumb_url: str = Field(default=None)
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, title: str, document_url: str, mime_type: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, description: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultDocument, self).__init__(type=type, id=id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, document_url=document_url, mime_type=mime_type, description=description, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+        super(InlineQueryResultDocument, self).__init__(type=type, id=id, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, document_url=document_url,
+                                                        mime_type=mime_type, description=description, reply_markup=reply_markup, input_message_content=input_message_content, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
 
 
 class InlineQueryResultVoice(InlineQueryResult):
@@ -1658,7 +1681,7 @@ class InlineQueryResultVoice(InlineQueryResult):
     Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     voice_url: str = Field(default=None)
@@ -1669,9 +1692,10 @@ class InlineQueryResultVoice(InlineQueryResult):
     voice_duration: int = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, voice_url: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, voice_duration: int = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultVoice, self).__init__(type=type, id=id, voice_url=voice_url, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, voice_duration=voice_duration, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultVoice, self).__init__(type=type, id=id, voice_url=voice_url, title=title, caption=caption, parse_mode=parse_mode,
+                                                     caption_entities=caption_entities, voice_duration=voice_duration, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultAudio(InlineQueryResult):
@@ -1680,7 +1704,7 @@ class InlineQueryResultAudio(InlineQueryResult):
     Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     audio_url: str = Field(default=None)
@@ -1692,14 +1716,14 @@ class InlineQueryResultAudio(InlineQueryResult):
     audio_duration: int = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
 
 class InlineQueryResultVideo(InlineQueryResult):
 
     """
     Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     video_url: str = Field(default=None)
@@ -1715,9 +1739,10 @@ class InlineQueryResultVideo(InlineQueryResult):
     description: str = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, video_url: str, mime_type: str, thumb_url: str, title: str, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, video_width: int = None, video_height: int = None, video_duration: int = None, description: str = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultVideo, self).__init__(type=type, id=id, video_url=video_url, mime_type=mime_type, thumb_url=thumb_url, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, video_width=video_width, video_height=video_height, video_duration=video_duration, description=description, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultVideo, self).__init__(type=type, id=id, video_url=video_url, mime_type=mime_type, thumb_url=thumb_url, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities,
+                                                     video_width=video_width, video_height=video_height, video_duration=video_duration, description=description, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultMpeg4Gif(InlineQueryResult):
@@ -1725,7 +1750,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
     """
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     mpeg4_url: str = Field(default=None)
@@ -1740,9 +1765,10 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, mpeg4_url: str, thumb_url: str, mpeg4_width: int = None, mpeg4_height: int = None, mpeg4_duration: int = None, thumb_mime_type: str = None, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultMpeg4Gif, self).__init__(type=type, id=id, mpeg4_url=mpeg4_url, mpeg4_width=mpeg4_width, mpeg4_height=mpeg4_height, mpeg4_duration=mpeg4_duration, thumb_url=thumb_url, thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultMpeg4Gif, self).__init__(type=type, id=id, mpeg4_url=mpeg4_url, mpeg4_width=mpeg4_width, mpeg4_height=mpeg4_height, mpeg4_duration=mpeg4_duration, thumb_url=thumb_url,
+                                                        thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultGif(InlineQueryResult):
@@ -1750,7 +1776,7 @@ class InlineQueryResultGif(InlineQueryResult):
     """
     Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     gif_url: str = Field(default=None)
@@ -1765,9 +1791,10 @@ class InlineQueryResultGif(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, gif_url: str, thumb_url: str, gif_width: int = None, gif_height: int = None, gif_duration: int = None, thumb_mime_type: str = None, title: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultGif, self).__init__(type=type, id=id, gif_url=gif_url, gif_width=gif_width, gif_height=gif_height, gif_duration=gif_duration, thumb_url=thumb_url, thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultGif, self).__init__(type=type, id=id, gif_url=gif_url, gif_width=gif_width, gif_height=gif_height, gif_duration=gif_duration, thumb_url=thumb_url,
+                                                   thumb_mime_type=thumb_mime_type, title=title, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultPhoto(InlineQueryResult):
@@ -1775,7 +1802,7 @@ class InlineQueryResultPhoto(InlineQueryResult):
     """
     Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     photo_url: str = Field(default=None)
@@ -1789,9 +1816,10 @@ class InlineQueryResultPhoto(InlineQueryResult):
     caption_entities: List["MessageEntity"] = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     input_message_content: "InputMessageContent" = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, photo_url: str, thumb_url: str, photo_width: int = None, photo_height: int = None, title: str = None, description: str = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, reply_markup: "InlineKeyboardMarkup" = None, input_message_content: "InputMessageContent" = None):
-        super(InlineQueryResultPhoto, self).__init__(type=type, id=id, photo_url=photo_url, thumb_url=thumb_url, photo_width=photo_width, photo_height=photo_height, title=title, description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
+        super(InlineQueryResultPhoto, self).__init__(type=type, id=id, photo_url=photo_url, thumb_url=thumb_url, photo_width=photo_width, photo_height=photo_height, title=title,
+                                                     description=description, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, reply_markup=reply_markup, input_message_content=input_message_content)
 
 
 class InlineQueryResultArticle(InlineQueryResult):
@@ -1799,7 +1827,7 @@ class InlineQueryResultArticle(InlineQueryResult):
     """
     Represents a link to an article or web page.
     """
-    
+
     type: str = Field(default=None)
     id: str = Field(default=None)
     title: str = Field(default=None)
@@ -1811,9 +1839,10 @@ class InlineQueryResultArticle(InlineQueryResult):
     thumb_url: str = Field(default=None)
     thumb_width: int = Field(default=None)
     thumb_height: int = Field(default=None)
-    
+
     def __init__(self, type: str, id: str, title: str, input_message_content: "InputMessageContent", reply_markup: "InlineKeyboardMarkup" = None, url: str = "", hide_url: bool = None, description: str = None, thumb_url: str = None, thumb_width: int = None, thumb_height: int = None):
-        super(InlineQueryResultArticle, self).__init__(type=type, id=id, title=title, input_message_content=input_message_content, reply_markup=reply_markup, url=url, hide_url=hide_url, description=description, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
+        super(InlineQueryResultArticle, self).__init__(type=type, id=id, title=title, input_message_content=input_message_content, reply_markup=reply_markup,
+                                                       url=url, hide_url=hide_url, description=description, thumb_url=thumb_url, thumb_width=thumb_width, thumb_height=thumb_height)
 
 
 class Sticker(TelegramObject):
@@ -1821,7 +1850,7 @@ class Sticker(TelegramObject):
     """
     This object represents a sticker.
     """
-    
+
     file_id: str = Field(default=None)
     file_unique_id: str = Field(default=None)
     width: int = Field(default=None)
@@ -1834,14 +1863,14 @@ class Sticker(TelegramObject):
     premium_animation: "File" = Field(default=None)
     mask_position: "MaskPosition" = Field(default=None)
     file_size: int = Field(default=None)
-    
+
 
 class InputMediaDocument(InputMedia):
 
     """
     Represents a general file to be sent.
     """
-    
+
     type: str = Field(default=None)
     media: str = Field(default=None)
     thumb: Union["InputFile", str] = Field(default=None)
@@ -1849,9 +1878,10 @@ class InputMediaDocument(InputMedia):
     parse_mode: str = Field(default=None)
     caption_entities: List["MessageEntity"] = Field(default=None)
     disable_content_type_detection: bool = Field(default=None)
-    
+
     def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, disable_content_type_detection: bool = None):
-        super(InputMediaDocument, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, disable_content_type_detection=disable_content_type_detection)
+        super(InputMediaDocument, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode,
+                                                 caption_entities=caption_entities, disable_content_type_detection=disable_content_type_detection)
 
 
 class InputMediaAudio(InputMedia):
@@ -1859,7 +1889,7 @@ class InputMediaAudio(InputMedia):
     """
     Represents an audio file to be treated as music to be sent.
     """
-    
+
     type: str = Field(default=None)
     media: str = Field(default=None)
     thumb: Union["InputFile", str] = Field(default=None)
@@ -1869,9 +1899,10 @@ class InputMediaAudio(InputMedia):
     duration: int = Field(default=None)
     performer: str = Field(default=None)
     title: str = Field(default=None)
-    
+
     def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, duration: int = None, performer: str = None, title: str = None):
-        super(InputMediaAudio, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, duration=duration, performer=performer, title=title)
+        super(InputMediaAudio, self).__init__(type=type, media=media, thumb=thumb, caption=caption,
+                                              parse_mode=parse_mode, caption_entities=caption_entities, duration=duration, performer=performer, title=title)
 
 
 class InputMediaAnimation(InputMedia):
@@ -1879,7 +1910,7 @@ class InputMediaAnimation(InputMedia):
     """
     Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
     """
-    
+
     type: str = Field(default=None)
     media: str = Field(default=None)
     thumb: Union["InputFile", str] = Field(default=None)
@@ -1889,9 +1920,10 @@ class InputMediaAnimation(InputMedia):
     width: int = Field(default=None)
     height: int = Field(default=None)
     duration: int = Field(default=None)
-    
+
     def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, width: int = None, height: int = None, duration: int = None):
-        super(InputMediaAnimation, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, width=width, height=height, duration=duration)
+        super(InputMediaAnimation, self).__init__(type=type, media=media, thumb=thumb, caption=caption,
+                                                  parse_mode=parse_mode, caption_entities=caption_entities, width=width, height=height, duration=duration)
 
 
 class InputMediaVideo(InputMedia):
@@ -1899,7 +1931,7 @@ class InputMediaVideo(InputMedia):
     """
     Represents a video to be sent.
     """
-    
+
     type: str = Field(default=None)
     media: str = Field(default=None)
     thumb: Union["InputFile", str] = Field(default=None)
@@ -1910,9 +1942,10 @@ class InputMediaVideo(InputMedia):
     height: int = Field(default=None)
     duration: int = Field(default=None)
     supports_streaming: bool = Field(default=None)
-    
+
     def __init__(self, type: str, media: str, thumb: Union["InputFile", str] = None, caption: str = None, parse_mode: str = None, caption_entities: List["MessageEntity"] = None, width: int = None, height: int = None, duration: int = None, supports_streaming: bool = None):
-        super(InputMediaVideo, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, width=width, height=height, duration=duration, supports_streaming=supports_streaming)
+        super(InputMediaVideo, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode,
+                                              caption_entities=caption_entities, width=width, height=height, duration=duration, supports_streaming=supports_streaming)
 
 
 class KeyboardButton(TelegramObject):
@@ -1923,15 +1956,16 @@ class KeyboardButton(TelegramObject):
     Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.
     Note: web_app option will only work in Telegram versions released after 16 April, 2022. Older clients will display unsupported message.
     """
-    
+
     text: str = Field(default=None)
     request_contact: bool = Field(default=None)
     request_location: bool = Field(default=None)
     request_poll: "KeyboardButtonPollType" = Field(default=None)
     web_app: "WebAppInfo" = Field(default=None)
-    
+
     def __init__(self, text: str, request_contact: bool = None, request_location: bool = None, request_poll: "KeyboardButtonPollType" = None, web_app: "WebAppInfo" = None):
-        super(KeyboardButton, self).__init__(text=text, request_contact=request_contact, request_location=request_location, request_poll=request_poll, web_app=web_app)
+        super(KeyboardButton, self).__init__(text=text, request_contact=request_contact,
+                                             request_location=request_location, request_poll=request_poll, web_app=web_app)
 
 
 class ReplyKeyboardMarkup(TelegramObject):
@@ -1939,15 +1973,16 @@ class ReplyKeyboardMarkup(TelegramObject):
     """
     This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
     """
-    
+
     keyboard: List[List["KeyboardButton"]] = Field(default=None)
     resize_keyboard: bool = Field(default=None)
     one_time_keyboard: bool = Field(default=None)
     input_field_placeholder: str = Field(default=None)
     selective: bool = Field(default=None)
-    
+
     def __init__(self, keyboard: List[List["KeyboardButton"]], resize_keyboard: bool = None, one_time_keyboard: bool = None, input_field_placeholder: str = None, selective: bool = None):
-        super(ReplyKeyboardMarkup, self).__init__(keyboard=keyboard, resize_keyboard=resize_keyboard, one_time_keyboard=one_time_keyboard, input_field_placeholder=input_field_placeholder, selective=selective)
+        super(ReplyKeyboardMarkup, self).__init__(keyboard=keyboard, resize_keyboard=resize_keyboard,
+                                                  one_time_keyboard=one_time_keyboard, input_field_placeholder=input_field_placeholder, selective=selective)
 
 
 class Chat(TelegramObject):
@@ -1955,7 +1990,7 @@ class Chat(TelegramObject):
     """
     This object represents a chat.
     """
-    
+
     id: int = Field(default=None)
     type: str = Field(default=None)
     title: str = Field(default=None)
@@ -1978,14 +2013,14 @@ class Chat(TelegramObject):
     can_set_sticker_set: bool = Field(default=None)
     linked_chat_id: int = Field(default=None)
     location: "ChatLocation" = Field(default=None)
-    
+
 
 class Message(TelegramObject):
 
     """
     This object represents a message.
     """
-    
+
     message_id: int = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     sender_chat: "Chat" = Field(default=None)
@@ -2030,7 +2065,8 @@ class Message(TelegramObject):
     group_chat_created: bool = Field(default=None)
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
-    message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(default=None)
+    message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
+        default=None)
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2042,17 +2078,18 @@ class Message(TelegramObject):
     video_chat_scheduled: "VideoChatScheduled" = Field(default=None)
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
-    video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(default=None)
+    video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
+        default=None)
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
-    
+
 
 class CallbackQuery(TelegramObject):
 
     """
     This object represents an incoming callback query from a callback button in an inline keyboard. If the button that originated the query was attached to a message sent by the bot, the field message will be present. If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present. Exactly one of the fields data or game_short_name will be present.
     """
-    
+
     id: str = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     message: "Message" = Field(default=None)
@@ -2060,14 +2097,14 @@ class CallbackQuery(TelegramObject):
     chat_instance: str = Field(default=None)
     data: str = Field(default=None)
     game_short_name: str = Field(default=None)
-    
+
 
 class Message(TelegramObject):
 
     """
     This object represents a message.
     """
-    
+
     message_id: int = Field(default=None)
     from_user: "User" = Field(alias="from", default=None)
     sender_chat: "Chat" = Field(default=None)
@@ -2112,7 +2149,8 @@ class Message(TelegramObject):
     group_chat_created: bool = Field(default=None)
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
-    message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(default=None)
+    message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
+        default=None)
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2124,10 +2162,11 @@ class Message(TelegramObject):
     video_chat_scheduled: "VideoChatScheduled" = Field(default=None)
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
-    video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(default=None)
+    video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
+        default=None)
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
-    
+
 
 class Update(TelegramObject):
 
@@ -2135,7 +2174,7 @@ class Update(TelegramObject):
     This object represents an incoming update.
     At most one of the optional parameters can be present in any given update.
     """
-    
+
     update_id: int = Field(default=None)
     message: "Message" = Field(default=None)
     edited_message: "Message" = Field(default=None)
@@ -2151,5 +2190,3 @@ class Update(TelegramObject):
     my_chat_member: "ChatMemberUpdated" = Field(default=None)
     chat_member: "ChatMemberUpdated" = Field(default=None)
     chat_join_request: "ChatJoinRequest" = Field(default=None)
-    
-

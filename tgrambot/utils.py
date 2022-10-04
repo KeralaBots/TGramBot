@@ -3,7 +3,6 @@ import re
 CORE_TYPES = [int, str, bool, None, dict, list]
 
 
-
 def snake(s: str):
     # https://stackoverflow.com/q/1175208
     s = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", s)

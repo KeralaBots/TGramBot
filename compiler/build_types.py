@@ -97,7 +97,8 @@ def build_types():
     with open(API_PATH / 'api.json') as f:
         schema = json.loads(f.read()).get('types')
         # Main Template
-        content_temp = open(TEMPLATES_DESTINATION / 'type_class.tmpl', mode='r').read()
+        content_temp = open(TEMPLATES_DESTINATION /
+                            'type_class.tmpl', mode='r').read()
         content = ''
         # Pending queue to avoid ForwardRefs and ConfigErrors in pydantic
         pending_objects = []
@@ -124,7 +125,8 @@ def build_types():
                 for subclass in subclasses:
                     subclass_dict.update({snake(subclass): snake(name)})
 
-            class_object = camel(subclass_dict.get(snake(name))) if subclass_dict.get(snake(name)) is not None else 'TelegramObject'
+            class_object = camel(subclass_dict.get(snake(name))) if subclass_dict.get(
+                snake(name)) is not None else 'TelegramObject'
             if fields is None:
                 content += content_temp.format(
                     class_name=name,
@@ -146,13 +148,16 @@ def build_types():
                     typed_list = []
                     # Separate types of props and classify them
                     for types in field.get('types'):
-                        def_types = TG_CORE_TYPES.get(types) if TG_CORE_TYPES.get(types) is not None else types
+                        def_types = TG_CORE_TYPES.get(types) if TG_CORE_TYPES.get(
+                            types) is not None else types
                         if def_types.startswith("Array of Array"):
-                            import_type = TG_CORE_TYPES.get(def_types[18:]) if TG_CORE_TYPES.get(def_types[18:]) is not None else def_types[18:]
+                            import_type = TG_CORE_TYPES.get(def_types[18:]) if TG_CORE_TYPES.get(
+                                def_types[18:]) is not None else def_types[18:]
                             def_types = f"List[List[{TG_CORE_TYPES.get(f'{def_types[18:]}')}]]" if TG_CORE_TYPES.get(
                                 f'{def_types[18:]}') is not None else f'List[List["{def_types[18:]}"]]'
                         elif def_types.startswith("Array of"):
-                            import_type = TG_CORE_TYPES.get(def_types[9:]) if TG_CORE_TYPES.get(def_types[9:]) is not None else def_types[9:]
+                            import_type = TG_CORE_TYPES.get(def_types[9:]) if TG_CORE_TYPES.get(
+                                def_types[9:]) is not None else def_types[9:]
                             def_types = f"List[{TG_CORE_TYPES.get(f'{def_types[9:]}')}]" if TG_CORE_TYPES.get(
                                 f'{def_types[9:]}') is not None else f'List["{def_types[9:]}"]'
                         else:
@@ -167,7 +172,8 @@ def build_types():
                         typed_list.append(def_types)
 
                     typed = str(typed_list).replace("'", "")
-                    cust_typed = f'Union{typed}' if len(typed_list) > 1 else typed[1:-1]
+                    cust_typed = f'Union{typed}' if len(
+                        typed_list) > 1 else typed[1:-1]
                     cust_field = cust_typed
                     field_name = field.get('name')
                     required = field.get('required')
@@ -292,10 +298,12 @@ def build_types():
                 type_init_temp = type_init_temp_file.read()
                 init_imports = ",\n    ".join(init_types)
                 # Beautifying the imports
-                list_imports = [init_types[i:i+4] for i in range(0, len(init_types), 4)]
+                list_imports = [init_types[i:i+4]
+                                for i in range(0, len(init_types), 4)]
                 types_to_import = ""
                 for lt in list_imports:
-                    types_to_import += str(lt).replace("[", "").replace("]", "") + ",\n    "
+                    types_to_import += str(lt).replace(
+                        "[", "").replace("]", "") + ",\n    "
                 type_init_file.write(type_init_temp.format(
                     copyright=COPYRIGHT,
                     warning=WARNING,
