@@ -36,6 +36,7 @@ RETRY = 3
 
 
 class Bot(Methods):
+
     def __init__(
         self,
         token: str,
@@ -97,16 +98,16 @@ class Bot(Methods):
         if parse_mode not in self._parse_modes:
             raise ValueError(
                 'parse_mode must be one of {} or None. Not "{}"'.format(
-                    ", ".join(f'"{m}"' for m in self._parse_modes[:-1]), parse_mode
-                )
-            )
+                    ", ".join(f'"{m}"' for m in self._parse_modes[:-1]),
+                    parse_mode))
         self._parse_mode = parse_mode
 
     @parse_mode.deleter
     def parse_mode(self):
         self.parse_mode = None
 
-    def render_markup_element(self, element: Element, parse_mode: Union[None, str]):
+    def render_markup_element(self, element: Element, parse_mode: Union[None,
+                                                                        str]):
         parse_mode = parse_mode or self._parse_mode
         if parse_mode is None:
             return element.to_plain_text()
@@ -121,8 +122,7 @@ class Bot(Methods):
             self.logger.warning(
                 "Parse mode 'Markdown' is a legacy format. "
                 "Message will be rendered without markup as plaint text. "
-                "Try to use 'MarkdownV2'"
-            )
+                "Try to use 'MarkdownV2'")
             return element.to_plain_text()
 
         raise ValueError(f"Unknown parse mode: {parse_mode}")
@@ -147,11 +147,8 @@ class Bot(Methods):
                 self = kwargs.get("self")
                 new_value = self._parse_mode
                 return_value.update({key: new_value})
-            if (
-                key not in ["self", "cls"]
-                and value is not None
-                and not key.startswith("_")
-            ):
+            if (key not in ["self", "cls"] and value is not None
+                    and not key.startswith("_")):
                 new_value = get_values(value)
                 return_value.update({key: new_value})
         return return_value
@@ -168,9 +165,9 @@ class Bot(Methods):
         return files
 
     async def aio_post(self, url, payload, files=None):
-        async with httpx.AsyncClient(
-            http2=True, timeout=self.timeout, proxies=self.proxy
-        ) as client:
+        async with httpx.AsyncClient(http2=True,
+                                     timeout=self.timeout,
+                                     proxies=self.proxy) as client:
             resp = await client.post(url, data=payload, files=files)
             try:
                 data = resp.json()
@@ -178,7 +175,8 @@ class Bot(Methods):
                 raise TelegramError("Error", resp.text)
 
             if not data["ok"]:
-                raise TelegramError(str(data["error_code"]), str(data["description"]))
+                raise TelegramError(str(data["error_code"]),
+                                    str(data["description"]))
 
             return data["result"]
 
@@ -199,37 +197,43 @@ class Bot(Methods):
         await self.stop()
 
     def on_message(self, filters: Filters = None, group: int = 0):
+
         def decorator(func):
             self.add_message_handler(func, filters, group)
 
         return decorator
 
     def on_callback(self, filters: Filters = None, group: int = 0):
+
         def decorator(func):
             self.add_callback_handler(func, filters, group)
 
         return decorator
 
     def on_inlinequery(self, filters: Filters = None, group: int = 0):
+
         def decorator(func):
             self.add_inlinequery_handler(func, filters, group)
 
         return decorator
 
-    def add_message_handler(
-        self, callback: Callable, filters: Filters = None, group: int = 0
-    ):
+    def add_message_handler(self,
+                            callback: Callable,
+                            filters: Filters = None,
+                            group: int = 0):
         handler = MessageHandler(callback, filters)
         self.dispatcher.add_handler(handler, group)
 
-    def add_callback_handler(
-        self, callback: Callable, filters: Filters = None, group: int = 0
-    ):
+    def add_callback_handler(self,
+                             callback: Callable,
+                             filters: Filters = None,
+                             group: int = 0):
         handler = CallbackQueryHandler(callback, filters)
         self.dispatcher.add_handler(handler, group)
 
-    def add_inlinequery_handler(
-        self, callback: Callable, filters: Filters = None, group: int = 0
-    ):
+    def add_inlinequery_handler(self,
+                                callback: Callable,
+                                filters: Filters = None,
+                                group: int = 0):
         handler = InlineQueryHandler(callback, filters)
         self.dispatcher.add_handler(handler, group)

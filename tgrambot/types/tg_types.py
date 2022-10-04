@@ -24,7 +24,6 @@ from .base import TelegramObject
 
 
 class WebhookInfo(TelegramObject):
-
     """
     Describes the current status of a webhook.
     """
@@ -41,7 +40,6 @@ class WebhookInfo(TelegramObject):
 
 
 class User(TelegramObject):
-
     """
     This object represents a Telegram user or bot.
     """
@@ -60,7 +58,6 @@ class User(TelegramObject):
 
 
 class MessageId(TelegramObject):
-
     """
     This object represents a unique message identifier.
     """
@@ -69,7 +66,6 @@ class MessageId(TelegramObject):
 
 
 class MessageEntity(TelegramObject):
-
     """
     This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
     """
@@ -83,7 +79,6 @@ class MessageEntity(TelegramObject):
 
 
 class PhotoSize(TelegramObject):
-
     """
     This object represents one size of a photo or a file / sticker thumbnail.
     """
@@ -96,7 +91,6 @@ class PhotoSize(TelegramObject):
 
 
 class Animation(TelegramObject):
-
     """
     This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
     """
@@ -113,7 +107,6 @@ class Animation(TelegramObject):
 
 
 class Audio(TelegramObject):
-
     """
     This object represents an audio file to be treated as music by the Telegram clients.
     """
@@ -130,7 +123,6 @@ class Audio(TelegramObject):
 
 
 class Document(TelegramObject):
-
     """
     This object represents a general file (as opposed to photos, voice messages and audio files).
     """
@@ -144,7 +136,6 @@ class Document(TelegramObject):
 
 
 class Video(TelegramObject):
-
     """
     This object represents a video file.
     """
@@ -161,7 +152,6 @@ class Video(TelegramObject):
 
 
 class VideoNote(TelegramObject):
-
     """
     This object represents a video message (available in Telegram apps as of v.4.0).
     """
@@ -175,7 +165,6 @@ class VideoNote(TelegramObject):
 
 
 class Voice(TelegramObject):
-
     """
     This object represents a voice note.
     """
@@ -188,7 +177,6 @@ class Voice(TelegramObject):
 
 
 class Contact(TelegramObject):
-
     """
     This object represents a phone contact.
     """
@@ -201,7 +189,6 @@ class Contact(TelegramObject):
 
 
 class Dice(TelegramObject):
-
     """
     This object represents an animated emoji that displays a random value.
     """
@@ -211,7 +198,6 @@ class Dice(TelegramObject):
 
 
 class PollOption(TelegramObject):
-
     """
     This object contains information about one answer option in a poll.
     """
@@ -221,7 +207,6 @@ class PollOption(TelegramObject):
 
 
 class PollAnswer(TelegramObject):
-
     """
     This object represents an answer of a user in a non-anonymous poll.
     """
@@ -232,7 +217,6 @@ class PollAnswer(TelegramObject):
 
 
 class Poll(TelegramObject):
-
     """
     This object contains information about a poll.
     """
@@ -253,7 +237,6 @@ class Poll(TelegramObject):
 
 
 class Location(TelegramObject):
-
     """
     This object represents a point on the map.
     """
@@ -267,7 +250,6 @@ class Location(TelegramObject):
 
 
 class Venue(TelegramObject):
-
     """
     This object represents a venue.
     """
@@ -282,7 +264,6 @@ class Venue(TelegramObject):
 
 
 class WebAppData(TelegramObject):
-
     """
     Describes data sent from a Web App to the bot.
     """
@@ -292,7 +273,6 @@ class WebAppData(TelegramObject):
 
 
 class ProximityAlertTriggered(TelegramObject):
-
     """
     This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.
     """
@@ -303,7 +283,6 @@ class ProximityAlertTriggered(TelegramObject):
 
 
 class MessageAutoDeleteTimerChanged(TelegramObject):
-
     """
     This object represents a service message about a change in auto-delete timer settings.
     """
@@ -312,7 +291,6 @@ class MessageAutoDeleteTimerChanged(TelegramObject):
 
 
 class VideoChatScheduled(TelegramObject):
-
     """
     This object represents a service message about a video chat scheduled in the chat.
     """
@@ -321,7 +299,6 @@ class VideoChatScheduled(TelegramObject):
 
 
 class VideoChatStarted(TelegramObject):
-
     """
     This object represents a service message about a video chat started in the chat. Currently holds no information.
     """
@@ -330,7 +307,6 @@ class VideoChatStarted(TelegramObject):
 
 
 class VideoChatEnded(TelegramObject):
-
     """
     This object represents a service message about a video chat ended in the chat.
     """
@@ -339,7 +315,6 @@ class VideoChatEnded(TelegramObject):
 
 
 class VideoChatParticipantsInvited(TelegramObject):
-
     """
     This object represents a service message about new members invited to a video chat.
     """
@@ -348,7 +323,6 @@ class VideoChatParticipantsInvited(TelegramObject):
 
 
 class UserProfilePhotos(TelegramObject):
-
     """
     This object represent a user's profile pictures.
     """
@@ -358,7 +332,6 @@ class UserProfilePhotos(TelegramObject):
 
 
 class File(TelegramObject):
-
     """
     This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
     """
@@ -370,7 +343,6 @@ class File(TelegramObject):
 
 
 class WebAppInfo(TelegramObject):
-
     """
     Describes a Web App.
     """
@@ -379,7 +351,6 @@ class WebAppInfo(TelegramObject):
 
 
 class KeyboardButtonPollType(TelegramObject):
-
     """
     This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
     """
@@ -391,7 +362,6 @@ class KeyboardButtonPollType(TelegramObject):
 
 
 class ReplyKeyboardRemove(TelegramObject):
-
     """
     Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard. By default, custom keyboards are displayed until a new keyboard is sent by a bot. An exception is made for one-time keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).
     """
@@ -400,13 +370,12 @@ class ReplyKeyboardRemove(TelegramObject):
     selective: bool = Field(default=None)
 
     def __init__(self, remove_keyboard: bool, selective: bool = None):
-        super(ReplyKeyboardRemove, self).__init__(
-            remove_keyboard=remove_keyboard, selective=selective
-        )
+        super(ReplyKeyboardRemove,
+              self).__init__(remove_keyboard=remove_keyboard,
+                             selective=selective)
 
 
 class LoginUrl(TelegramObject):
-
     """
     This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from Telegram. All the user needs to do is tap/click a button and confirm that they want to log in:
     Telegram apps support these buttons as of version 5.7.
@@ -433,7 +402,6 @@ class LoginUrl(TelegramObject):
 
 
 class ForceReply(TelegramObject):
-
     """
     Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.
     """
@@ -456,7 +424,6 @@ class ForceReply(TelegramObject):
 
 
 class ChatPhoto(TelegramObject):
-
     """
     This object represents a chat photo.
     """
@@ -468,7 +435,6 @@ class ChatPhoto(TelegramObject):
 
 
 class ChatInviteLink(TelegramObject):
-
     """
     Represents an invite link for a chat.
     """
@@ -485,7 +451,6 @@ class ChatInviteLink(TelegramObject):
 
 
 class ChatAdministratorRights(TelegramObject):
-
     """
     Represents the rights of an administrator in a chat.
     """
@@ -504,7 +469,6 @@ class ChatAdministratorRights(TelegramObject):
 
 
 class ChatMember(TelegramObject):
-
     """
     This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:
     - ChatMemberOwner
@@ -519,7 +483,6 @@ class ChatMember(TelegramObject):
 
 
 class ChatMemberOwner(ChatMember):
-
     """
     Represents a chat member that owns the chat and has all administrator privileges.
     """
@@ -531,7 +494,6 @@ class ChatMemberOwner(ChatMember):
 
 
 class ChatMemberAdministrator(ChatMember):
-
     """
     Represents a chat member that has some additional privileges.
     """
@@ -554,7 +516,6 @@ class ChatMemberAdministrator(ChatMember):
 
 
 class ChatMemberMember(ChatMember):
-
     """
     Represents a chat member that has no additional privileges or restrictions.
     """
@@ -564,7 +525,6 @@ class ChatMemberMember(ChatMember):
 
 
 class ChatMemberRestricted(ChatMember):
-
     """
     Represents a chat member that is under certain restrictions in the chat. Supergroups only.
     """
@@ -584,7 +544,6 @@ class ChatMemberRestricted(ChatMember):
 
 
 class ChatMemberLeft(ChatMember):
-
     """
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
     """
@@ -594,7 +553,6 @@ class ChatMemberLeft(ChatMember):
 
 
 class ChatMemberBanned(ChatMember):
-
     """
     Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
     """
@@ -605,7 +563,6 @@ class ChatMemberBanned(ChatMember):
 
 
 class ChatMemberUpdated(TelegramObject):
-
     """
     This object represents changes in the status of a chat member.
     """
@@ -619,7 +576,6 @@ class ChatMemberUpdated(TelegramObject):
 
 
 class ChatJoinRequest(TelegramObject):
-
     """
     Represents a join request sent to a chat.
     """
@@ -632,7 +588,6 @@ class ChatJoinRequest(TelegramObject):
 
 
 class ChatPermissions(TelegramObject):
-
     """
     Describes actions that a non-administrator user is allowed to take in a chat.
     """
@@ -648,7 +603,6 @@ class ChatPermissions(TelegramObject):
 
 
 class ChatLocation(TelegramObject):
-
     """
     Represents a location to which a chat is connected.
     """
@@ -658,7 +612,6 @@ class ChatLocation(TelegramObject):
 
 
 class BotCommand(TelegramObject):
-
     """
     This object represents a bot command.
     """
@@ -668,7 +621,6 @@ class BotCommand(TelegramObject):
 
 
 class BotCommandScope(TelegramObject):
-
     """
     This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
     - BotCommandScopeDefault
@@ -684,7 +636,6 @@ class BotCommandScope(TelegramObject):
 
 
 class BotCommandScopeDefault(BotCommandScope):
-
     """
     Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
     """
@@ -693,7 +644,6 @@ class BotCommandScopeDefault(BotCommandScope):
 
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering all private chats.
     """
@@ -702,7 +652,6 @@ class BotCommandScopeAllPrivateChats(BotCommandScope):
 
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering all group and supergroup chats.
     """
@@ -711,7 +660,6 @@ class BotCommandScopeAllGroupChats(BotCommandScope):
 
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering all group and supergroup chat administrators.
     """
@@ -720,7 +668,6 @@ class BotCommandScopeAllChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChat(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering a specific chat.
     """
@@ -730,7 +677,6 @@ class BotCommandScopeChat(BotCommandScope):
 
 
 class BotCommandScopeChatAdministrators(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
     """
@@ -740,7 +686,6 @@ class BotCommandScopeChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChatMember(BotCommandScope):
-
     """
     Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
     """
@@ -751,7 +696,6 @@ class BotCommandScopeChatMember(BotCommandScope):
 
 
 class MenuButton(TelegramObject):
-
     """
     This object describes the bot's menu button in a private chat. It should be one of
     - MenuButtonCommands
@@ -764,7 +708,6 @@ class MenuButton(TelegramObject):
 
 
 class MenuButtonCommands(MenuButton):
-
     """
     Represents a menu button, which opens the bot's list of commands.
     """
@@ -773,7 +716,6 @@ class MenuButtonCommands(MenuButton):
 
 
 class MenuButtonWebApp(MenuButton):
-
     """
     Represents a menu button, which launches a Web App.
     """
@@ -784,7 +726,6 @@ class MenuButtonWebApp(MenuButton):
 
 
 class MenuButtonDefault(MenuButton):
-
     """
     Describes that no specific value for the menu button was set.
     """
@@ -793,7 +734,6 @@ class MenuButtonDefault(MenuButton):
 
 
 class ResponseParameters(TelegramObject):
-
     """
     Describes why a request was unsuccessful.
     """
@@ -803,7 +743,6 @@ class ResponseParameters(TelegramObject):
 
 
 class InputMedia(TelegramObject):
-
     """
     This object represents the content of a media message to be sent. It should be one of
     - InputMediaAnimation
@@ -817,7 +756,6 @@ class InputMedia(TelegramObject):
 
 
 class InputMediaPhoto(InputMedia):
-
     """
     Represents a photo to be sent.
     """
@@ -846,7 +784,6 @@ class InputMediaPhoto(InputMedia):
 
 
 class InputFile(TelegramObject):
-
     """
     This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.
     """
@@ -855,7 +792,6 @@ class InputFile(TelegramObject):
 
 
 class StickerSet(TelegramObject):
-
     """
     This object represents a sticker set.
     """
@@ -870,7 +806,6 @@ class StickerSet(TelegramObject):
 
 
 class MaskPosition(TelegramObject):
-
     """
     This object describes the position on faces where a mask should be placed by default.
     """
@@ -882,7 +817,6 @@ class MaskPosition(TelegramObject):
 
 
 class InlineQuery(TelegramObject):
-
     """
     This object represents an incoming inline query. When the user sends an empty query, your bot could return some default or trending results.
     """
@@ -896,7 +830,6 @@ class InlineQuery(TelegramObject):
 
 
 class InlineQueryResult(TelegramObject):
-
     """
     This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:
     - InlineQueryResultCachedAudio
@@ -926,7 +859,6 @@ class InlineQueryResult(TelegramObject):
 
 
 class InlineQueryResultGame(InlineQueryResult):
-
     """
     Represents a Game.
     Note: This will only work in Telegram versions released after October 1, 2016. Older clients will not display any inline results if a game result is among them.
@@ -944,13 +876,14 @@ class InlineQueryResultGame(InlineQueryResult):
         game_short_name: str,
         reply_markup: "InlineKeyboardMarkup" = None,
     ):
-        super(InlineQueryResultGame, self).__init__(
-            type=type, id=id, game_short_name=game_short_name, reply_markup=reply_markup
-        )
+        super(InlineQueryResultGame,
+              self).__init__(type=type,
+                             id=id,
+                             game_short_name=game_short_name,
+                             reply_markup=reply_markup)
 
 
 class InputMessageContent(TelegramObject):
-
     """
     This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:
     - InputTextMessageContent
@@ -964,7 +897,6 @@ class InputMessageContent(TelegramObject):
 
 
 class InputTextMessageContent(InputMessageContent):
-
     """
     Represents the content of a text message to be sent as the result of an inline query.
     """
@@ -990,7 +922,6 @@ class InputTextMessageContent(InputMessageContent):
 
 
 class InputLocationMessageContent(InputMessageContent):
-
     """
     Represents the content of a location message to be sent as the result of an inline query.
     """
@@ -1022,7 +953,6 @@ class InputLocationMessageContent(InputMessageContent):
 
 
 class InputVenueMessageContent(InputMessageContent):
-
     """
     Represents the content of a venue message to be sent as the result of an inline query.
     """
@@ -1060,7 +990,6 @@ class InputVenueMessageContent(InputMessageContent):
 
 
 class InputContactMessageContent(InputMessageContent):
-
     """
     Represents the content of a contact message to be sent as the result of an inline query.
     """
@@ -1086,7 +1015,6 @@ class InputContactMessageContent(InputMessageContent):
 
 
 class ChosenInlineResult(TelegramObject):
-
     """
     Represents a result of an inline query that was chosen by the user and sent to their chat partner.
     Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates.
@@ -1100,7 +1028,6 @@ class ChosenInlineResult(TelegramObject):
 
 
 class SentWebAppMessage(TelegramObject):
-
     """
     Describes an inline message sent by a Web App on behalf of a user.
     """
@@ -1109,7 +1036,6 @@ class SentWebAppMessage(TelegramObject):
 
 
 class LabeledPrice(TelegramObject):
-
     """
     This object represents a portion of the price for goods or services.
     """
@@ -1119,7 +1045,6 @@ class LabeledPrice(TelegramObject):
 
 
 class Invoice(TelegramObject):
-
     """
     This object contains basic information about an invoice.
     """
@@ -1132,7 +1057,6 @@ class Invoice(TelegramObject):
 
 
 class ShippingAddress(TelegramObject):
-
     """
     This object represents a shipping address.
     """
@@ -1146,7 +1070,6 @@ class ShippingAddress(TelegramObject):
 
 
 class OrderInfo(TelegramObject):
-
     """
     This object represents information about an order.
     """
@@ -1158,7 +1081,6 @@ class OrderInfo(TelegramObject):
 
 
 class ShippingOption(TelegramObject):
-
     """
     This object represents one shipping option.
     """
@@ -1169,7 +1091,6 @@ class ShippingOption(TelegramObject):
 
 
 class SuccessfulPayment(TelegramObject):
-
     """
     This object contains basic information about a successful payment.
     """
@@ -1184,7 +1105,6 @@ class SuccessfulPayment(TelegramObject):
 
 
 class ShippingQuery(TelegramObject):
-
     """
     This object contains information about an incoming shipping query.
     """
@@ -1196,7 +1116,6 @@ class ShippingQuery(TelegramObject):
 
 
 class PreCheckoutQuery(TelegramObject):
-
     """
     This object contains information about an incoming pre-checkout query.
     """
@@ -1211,7 +1130,6 @@ class PreCheckoutQuery(TelegramObject):
 
 
 class PassportFile(TelegramObject):
-
     """
     This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
     """
@@ -1223,7 +1141,6 @@ class PassportFile(TelegramObject):
 
 
 class EncryptedPassportElement(TelegramObject):
-
     """
     Describes documents or other Telegram Passport elements shared with the bot by the user.
     """
@@ -1241,7 +1158,6 @@ class EncryptedPassportElement(TelegramObject):
 
 
 class EncryptedCredentials(TelegramObject):
-
     """
     Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
     """
@@ -1252,7 +1168,6 @@ class EncryptedCredentials(TelegramObject):
 
 
 class PassportElementError(TelegramObject):
-
     """
     This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:
     - PassportElementErrorDataField
@@ -1270,7 +1185,6 @@ class PassportElementError(TelegramObject):
 
 
 class PassportElementErrorDataField(PassportElementError):
-
     """
     Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes.
     """
@@ -1283,7 +1197,6 @@ class PassportElementErrorDataField(PassportElementError):
 
 
 class PassportElementErrorFrontSide(PassportElementError):
-
     """
     Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
     """
@@ -1295,7 +1208,6 @@ class PassportElementErrorFrontSide(PassportElementError):
 
 
 class PassportElementErrorReverseSide(PassportElementError):
-
     """
     Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
     """
@@ -1307,7 +1219,6 @@ class PassportElementErrorReverseSide(PassportElementError):
 
 
 class PassportElementErrorSelfie(PassportElementError):
-
     """
     Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.
     """
@@ -1319,7 +1230,6 @@ class PassportElementErrorSelfie(PassportElementError):
 
 
 class PassportElementErrorFile(PassportElementError):
-
     """
     Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes.
     """
@@ -1331,7 +1241,6 @@ class PassportElementErrorFile(PassportElementError):
 
 
 class PassportElementErrorFiles(PassportElementError):
-
     """
     Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes.
     """
@@ -1343,7 +1252,6 @@ class PassportElementErrorFiles(PassportElementError):
 
 
 class PassportElementErrorTranslationFile(PassportElementError):
-
     """
     Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes.
     """
@@ -1355,7 +1263,6 @@ class PassportElementErrorTranslationFile(PassportElementError):
 
 
 class PassportElementErrorTranslationFiles(PassportElementError):
-
     """
     Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
     """
@@ -1367,7 +1274,6 @@ class PassportElementErrorTranslationFiles(PassportElementError):
 
 
 class PassportElementErrorUnspecified(PassportElementError):
-
     """
     Represents an issue in an unspecified place. The error is considered resolved when new data is added.
     """
@@ -1379,7 +1285,6 @@ class PassportElementErrorUnspecified(PassportElementError):
 
 
 class Game(TelegramObject):
-
     """
     This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
     """
@@ -1393,7 +1298,6 @@ class Game(TelegramObject):
 
 
 class CallbackGame(TelegramObject):
-
     """
     A placeholder, currently holds no information. Use BotFather to set up your game.
     """
@@ -1402,7 +1306,6 @@ class CallbackGame(TelegramObject):
 
 
 class GameHighScore(TelegramObject):
-
     """
     This object represents one row of the high scores table for a game.
     """
@@ -1413,7 +1316,6 @@ class GameHighScore(TelegramObject):
 
 
 class PassportData(TelegramObject):
-
     """
     Describes Telegram Passport data shared with the bot by the user.
     """
@@ -1423,7 +1325,6 @@ class PassportData(TelegramObject):
 
 
 class InputInvoiceMessageContent(InputMessageContent):
-
     """
     Represents the content of an invoice message to be sent as the result of an inline query.
     """
@@ -1497,7 +1398,6 @@ class InputInvoiceMessageContent(InputMessageContent):
 
 
 class InlineKeyboardButton(TelegramObject):
-
     """
     This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
     """
@@ -1538,7 +1438,6 @@ class InlineKeyboardButton(TelegramObject):
 
 
 class InlineKeyboardMarkup(TelegramObject):
-
     """
     This object represents an inline keyboard that appears right next to the message it belongs to.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.
@@ -1547,11 +1446,11 @@ class InlineKeyboardMarkup(TelegramObject):
     inline_keyboard: List[List["InlineKeyboardButton"]] = Field(default=None)
 
     def __init__(self, inline_keyboard: List[List["InlineKeyboardButton"]]):
-        super(InlineKeyboardMarkup, self).__init__(inline_keyboard=inline_keyboard)
+        super(InlineKeyboardMarkup,
+              self).__init__(inline_keyboard=inline_keyboard)
 
 
 class InlineQueryResultCachedAudio(InlineQueryResult):
-
     """
     Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -1590,7 +1489,6 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
 
 
 class InlineQueryResultCachedVoice(InlineQueryResult):
-
     """
     Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -1632,7 +1530,6 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
 
 
 class InlineQueryResultCachedVideo(InlineQueryResult):
-
     """
     Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
     """
@@ -1676,7 +1573,6 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
 
 
 class InlineQueryResultCachedDocument(InlineQueryResult):
-
     """
     Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -1721,7 +1617,6 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
 
 
 class InlineQueryResultCachedSticker(InlineQueryResult):
-
     """
     Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
     Note: This will only work in Telegram versions released after 9 April, 2016 for static stickers and after 06 July, 2019 for animated stickers. Older clients will ignore them.
@@ -1751,7 +1646,6 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
 
 
 class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
-
     """
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
@@ -1792,7 +1686,6 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultCachedGif(InlineQueryResult):
-
     """
     Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
     """
@@ -1833,7 +1726,6 @@ class InlineQueryResultCachedGif(InlineQueryResult):
 
 
 class InlineQueryResultCachedPhoto(InlineQueryResult):
-
     """
     Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
     """
@@ -1877,7 +1769,6 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
 
 
 class InlineQueryResultContact(InlineQueryResult):
-
     """
     Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -1897,7 +1788,6 @@ class InlineQueryResultContact(InlineQueryResult):
 
 
 class InlineQueryResultVenue(InlineQueryResult):
-
     """
     Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -1957,7 +1847,6 @@ class InlineQueryResultVenue(InlineQueryResult):
 
 
 class InlineQueryResultLocation(InlineQueryResult):
-
     """
     Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -2014,7 +1903,6 @@ class InlineQueryResultLocation(InlineQueryResult):
 
 
 class InlineQueryResultDocument(InlineQueryResult):
-
     """
     Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -2071,7 +1959,6 @@ class InlineQueryResultDocument(InlineQueryResult):
 
 
 class InlineQueryResultVoice(InlineQueryResult):
-
     """
     Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -2116,7 +2003,6 @@ class InlineQueryResultVoice(InlineQueryResult):
 
 
 class InlineQueryResultAudio(InlineQueryResult):
-
     """
     Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
@@ -2136,7 +2022,6 @@ class InlineQueryResultAudio(InlineQueryResult):
 
 
 class InlineQueryResultVideo(InlineQueryResult):
-
     """
     Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
     """
@@ -2195,7 +2080,6 @@ class InlineQueryResultVideo(InlineQueryResult):
 
 
 class InlineQueryResultMpeg4Gif(InlineQueryResult):
-
     """
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
@@ -2251,7 +2135,6 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultGif(InlineQueryResult):
-
     """
     Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
     """
@@ -2307,7 +2190,6 @@ class InlineQueryResultGif(InlineQueryResult):
 
 
 class InlineQueryResultPhoto(InlineQueryResult):
-
     """
     Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
     """
@@ -2360,7 +2242,6 @@ class InlineQueryResultPhoto(InlineQueryResult):
 
 
 class InlineQueryResultArticle(InlineQueryResult):
-
     """
     Represents a link to an article or web page.
     """
@@ -2407,7 +2288,6 @@ class InlineQueryResultArticle(InlineQueryResult):
 
 
 class Sticker(TelegramObject):
-
     """
     This object represents a sticker.
     """
@@ -2427,7 +2307,6 @@ class Sticker(TelegramObject):
 
 
 class InputMediaDocument(InputMedia):
-
     """
     Represents a general file to be sent.
     """
@@ -2462,7 +2341,6 @@ class InputMediaDocument(InputMedia):
 
 
 class InputMediaAudio(InputMedia):
-
     """
     Represents an audio file to be treated as music to be sent.
     """
@@ -2503,7 +2381,6 @@ class InputMediaAudio(InputMedia):
 
 
 class InputMediaAnimation(InputMedia):
-
     """
     Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
     """
@@ -2544,7 +2421,6 @@ class InputMediaAnimation(InputMedia):
 
 
 class InputMediaVideo(InputMedia):
-
     """
     Represents a video to be sent.
     """
@@ -2588,7 +2464,6 @@ class InputMediaVideo(InputMedia):
 
 
 class KeyboardButton(TelegramObject):
-
     """
     This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields web_app, request_contact, request_location, and request_poll are mutually exclusive.
     Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.
@@ -2620,7 +2495,6 @@ class KeyboardButton(TelegramObject):
 
 
 class ReplyKeyboardMarkup(TelegramObject):
-
     """
     This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
     """
@@ -2649,7 +2523,6 @@ class ReplyKeyboardMarkup(TelegramObject):
 
 
 class Chat(TelegramObject):
-
     """
     This object represents a chat.
     """
@@ -2679,7 +2552,6 @@ class Chat(TelegramObject):
 
 
 class Message(TelegramObject):
-
     """
     This object represents a message.
     """
@@ -2729,8 +2601,7 @@ class Message(TelegramObject):
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
     message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
-        default=None
-    )
+        default=None)
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2743,14 +2614,12 @@ class Message(TelegramObject):
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
     video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
-        default=None
-    )
+        default=None)
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
 
 
 class CallbackQuery(TelegramObject):
-
     """
     This object represents an incoming callback query from a callback button in an inline keyboard. If the button that originated the query was attached to a message sent by the bot, the field message will be present. If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present. Exactly one of the fields data or game_short_name will be present.
     """
@@ -2765,7 +2634,6 @@ class CallbackQuery(TelegramObject):
 
 
 class Message(TelegramObject):
-
     """
     This object represents a message.
     """
@@ -2815,8 +2683,7 @@ class Message(TelegramObject):
     supergroup_chat_created: bool = Field(default=None)
     channel_chat_created: bool = Field(default=None)
     message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(
-        default=None
-    )
+        default=None)
     migrate_to_chat_id: int = Field(default=None)
     migrate_from_chat_id: int = Field(default=None)
     pinned_message: "Message" = Field(default=None)
@@ -2829,14 +2696,12 @@ class Message(TelegramObject):
     video_chat_started: "VideoChatStarted" = Field(default=None)
     video_chat_ended: "VideoChatEnded" = Field(default=None)
     video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(
-        default=None
-    )
+        default=None)
     web_app_data: "WebAppData" = Field(default=None)
     reply_markup: "InlineKeyboardMarkup" = Field(default=None)
 
 
 class Update(TelegramObject):
-
     """
     This object represents an incoming update.
     At most one of the optional parameters can be present in any given update.
