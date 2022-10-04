@@ -1358,6 +1358,39 @@ class InputInvoiceMessageContent(InputMessageContent):
         super(InputInvoiceMessageContent, self).__init__(title=title, description=description, payload=payload, provider_token=provider_token, currency=currency, prices=prices, max_tip_amount=max_tip_amount, suggested_tip_amounts=suggested_tip_amounts, provider_data=provider_data, photo_url=photo_url, photo_size=photo_size, photo_width=photo_width, photo_height=photo_height, need_name=need_name, need_phone_number=need_phone_number, need_email=need_email, need_shipping_address=need_shipping_address, send_phone_number_to_provider=send_phone_number_to_provider, send_email_to_provider=send_email_to_provider, is_flexible=is_flexible)
 
 
+class InlineKeyboardButton(TelegramObject):
+
+    """
+    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
+    """
+    
+    text: str = Field(default=None)
+    url: str = Field(default=None)
+    callback_data: str = Field(default=None)
+    web_app: "WebAppInfo" = Field(default=None)
+    login_url: "LoginUrl" = Field(default=None)
+    switch_inline_query: str = Field(default=None)
+    switch_inline_query_current_chat: str = Field(default=None)
+    callback_game: "CallbackGame" = Field(default=None)
+    pay: bool = Field(default=None)
+    
+    def __init__(self, text: str, url: str = "", callback_data: str = None, web_app: "WebAppInfo" = None, login_url: "LoginUrl" = None, switch_inline_query: str = None, switch_inline_query_current_chat: str = None, callback_game: "CallbackGame" = None, pay: bool = None):
+        super(InlineKeyboardButton, self).__init__(text=text, url=url, callback_data=callback_data, web_app=web_app, login_url=login_url, switch_inline_query=switch_inline_query, switch_inline_query_current_chat=switch_inline_query_current_chat, callback_game=callback_game, pay=pay)
+
+
+class InlineKeyboardMarkup(TelegramObject):
+
+    """
+    This object represents an inline keyboard that appears right next to the message it belongs to.
+    Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.
+    """
+    
+    inline_keyboard: List[List["InlineKeyboardButton"]] = Field(default=None)
+    
+    def __init__(self, inline_keyboard: List[List["InlineKeyboardButton"]]):
+        super(InlineKeyboardMarkup, self).__init__(inline_keyboard=inline_keyboard)
+
+
 class InlineQueryResultCachedAudio(InlineQueryResult):
 
     """
@@ -1882,39 +1915,6 @@ class InputMediaVideo(InputMedia):
         super(InputMediaVideo, self).__init__(type=type, media=media, thumb=thumb, caption=caption, parse_mode=parse_mode, caption_entities=caption_entities, width=width, height=height, duration=duration, supports_streaming=supports_streaming)
 
 
-class InlineKeyboardButton(TelegramObject):
-
-    """
-    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
-    """
-    
-    text: str = Field(default=None)
-    url: str = Field(default=None)
-    callback_data: str = Field(default=None)
-    web_app: "WebAppInfo" = Field(default=None)
-    login_url: "LoginUrl" = Field(default=None)
-    switch_inline_query: str = Field(default=None)
-    switch_inline_query_current_chat: str = Field(default=None)
-    callback_game: "CallbackGame" = Field(default=None)
-    pay: bool = Field(default=None)
-    
-    def __init__(self, text: str, url: str = "", callback_data: str = None, web_app: "WebAppInfo" = None, login_url: "LoginUrl" = None, switch_inline_query: str = None, switch_inline_query_current_chat: str = None, callback_game: "CallbackGame" = None, pay: bool = None):
-        super(InlineKeyboardButton, self).__init__(text=text, url=url, callback_data=callback_data, web_app=web_app, login_url=login_url, switch_inline_query=switch_inline_query, switch_inline_query_current_chat=switch_inline_query_current_chat, callback_game=callback_game, pay=pay)
-
-
-class InlineKeyboardMarkup(TelegramObject):
-
-    """
-    This object represents an inline keyboard that appears right next to the message it belongs to.
-    Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.
-    """
-    
-    inline_keyboard: List[List["InlineKeyboardButton"]] = Field(default=None)
-    
-    def __init__(self, inline_keyboard: List[List["InlineKeyboardButton"]]):
-        super(InlineKeyboardMarkup, self).__init__(inline_keyboard=inline_keyboard)
-
-
 class KeyboardButton(TelegramObject):
 
     """
@@ -2060,6 +2060,73 @@ class CallbackQuery(TelegramObject):
     chat_instance: str = Field(default=None)
     data: str = Field(default=None)
     game_short_name: str = Field(default=None)
+    
+
+class Message(TelegramObject):
+
+    """
+    This object represents a message.
+    """
+    
+    message_id: int = Field(default=None)
+    from_user: "User" = Field(alias="from", default=None)
+    sender_chat: "Chat" = Field(default=None)
+    date: int = Field(default=None)
+    chat: "Chat" = Field(default=None)
+    forward_from: "User" = Field(default=None)
+    forward_from_chat: "Chat" = Field(default=None)
+    forward_from_message_id: int = Field(default=None)
+    forward_signature: str = Field(default=None)
+    forward_sender_name: str = Field(default=None)
+    forward_date: int = Field(default=None)
+    is_automatic_forward: bool = Field(default=None)
+    reply_to_message: "Message" = Field(default=None)
+    via_bot: "User" = Field(default=None)
+    edit_date: int = Field(default=None)
+    has_protected_content: bool = Field(default=None)
+    media_group_id: str = Field(default=None)
+    author_signature: str = Field(default=None)
+    text: str = Field(default=None)
+    entities: List["MessageEntity"] = Field(default=None)
+    animation: "Animation" = Field(default=None)
+    audio: "Audio" = Field(default=None)
+    document: "Document" = Field(default=None)
+    photo: List["PhotoSize"] = Field(default=None)
+    sticker: "Sticker" = Field(default=None)
+    video: "Video" = Field(default=None)
+    video_note: "VideoNote" = Field(default=None)
+    voice: "Voice" = Field(default=None)
+    caption: str = Field(default=None)
+    caption_entities: List["MessageEntity"] = Field(default=None)
+    contact: "Contact" = Field(default=None)
+    dice: "Dice" = Field(default=None)
+    game: "Game" = Field(default=None)
+    poll: "Poll" = Field(default=None)
+    venue: "Venue" = Field(default=None)
+    location: "Location" = Field(default=None)
+    new_chat_members: List["User"] = Field(default=None)
+    left_chat_member: "User" = Field(default=None)
+    new_chat_title: str = Field(default=None)
+    new_chat_photo: List["PhotoSize"] = Field(default=None)
+    delete_chat_photo: bool = Field(default=None)
+    group_chat_created: bool = Field(default=None)
+    supergroup_chat_created: bool = Field(default=None)
+    channel_chat_created: bool = Field(default=None)
+    message_auto_delete_timer_changed: "MessageAutoDeleteTimerChanged" = Field(default=None)
+    migrate_to_chat_id: int = Field(default=None)
+    migrate_from_chat_id: int = Field(default=None)
+    pinned_message: "Message" = Field(default=None)
+    invoice: "Invoice" = Field(default=None)
+    successful_payment: "SuccessfulPayment" = Field(default=None)
+    connected_website: str = Field(default=None)
+    passport_data: "PassportData" = Field(default=None)
+    proximity_alert_triggered: "ProximityAlertTriggered" = Field(default=None)
+    video_chat_scheduled: "VideoChatScheduled" = Field(default=None)
+    video_chat_started: "VideoChatStarted" = Field(default=None)
+    video_chat_ended: "VideoChatEnded" = Field(default=None)
+    video_chat_participants_invited: "VideoChatParticipantsInvited" = Field(default=None)
+    web_app_data: "WebAppData" = Field(default=None)
+    reply_markup: "InlineKeyboardMarkup" = Field(default=None)
     
 
 class Update(TelegramObject):

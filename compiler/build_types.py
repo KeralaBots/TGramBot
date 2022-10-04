@@ -102,11 +102,15 @@ def build_types():
         # Pending queue to avoid ForwardRefs and ConfigErrors in pydantic
         pending_objects = []
         not_pending = []
+        pending_dict = {}
+        pending_names = []
 
         # To Find subclasses of an object
         subclass_dict = {}
         chat_object = ''
         callbackquery_object = ''
+        inlinebutton_object = ''
+        inlinemarkup_object = ''
 
         # Classes to be imported in __init__ file
         init_types = []
@@ -137,6 +141,7 @@ def build_types():
                 super_class_text = ''
                 field_count = 0
                 pending_objects_count = 0
+                pending_list = []
                 for field in fields:
                     typed_list = []
                     # Separate types of props and classify them
@@ -155,6 +160,7 @@ def build_types():
                             def_types = def_types if def_types in BASE_TYPES else f'"{def_types}"'
                         if import_type not in BASE_TYPES and import_type not in not_pending and import_type not in init_types:
                             pending_objects_count += 1
+                            pending_list.append(import_type)
                         else:
                             not_pending.append(name)
 
@@ -196,7 +202,7 @@ def build_types():
                     super_class += f"\n    def __init__(self, {super_class_props[:-2]}):\n        super({name}, self).__init__({super_class_text[:-2]})\n"
 
                 # To avoid ForwardRefs and ConfigErrors in pydantic
-                print(f'{name} - {pending_objects_count}')
+                # print(f'{name} - {pending_objects_count}')
                 if name == "Chat":
                     chat_object += content_temp.format(
                         class_name=name,
@@ -217,6 +223,26 @@ def build_types():
                     )
                     continue
 
+                if name == "InlineKeyboardButton":
+                    inlinebutton_object += content_temp.format(
+                        class_name=name,
+                        class_object=class_object,
+                        comments=comments,
+                        fields=field_text,
+                        super_class=super_class
+                    )
+                    continue
+
+                if name == "InlineKeyboardMarkup":
+                    inlinemarkup_object += content_temp.format(
+                        class_name=name,
+                        class_object=class_object,
+                        comments=comments,
+                        fields=field_text,
+                        super_class=super_class
+                    )
+                    continue
+
                 if pending_objects_count > 0:
                     pending_objects.append(content_temp.format(
                         class_name=name,
@@ -225,6 +251,9 @@ def build_types():
                         fields=field_text,
                         super_class=super_class
                     ))
+
+                    pending_dict.update({name: pending_list})
+                    pending_names.append(name)
                 else:
                     content += content_temp.format(
                         class_name=name,
@@ -240,6 +269,10 @@ def build_types():
                 content += chat_object
                 content += pending
                 content += callbackquery_object
+            if pending.startswith('class InlineQueryResultCachedAudio('):
+                content += inlinebutton_object
+                content += inlinemarkup_object
+                content += pending
             else:
                 content += pending
 
