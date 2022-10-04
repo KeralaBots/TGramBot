@@ -3,41 +3,59 @@
 #       This is an auto-generated file!       #
 # All changes made in this file will be lost! #
 # # # # # # # # # # # # # # # # # # # # # # # #
-
-
 # TGramBot - Partially Auto-generated Telegram Bot Api Library Python
 # Copyright (C) 2022  Anand <anandpskerala@gmail.com>
-
 # TGramBot is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-
 # TGramBot is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-from typing import List, Union
+from typing import List
+from typing import Union
 
 from telegram_text.bases import Element
 
 import tgrambot
-from tgrambot.types import (BotCommand, BotCommandScope, Chat,
-                            ChatAdministratorRights, ChatInviteLink,
-                            ChatMember, ChatPermissions, File, ForceReply,
-                            GameHighScore, InlineKeyboardMarkup,
-                            InlineQueryResult, InputFile, InputMedia,
-                            InputMediaAudio, InputMediaDocument,
-                            InputMediaPhoto, InputMediaVideo, LabeledPrice,
-                            MaskPosition, MenuButton, Message, MessageEntity,
-                            MessageId, PassportElementError, Poll,
-                            ReplyKeyboardMarkup, ReplyKeyboardRemove,
-                            SentWebAppMessage, ShippingOption, StickerSet,
-                            Update, User, UserProfilePhotos, WebhookInfo)
+from tgrambot.types import BotCommand
+from tgrambot.types import BotCommandScope
+from tgrambot.types import Chat
+from tgrambot.types import ChatAdministratorRights
+from tgrambot.types import ChatInviteLink
+from tgrambot.types import ChatMember
+from tgrambot.types import ChatPermissions
+from tgrambot.types import File
+from tgrambot.types import ForceReply
+from tgrambot.types import GameHighScore
+from tgrambot.types import InlineKeyboardMarkup
+from tgrambot.types import InlineQueryResult
+from tgrambot.types import InputFile
+from tgrambot.types import InputMedia
+from tgrambot.types import InputMediaAudio
+from tgrambot.types import InputMediaDocument
+from tgrambot.types import InputMediaPhoto
+from tgrambot.types import InputMediaVideo
+from tgrambot.types import LabeledPrice
+from tgrambot.types import MaskPosition
+from tgrambot.types import MenuButton
+from tgrambot.types import Message
+from tgrambot.types import MessageEntity
+from tgrambot.types import MessageId
+from tgrambot.types import PassportElementError
+from tgrambot.types import Poll
+from tgrambot.types import ReplyKeyboardMarkup
+from tgrambot.types import ReplyKeyboardRemove
+from tgrambot.types import SentWebAppMessage
+from tgrambot.types import ShippingOption
+from tgrambot.types import StickerSet
+from tgrambot.types import Update
+from tgrambot.types import User
+from tgrambot.types import UserProfilePhotos
+from tgrambot.types import WebhookInfo
 
 
 class Methods:
