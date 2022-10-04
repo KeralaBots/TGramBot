@@ -19,7 +19,8 @@ import logging
 import os
 import json
 import httpx
-from typing import Optional, Callable
+from typing import Optional, Callable, Union
+from telegram_text.bases import Element
 
 from .dispatcher import Dispatcher
 from .filters import Filters
@@ -29,6 +30,7 @@ from .handlers import MessageHandler, CallbackQueryHandler, InlineQueryHandler
 from .methods import Methods
 
 from .errors import InvalidToken, TelegramError
+from .utils import get_values
 
 API_TIMEOUT = 60
 RETRY = 3
@@ -104,6 +106,27 @@ class Bot(Methods):
     def parse_mode(self):
         self.parse_mode = None
 
+    def render_markup_element(self, element: Element, parse_mode: Union[None, str]):
+        parse_mode = parse_mode or self._parse_mode
+        if parse_mode is None:
+            return element.to_plain_text()
+
+        if parse_mode == 'HTML':
+            return element.to_html()
+
+        if parse_mode == 'MarkdownV2':
+            return element.to_markdown()
+
+        if parse_mode == 'Markdown':
+            self.logger.warning(
+                "Parse mode 'Markdown' is a legacy format. "
+                "Message will be rendered without markup as plaint text. "
+                "Try to use 'MarkdownV2'"
+            )
+            return element.to_plain_text()
+
+        raise ValueError(f"Unknown parse mode: {parse_mode}")
+
     @property
     async def me(self):
         if not hasattr(self, '_me'):
@@ -118,16 +141,15 @@ class Bot(Methods):
     @staticmethod
     def generate_payload(**kwargs):
         return_value = {}
+
         for key, value in kwargs.items():
             if not kwargs.get('parse_mode') and key == 'parse_mode':
                 self = kwargs.get('self')
-                value = self._parse_mode
-                return_value.update({key: value})
+                new_value = self._parse_mode
+                return_value.update({key: new_value})
             if key not in ['self', 'cls'] and value is not None and not key.startswith('_'):
-                if key == 'reply_markup':
-                    value = value.json() if value is not None else value
-
-                return_value.update({key: value})
+                new_value = get_values(value)
+                return_value.update({key: new_value})
         return return_value
 
     @staticmethod

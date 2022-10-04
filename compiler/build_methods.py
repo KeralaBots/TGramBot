@@ -41,6 +41,11 @@ COPYRIGHT = """
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """.strip()
 
+markup_temp = """
+        if isinstance({mark}, Element):
+            {mark} = self._bot.render_markup_element({mark}, parse_mode)
+"""
+
 
 def snake(s: str):
     # https://stackoverflow.com/q/1175208
@@ -89,10 +94,15 @@ def build_methods():
                     fields=field_text[:-2] + '\n    ',
                     attachment="",
                     comments=comments,
+                    markup="",
                     returns=returns
                 )
             else:
                 returns = ''
+                markup = ""
+                check_markup = []
+                markup_name = ""
+                is_markup = ["text", "caption"]
                 for field in fields:
                     typed_list = []
                     field_name = field.get('name')
@@ -117,14 +127,23 @@ def build_methods():
                             attach_file.append(field_name)
                         typed_list.append(def_types)
 
-                    typed = str(typed_list).replace("'", "")
-                    cust_typed = f'Union{typed}' if len(typed_list) > 1 else typed[1:-1]
+                    if field_name in is_markup:
+                        typed_list.append("Element")
+                        markup_name = field_name
+                    if field_name == "parse_mode":
+                        check_markup.append(True)
+
+                    typed = ", ".join(typed_list)
+
+                    cust_typed = f'Union[{typed}]' if len(typed_list) > 1 else typed
                     if field_name:
                         if field.get('required'):
                             required += f"\n            {field_name}: {cust_typed}, "
                         else:
                             non_required += f"\n            {field_name}: {cust_typed} = None, "
 
+                if True in check_markup:
+                    markup += markup_temp.format(mark=markup_name)
                 raw_return = TG_CORE_TYPES.get(returns_list[0]) if TG_CORE_TYPES.get(returns_list[0]) is not None else returns_list[0]
                 if raw_return.startswith("Array of"):
                     raw_return = TG_CORE_TYPES.get(raw_return[9:]) if TG_CORE_TYPES.get(raw_return[9:]) is not None else raw_return[9:]
@@ -149,6 +168,7 @@ def build_methods():
                     fields=field_text[:-2] + '\n    ',
                     attachment=attach_content,
                     comments=comments,
+                    markup=markup,
                     returns=returns
                 )
 

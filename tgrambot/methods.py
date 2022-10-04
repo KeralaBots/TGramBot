@@ -21,12 +21,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import logging
-from typing import List, Union
-
-from telegram_text.bases import Element
-
 import tgrambot
+from typing import List, Union
+from telegram_text.bases import Element
 from tgrambot.types import (
     Update,
     InputFile,
@@ -65,8 +62,6 @@ from tgrambot.types import (
     GameHighScore
 )
 
-logger = logging.getLogger(__name__)
-
 
 class Methods:
     def __init__(self, bot: "tgrambot.Bot"):
@@ -84,6 +79,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getupdates
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -108,6 +104,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setwebhook
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -127,6 +124,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletewebhook
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -143,6 +141,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getwebhookinfo
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -159,6 +158,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getme
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -175,6 +175,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#logout
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -191,6 +192,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#close
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -199,31 +201,10 @@ class Methods:
         result = await self._bot.aio_post(url, payload, files)
         return result
 
-    @staticmethod
-    def _render_markup_element(element: Element, parse_mode: Union[None, str]):
-        if parse_mode is None:
-            return element.to_plain_text()
-
-        if parse_mode == 'HTML':
-            return element.to_html()
-
-        if parse_mode == 'MarkdownV2':
-            return element.to_markdown()
-
-        if parse_mode == 'Markdown':
-            logger.warning(
-                "Parse mode 'Markdown' is a legacy format. "
-                "Message will be rendered without markup as plaint text. "
-                "Try to use 'MarkdownV2'"
-            )
-            return element.to_plain_text()
-
-        raise ValueError(f"Unknown parse mode: {parse_mode}")
-
     async def send_message(
             self, 
             chat_id: Union[int, str], 
-            text: Union[str, Element],
+            text: Union[str, Element], 
             parse_mode: str = None, 
             entities: List[MessageEntity] = None, 
             disable_web_page_preview: bool = None, 
@@ -238,10 +219,9 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendmessage
         """
-
+        
         if isinstance(text, Element):
-            _parse_mode = parse_mode or self._parse_mode
-            text = self._render_markup_element(text, _parse_mode)
+            text = self._bot.render_markup_element(text, parse_mode)
 
         payload = self._bot.generate_payload(**locals())
         files = {}
@@ -264,6 +244,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#forwardmessage
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -277,7 +258,7 @@ class Methods:
             chat_id: Union[int, str], 
             from_chat_id: Union[int, str], 
             message_id: int, 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             disable_notification: bool = None, 
@@ -291,6 +272,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#copymessage
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -303,7 +288,7 @@ class Methods:
             self, 
             chat_id: Union[int, str], 
             photo: Union[InputFile, str], 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             disable_notification: bool = None, 
@@ -317,6 +302,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendphoto
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -331,7 +320,7 @@ class Methods:
             self, 
             chat_id: Union[int, str], 
             audio: Union[InputFile, str], 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             duration: int = None, 
@@ -350,6 +339,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendaudio
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -367,7 +360,7 @@ class Methods:
             chat_id: Union[int, str], 
             document: Union[InputFile, str], 
             thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             disable_content_type_detection: bool = None, 
@@ -382,6 +375,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#senddocument
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -402,7 +399,7 @@ class Methods:
             width: int = None, 
             height: int = None, 
             thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             supports_streaming: bool = None, 
@@ -417,6 +414,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendvideo
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -437,7 +438,7 @@ class Methods:
             width: int = None, 
             height: int = None, 
             thumb: Union[InputFile, str] = None, 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             disable_notification: bool = None, 
@@ -451,6 +452,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendanimation
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -467,7 +472,7 @@ class Methods:
             self, 
             chat_id: Union[int, str], 
             voice: Union[InputFile, str], 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             duration: int = None, 
@@ -482,6 +487,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendvoice
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -510,6 +519,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendvideonote
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -536,6 +546,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendmediagroup
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -564,6 +575,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendlocation
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -589,6 +601,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagelivelocation
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -609,6 +622,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#stopmessagelivelocation
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -639,6 +653,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendvenue
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -665,6 +680,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendcontact
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -699,6 +715,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendpoll
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -722,6 +739,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#senddice
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -741,6 +759,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendchataction
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -760,6 +779,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getuserprofilephotos
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -778,6 +798,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getfile
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -798,6 +819,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#banchatmember
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -817,6 +839,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#unbanchatmember
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -837,6 +860,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#restrictchatmember
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -866,6 +890,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#promotechatmember
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -885,6 +910,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatadministratorcustomtitle
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -903,6 +929,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#banchatsenderchat
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -921,6 +948,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#unbanchatsenderchat
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -939,6 +967,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatpermissions
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -956,6 +985,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#exportchatinvitelink
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -977,6 +1007,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#createchatinvitelink
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -999,6 +1030,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editchatinvitelink
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1017,6 +1049,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#revokechatinvitelink
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1035,6 +1068,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#approvechatjoinrequest
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1053,6 +1087,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#declinechatjoinrequest
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1071,6 +1106,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatphoto
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1090,6 +1126,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletechatphoto
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1108,6 +1145,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchattitle
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1126,6 +1164,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatdescription
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1145,6 +1184,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#pinchatmessage
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1163,6 +1203,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#unpinchatmessage
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1180,6 +1221,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#unpinallchatmessages
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1197,6 +1239,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#leavechat
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1214,6 +1257,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getchat
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1231,6 +1275,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getchatadministrators
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1248,6 +1293,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getchatmembercount
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1266,6 +1312,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getchatmember
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1284,6 +1331,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatstickerset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1301,6 +1349,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletechatstickerset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1312,7 +1361,7 @@ class Methods:
     async def answer_callback_query(
             self, 
             callback_query_id: str, 
-            text: str = None, 
+            text: Union[str, Element] = None, 
             show_alert: bool = None, 
             url: str = None, 
             cache_time: int = None
@@ -1322,6 +1371,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#answercallbackquery
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1341,6 +1391,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setmycommands
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1359,6 +1410,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletemycommands
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1377,6 +1429,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getmycommands
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1395,6 +1448,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setchatmenubutton
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1412,6 +1466,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getchatmenubutton
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1430,6 +1485,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setmydefaultadministratorrights
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1447,6 +1503,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getmydefaultadministratorrights
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1457,7 +1514,7 @@ class Methods:
 
     async def edit_message_text(
             self, 
-            text: Union[str, Element],
+            text: Union[str, Element], 
             chat_id: Union[int, str] = None, 
             message_id: int = None, 
             inline_message_id: str = None, 
@@ -1471,9 +1528,9 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagetext
         """
+        
         if isinstance(text, Element):
-            _parse_mode = parse_mode or self._parse_mode
-            text = self._render_markup_element(text, _parse_mode)
+            text = self._bot.render_markup_element(text, parse_mode)
 
         payload = self._bot.generate_payload(**locals())
         files = {}
@@ -1488,7 +1545,7 @@ class Methods:
             chat_id: Union[int, str] = None, 
             message_id: int = None, 
             inline_message_id: str = None, 
-            caption: str = None, 
+            caption: Union[str, Element] = None, 
             parse_mode: str = None, 
             caption_entities: List[MessageEntity] = None, 
             reply_markup: InlineKeyboardMarkup = None
@@ -1498,6 +1555,10 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagecaption
         """
+        
+        if isinstance(caption, Element):
+            caption = self._bot.render_markup_element(caption, parse_mode)
+
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1519,6 +1580,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagemedia
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1539,6 +1601,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#editmessagereplymarkup
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1558,6 +1621,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#stoppoll
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1584,6 +1648,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletemessage
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1607,6 +1672,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendsticker
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1626,6 +1692,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getstickerset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1644,6 +1711,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#uploadstickerfile
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1671,6 +1739,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#createnewstickerset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1700,6 +1769,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#addstickertoset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1724,6 +1794,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setstickerpositioninset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1741,6 +1812,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#deletestickerfromset
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1760,6 +1832,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setstickersetthumb
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1786,6 +1859,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#answerinlinequery
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1804,6 +1878,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#answerwebappquery
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1847,6 +1922,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendinvoice
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1883,6 +1959,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#createinvoicelink
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1903,6 +1980,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#answershippingquery
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1922,6 +2000,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#answerprecheckoutquery
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1941,6 +2020,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setpassportdataerrors
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1964,6 +2044,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#sendgame
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -1987,6 +2068,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#setgamescore
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
@@ -2007,6 +2089,7 @@ class Methods:
 
         Source : https://core.telegram.org/bots/api#getgamehighscores
         """
+        
         payload = self._bot.generate_payload(**locals())
         files = {}
         
