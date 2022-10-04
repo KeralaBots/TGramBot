@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import json
 import os
 import re
 import shutil
-import json
 from pathlib import Path
 
 API_PATH = Path("compiler/api")

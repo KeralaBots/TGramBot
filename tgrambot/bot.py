@@ -15,21 +15,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+import json
 import logging
 import os
-import json
+from typing import Callable, Optional, Union
+
 import httpx
-from typing import Optional, Callable, Union
 from telegram_text.bases import Element
 
 from .dispatcher import Dispatcher
-from .filters import Filters
-from .handlers import MessageHandler, CallbackQueryHandler, InlineQueryHandler
-
-
-from .methods import Methods
-
 from .errors import InvalidToken, TelegramError
+from .filters import Filters
+from .handlers import CallbackQueryHandler, InlineQueryHandler, MessageHandler
+from .methods import Methods
 from .utils import get_values
 
 API_TIMEOUT = 60

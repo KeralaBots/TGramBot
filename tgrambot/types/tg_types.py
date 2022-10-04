@@ -21,7 +21,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Union, List
+from typing import List, Union
+
 from pydantic import Field
 
 from .base import TelegramObject

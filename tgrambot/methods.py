@@ -21,46 +21,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import tgrambot
 from typing import List, Union
+
 from telegram_text.bases import Element
-from tgrambot.types import (
-    Update,
-    InputFile,
-    WebhookInfo,
-    User,
-    MessageEntity,
-    InlineKeyboardMarkup,
-    ReplyKeyboardMarkup,
-    ReplyKeyboardRemove,
-    ForceReply,
-    Message,
-    MessageId,
-    InputMediaAudio,
-    InputMediaDocument,
-    InputMediaPhoto,
-    InputMediaVideo,
-    UserProfilePhotos,
-    File,
-    ChatPermissions,
-    ChatInviteLink,
-    Chat,
-    ChatMember,
-    BotCommand,
-    BotCommandScope,
-    MenuButton,
-    ChatAdministratorRights,
-    InputMedia,
-    Poll,
-    StickerSet,
-    MaskPosition,
-    InlineQueryResult,
-    SentWebAppMessage,
-    LabeledPrice,
-    ShippingOption,
-    PassportElementError,
-    GameHighScore,
-)
+
+import tgrambot
+from tgrambot.types import (BotCommand, BotCommandScope, Chat,
+                            ChatAdministratorRights, ChatInviteLink,
+                            ChatMember, ChatPermissions, File, ForceReply,
+                            GameHighScore, InlineKeyboardMarkup,
+                            InlineQueryResult, InputFile, InputMedia,
+                            InputMediaAudio, InputMediaDocument,
+                            InputMediaPhoto, InputMediaVideo, LabeledPrice,
+                            MaskPosition, MenuButton, Message, MessageEntity,
+                            MessageId, PassportElementError, Poll,
+                            ReplyKeyboardMarkup, ReplyKeyboardRemove,
+                            SentWebAppMessage, ShippingOption, StickerSet,
+                            Update, User, UserProfilePhotos, WebhookInfo)
 
 
 class Methods:
